@@ -1,0 +1,58 @@
+XL
+H 1 areas 8 global symbols
+M main.c
+S _adc_val Ref0000
+S _scan_led Ref0000
+S _dac_init Ref0000
+S _adc_init Ref0000
+S _change_data Ref0000
+S _disp_buffer Ref0000
+A text size 40 flags 0
+dbfile E:\ѧϰ\AVR\adc\main.c
+dbfunc e port_init 0 fV
+dbline FFFFFFFF 0
+dbline 10 0
+dbline 11 0
+dbline 12 4
+dbline 13 6
+dbline 14 A
+dbline 15 C
+dbline 16 E
+dbline 17 10
+dbline 18 14
+dbline FFFFFFFE 18
+dbline 19 18
+dbline 0 18
+dbfunc e main 1A fV
+dbsym l i 1 c
+dbline FFFFFFFF 1A
+dbline 1D 1A
+dbline 20 1A
+dbline 21 1C
+dbline 22 1E
+dbline 23 20
+dbline 24 22
+dbline 25 26
+dbline 26 28
+dbline 29 2C
+dbline 2A 2C
+dbline 2B 36
+dbline 2D 3C
+dbline 28 3C
+dbline FFFFFFFE 3E
+dbline 2E 3E
+dbline 0 3E
+S _main Def001A
+S _port_init Def0000
+T 00 00 22 24 2B BA 2A BA 8F EF 88 BB 87 BB 25 BA
+R 00 00 00 00
+T 0E 00 84 BB 80 EF 82 BB 8F E0 81 BB 08 95
+R 00 00 00 00
+T 1A 00 F8 94 F1 DF 00 D0 00 D0 22 24 25 BE 2B BE
+R 00 00 00 00 82 06 03 00 82 08 02 00
+T 28 00 78 94 08 C0 00 91 00 00 10 91 01 00 00 D0
+R 00 00 00 00 02 08 00 00 02 0C 00 00 82 0E 04 00
+T 36 00 00 E0 10 E0
+R 00 00 00 00 22 02 05 00 00 00 42 04 05 00 00 00
+T 3A 00 00 D0 F7 CF 08 95
+R 00 00 00 00 82 02 01 00

@@ -1,0 +1,321 @@
+__text_start:
+__start:
+    0033 E5CF      LDI	R28,0x5F
+    0034 E0D4      LDI	R29,4
+    0035 BFCD      OUT	0x3D,R28
+    0036 BFDE      OUT	0x3E,R29
+    0037 51C4      SUBI	R28,0x14
+    0038 40D0      SBCI	R29,0
+    0039 EA0A      LDI	R16,0xAA
+    003A 8308      STD	Y+0,R16
+    003B 2400      CLR	R0
+    003C E7E1      LDI	R30,0x71
+    003D E0F0      LDI	R31,0
+    003E E010      LDI	R17,0
+    003F 37E1      CPI	R30,0x71
+    0040 07F1      CPC	R31,R17
+    0041 F011      BEQ	0x0044
+    0042 9201      ST	R0,Z+
+    0043 CFFB      RJMP	0x003F
+    0044 8300      STD	Z+0,R16
+    0045 E5E4      LDI	R30,0x54
+    0046 E0F0      LDI	R31,0
+    0047 E6A0      LDI	R26,0x60
+    0048 E0B0      LDI	R27,0
+    0049 E010      LDI	R17,0
+    004A 36E5      CPI	R30,0x65
+    004B 07F1      CPC	R31,R17
+    004C F021      BEQ	0x0051
+    004D 95C8      LPM
+    004E 9631      ADIW	R30,1
+    004F 920D      ST	R0,X+
+    0050 CFF9      RJMP	0x004A
+    0051 940E00A8  CALL	_main
+_exit:
+    0053 CFFF      RJMP	_exit
+_DelayMs:
+  j                    --> R20
+  i                    --> R16
+    0054 940E0105  CALL	push_gset1
+FILE: F:\myavr\temp\M16_T0_Timer\M16_T0_Timer.c
+(0001) #include<iom16v.h>
+(0002) #define uchar unsigned char
+(0003) 
+(0004) uchar Table[10]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90};
+(0005) uchar Data[4]={0,0,0,0};
+(0006) uchar Time[2]={0,0};
+(0007) uchar CNT=0;
+(0008) 
+(0009) void DelayMs(uchar i)
+(0010) {
+(0011)  uchar j;
+(0012)  for(;i>0;i--)
+    0056 C006      RJMP	0x005D
+(0013)  {
+(0014)   for(j=0;j<250;j++);
+    0057 2744      CLR	R20
+    0058 C001      RJMP	0x005A
+    0059 9543      INC	R20
+    005A 3F4A      CPI	R20,0xFA
+    005B F3E8      BCS	0x0059
+    005C 950A      DEC	R16
+    005D 2422      CLR	R2
+    005E 1620      CP	R2,R16
+    005F F3B8      BCS	0x0057
+(0015)  }
+(0016) }
+    0060 940E0108  CALL	pop_gset1
+    0062 9508      RET
+_Display:
+  sel                  --> R20
+  i                    --> R22
+  p                    --> R10
+    0063 940E0120  CALL	push_gset3
+    0065 0158      MOVW	R10,R16
+(0017) 
+(0018) void Display(uchar *p)
+(0019) {
+(0020)  uchar i,sel=0x01;
+    0066 E041      LDI	R20,1
+(0021)  for(i=0;i<4;i++)
+    0067 2766      CLR	R22
+    0068 C011      RJMP	0x007A
+(0022)  {
+(0023)   PORTC=sel;
+    0069 BB45      OUT	0x15,R20
+(0024)   PORTA=Table[p[i]];
+    006A 2FE6      MOV	R30,R22
+    006B 27FF      CLR	R31
+    006C 0DEA      ADD	R30,R10
+    006D 1DFB      ADC	R31,R11
+    006E 81E0      LDD	R30,Z+0
+    006F 27FF      CLR	R31
+    0070 E680      LDI	R24,0x60
+    0071 E090      LDI	R25,0
+    0072 0FE8      ADD	R30,R24
+    0073 1FF9      ADC	R31,R25
+    0074 8020      LDD	R2,Z+0
+    0075 BA2B      OUT	0x1B,R2
+(0025)   DelayMs(2);
+    0076 E002      LDI	R16,2
+    0077 DFDC      RCALL	_DelayMs
+(0026)   sel=sel<<1;
+    0078 0F44      LSL	R20
+    0079 9563      INC	R22
+    007A 3064      CPI	R22,4
+    007B F368      BCS	0x0069
+(0027)  }
+(0028) }
+    007C 940E0102  CALL	pop_gset3
+    007E 9508      RET
+_Process:
+  p2                   --> R20
+  p1                   --> R22
+    007F 940E011C  CALL	push_gset2
+    0081 01A9      MOVW	R20,R18
+    0082 01B8      MOVW	R22,R16
+(0029) 
+(0030) void Process(uchar *p1,uchar *p2)
+(0031) {
+(0032)  p2[0]=p1[0]/10;
+    0083 E01A      LDI	R17,0xA
+    0084 01FB      MOVW	R30,R22
+    0085 8100      LDD	R16,Z+0
+    0086 940E00E9  CALL	div8u
+    0088 01FA      MOVW	R30,R20
+    0089 8300      STD	Z+0,R16
+(0033)  p2[1]=p1[0]%10;
+    008A E01A      LDI	R17,0xA
+    008B 01FB      MOVW	R30,R22
+    008C 8100      LDD	R16,Z+0
+    008D 940E00E7  CALL	mod8u
+    008F 01FA      MOVW	R30,R20
+    0090 8301      STD	Z+1,R16
+(0034)  p2[2]=p1[1]/10;
+    0091 E01A      LDI	R17,0xA
+    0092 01FB      MOVW	R30,R22
+    0093 8101      LDD	R16,Z+1
+    0094 940E00E9  CALL	div8u
+    0096 01FA      MOVW	R30,R20
+    0097 8302      STD	Z+2,R16
+(0035)  p2[3]=p1[1]%10;
+    0098 E01A      LDI	R17,0xA
+    0099 01FB      MOVW	R30,R22
+    009A 8101      LDD	R16,Z+1
+    009B 940E00E7  CALL	mod8u
+    009D 01FA      MOVW	R30,R20
+    009E 8303      STD	Z+3,R16
+(0036) }
+    009F 940E00FF  CALL	pop_gset2
+    00A1 9508      RET
+(0037) 
+(0038) void Init_IO(void)
+(0039) {
+(0040)  DDRA=0xff;
+_Init_IO:
+    00A2 EF8F      LDI	R24,0xFF
+    00A3 BB8A      OUT	0x1A,R24
+(0041)  PORTA=0xff;
+    00A4 BB8B      OUT	0x1B,R24
+(0042)  DDRC=0xff;
+    00A5 BB84      OUT	0x14,R24
+(0043)  PORTC=0xff;
+    00A6 BB85      OUT	0x15,R24
+(0044) }
+    00A7 9508      RET
+(0045) 
+(0046) void main(void)
+(0047) {
+(0048)  Init_IO();
+_main:
+    00A8 DFF9      RCALL	_Init_IO
+(0049)  DelayMs(10);
+    00A9 E00A      LDI	R16,0xA
+    00AA DFA9      RCALL	_DelayMs
+(0050)  TCCR0=0x04;
+    00AB E084      LDI	R24,4
+    00AC BF83      OUT	0x33,R24
+(0051)  TCNT0=0x06;
+    00AD E086      LDI	R24,6
+    00AE BF82      OUT	0x32,R24
+(0052)  TIMSK=0x01;
+    00AF E081      LDI	R24,1
+    00B0 BF89      OUT	0x39,R24
+(0053)  SREG=SREG|0x80;
+    00B1 9478      BSET	7
+    00B2 C008      RJMP	0x00BB
+(0054)  while(1)
+(0055)  {
+(0056)   Process(Time,Data);
+    00B3 E62A      LDI	R18,0x6A
+    00B4 E030      LDI	R19,0
+    00B5 E60E      LDI	R16,0x6E
+    00B6 E010      LDI	R17,0
+    00B7 DFC7      RCALL	_Process
+(0057)   Display(Data);
+    00B8 E60A      LDI	R16,0x6A
+    00B9 E010      LDI	R17,0
+    00BA DFA8      RCALL	_Display
+    00BB CFF7      RJMP	0x00B3
+(0058)  }
+(0059) }
+    00BC 9508      RET
+_Timer0:
+    00BD 922A      ST	R2,-Y
+    00BE 938A      ST	R24,-Y
+    00BF 939A      ST	R25,-Y
+    00C0 B62F      IN	R2,0x3F
+    00C1 922A      ST	R2,-Y
+(0060) 
+(0061) #pragma interrupt_handler Timer0:10
+(0062) void Timer0(void)
+(0063) {
+(0064)  CNT++;
+(0065)  if(CNT==25)
+    00C2 91800070  LDS	R24,0x70
+    00C4 5F8F      SUBI	R24,0xFF
+    00C5 93800070  STS	0x70,R24
+    00C7 3189      CPI	R24,0x19
+    00C8 F4C1      BNE	0x00E1
+(0066)  {
+(0067)   CNT=0;
+(0068)   Time[1]++;
+    00C9 2422      CLR	R2
+    00CA 92200070  STS	0x70,R2
+    00CC 9180006F  LDS	R24,0x6F
+    00CE 5F8F      SUBI	R24,0xFF
+    00CF 9380006F  STS	0x6F,R24
+(0069)   if(Time[1]==60)
+    00D1 338C      CPI	R24,0x3C
+    00D2 F439      BNE	0x00DA
+(0070)   {
+(0071)    Time[1]=0;
+    00D3 9220006F  STS	0x6F,R2
+(0072)    Time[0]++;
+    00D5 9180006E  LDS	R24,0x6E
+    00D7 5F8F      SUBI	R24,0xFF
+    00D8 9380006E  STS	0x6E,R24
+(0073)   }
+(0074)   if(Time[0]==60)
+    00DA 9180006E  LDS	R24,0x6E
+    00DC 338C      CPI	R24,0x3C
+    00DD F419      BNE	0x00E1
+(0075)   Time[0]=0;
+    00DE 2422      CLR	R2
+    00DF 9220006E  STS	0x6E,R2
+(0076)  }
+(0077) }
+FILE: <library>
+    00E1 9029      LD	R2,Y+
+    00E2 BE2F      OUT	0x3F,R2
+    00E3 9199      LD	R25,Y+
+    00E4 9189      LD	R24,Y+
+    00E5 9029      LD	R2,Y+
+    00E6 9518      RETI
+mod8u:
+    00E7 9468      BSET	6
+    00E8 C001      RJMP	xdiv8u
+div8u:
+    00E9 94E8      BCLR	6
+xdiv8u:
+    00EA 932A      ST	R18,-Y
+    00EB 92FA      ST	R15,-Y
+    00EC 92EA      ST	R14,-Y
+    00ED 24FF      CLR	R15
+    00EE 24EE      CLR	R14
+    00EF E120      LDI	R18,0x10
+    00F0 0F00      LSL	R16
+    00F1 1CFF      ROL	R15
+    00F2 1CEE      ROL	R14
+    00F3 16E1      CP	R14,R17
+    00F4 F010      BCS	0x00F7
+    00F5 1AE1      SUB	R14,R17
+    00F6 9503      INC	R16
+    00F7 952A      DEC	R18
+    00F8 F7B9      BNE	0x00F0
+    00F9 F40E      BRTC	0x00FB
+    00FA 2D0E      MOV	R16,R14
+    00FB 90E9      LD	R14,Y+
+    00FC 90F9      LD	R15,Y+
+    00FD 9129      LD	R18,Y+
+    00FE 9508      RET
+pop_gset2:
+    00FF E0E2      LDI	R30,2
+    0100 940C0109  JMP	pop
+pop_gset3:
+    0102 E0E4      LDI	R30,4
+    0103 940C0109  JMP	pop
+push_gset1:
+    0105 935A      ST	R21,-Y
+    0106 934A      ST	R20,-Y
+    0107 9508      RET
+pop_gset1:
+    0108 E0E1      LDI	R30,1
+pop:
+    0109 9149      LD	R20,Y+
+    010A 9159      LD	R21,Y+
+    010B FDE0      SBRC	R30,0
+    010C 9508      RET
+    010D 9169      LD	R22,Y+
+    010E 9179      LD	R23,Y+
+    010F FDE1      SBRC	R30,1
+    0110 9508      RET
+    0111 90A9      LD	R10,Y+
+    0112 90B9      LD	R11,Y+
+    0113 FDE2      SBRC	R30,2
+    0114 9508      RET
+    0115 90C9      LD	R12,Y+
+    0116 90D9      LD	R13,Y+
+    0117 FDE3      SBRC	R30,3
+    0118 9508      RET
+    0119 90E9      LD	R14,Y+
+    011A 90F9      LD	R15,Y+
+    011B 9508      RET
+push_gset2:
+    011C 937A      ST	R23,-Y
+    011D 936A      ST	R22,-Y
+    011E 940C0105  JMP	push_gset1
+push_gset3:
+    0120 92BA      ST	R11,-Y
+    0121 92AA      ST	R10,-Y
+    0122 940C011C  JMP	push_gset2

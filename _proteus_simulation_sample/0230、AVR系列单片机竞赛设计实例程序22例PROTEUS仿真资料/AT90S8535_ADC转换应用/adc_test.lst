@@ -1,0 +1,1154 @@
+__start:
+__text_start:
+    002E E5CF      LDI	R28,0x5F
+    002F E0D2      LDI	R29,2
+    0030 BFCD      OUT	0x3D,R28
+    0031 BFDE      OUT	0x3E,R29
+    0032 51C0      SUBI	R28,0x10
+    0033 40D0      SBCI	R29,0
+    0034 EA0A      LDI	R16,0xAA
+    0035 8308      STD	Y+0,R16
+    0036 2400      CLR	R0
+    0037 E7E9      LDI	R30,0x79
+    0038 E0F0      LDI	R31,0
+    0039 E010      LDI	R17,0
+    003A 37EC      CPI	R30,0x7C
+    003B 07F1      CPC	R31,R17
+    003C F011      BEQ	0x003F
+    003D 9201      ST	R0,Z+
+    003E CFFB      RJMP	0x003A
+    003F 8300      STD	Z+0,R16
+    0040 E4E2      LDI	R30,0x42
+    0041 E0F0      LDI	R31,0
+    0042 E6A0      LDI	R26,0x60
+    0043 E0B0      LDI	R27,0
+    0044 E010      LDI	R17,0
+    0045 35EB      CPI	R30,0x5B
+    0046 07F1      CPC	R31,R17
+    0047 F021      BEQ	0x004C
+    0048 95C8      LPM
+    0049 9631      ADIW	R30,1
+    004A 920D      ST	R0,X+
+    004B CFF9      RJMP	0x0045
+    004C D107      RCALL	_main
+_exit:
+    004D CFFF      RJMP	_exit
+FILE: E:\学习\AVR\adc\adc.c
+(0001) #define _adc_c
+(0002) #include <io8535v.h>
+(0003) #include <macros.h>
+(0004) #include <adc.h>
+(0005) //#define debug_p (*(volatile uint *)0xa0)
+(0006) //ADC initialisation
+(0007) // Conversion time: 416uS
+(0008) void adc_init(void)
+(0009) {
+(0010)  ADCSR = 0x00; //disable adc
+_adc_init:
+    004E 2422      CLR	R2
+    004F B826      OUT	0x06,R2
+(0011)  ADMUX = 0x00; //select adc input 0
+    0050 B827      OUT	0x07,R2
+(0012)  ADCSR = 0xcF;
+    0051 EC8F      LDI	R24,0xCF
+    0052 B986      OUT	0x06,R24
+(0013) }
+    0053 9508      RET
+_adc_isr:
+  temp_val2            --> Y+0
+  temp_val             --> R20
+    0054 920A      ST	R0,-Y
+    0055 921A      ST	R1,-Y
+    0056 922A      ST	R2,-Y
+    0057 923A      ST	R3,-Y
+    0058 924A      ST	R4,-Y
+    0059 925A      ST	R5,-Y
+    005A 930A      ST	R16,-Y
+    005B 931A      ST	R17,-Y
+    005C 932A      ST	R18,-Y
+    005D 933A      ST	R19,-Y
+    005E 93EA      ST	R30,-Y
+    005F 93FA      ST	R31,-Y
+    0060 B60F      IN	R0,0x3F
+    0061 920A      ST	R0,-Y
+    0062 D18B      RCALL	push_gset1
+    0063 9724      SBIW	R28,4
+(0014) 
+(0015) #pragma interrupt_handler adc_isr:15
+(0016) void adc_isr(void)
+(0017) {
+(0018)  uint temp_val;
+(0019)  float temp_val2;
+(0020)  //conversion complete, read value (int) using...
+(0021)  temp_val=ADCL;   //Read 8 low bits first (important)
+    0064 B144      IN	R20,0x04
+    0065 2755      CLR	R21
+(0022)  temp_val|=(int)ADCH << 8; //read 2 high bits and shift into top byte
+    0066 B025      IN	R2,0x05
+    0067 2433      CLR	R3
+    0068 2C32      MOV	R3,R2
+    0069 2422      CLR	R2
+    006A 2942      OR	R20,R2
+    006B 2953      OR	R21,R3
+(0023)  temp_val2 =temp_val*PER_VOL_DATA;//两位整数两位小数，全当整数处理
+    006C E20A      LDI	R16,0x2A
+    006D E010      LDI	R17,0
+    006E D1A5      RCALL	lpm32
+    006F 933A      ST	R19,-Y
+    0070 932A      ST	R18,-Y
+    0071 931A      ST	R17,-Y
+    0072 930A      ST	R16,-Y
+    0073 E206      LDI	R16,0x26
+    0074 E010      LDI	R17,0
+    0075 D19E      RCALL	lpm32
+    0076 933A      ST	R19,-Y
+    0077 932A      ST	R18,-Y
+    0078 931A      ST	R17,-Y
+    0079 930A      ST	R16,-Y
+    007A 018A      MOVW	R16,R20
+    007B 9516      LSR	R17
+    007C 9507      ROR	R16
+    007D D1E8      RCALL	int2fp
+    007E 933A      ST	R19,-Y
+    007F 932A      ST	R18,-Y
+    0080 931A      ST	R17,-Y
+    0081 930A      ST	R16,-Y
+    0082 D2BB      RCALL	empy32fs
+    0083 018A      MOVW	R16,R20
+    0084 7001      ANDI	R16,1
+    0085 7010      ANDI	R17,0
+    0086 D1DF      RCALL	int2fp
+    0087 933A      ST	R19,-Y
+    0088 932A      ST	R18,-Y
+    0089 931A      ST	R17,-Y
+    008A 930A      ST	R16,-Y
+    008B D22F      RCALL	add32fs
+    008C D2B3      RCALL	empy32f
+    008D 01FE      MOVW	R30,R28
+    008E 8300      STD	Z+0,R16
+    008F 8311      STD	Z+1,R17
+    0090 8322      STD	Z+2,R18
+    0091 8333      STD	Z+3,R19
+(0024)  adc_val = (uint)temp_val2;
+    0092 01FE      MOVW	R30,R28
+    0093 8020      LDD	R2,Z+0
+    0094 8031      LDD	R3,Z+1
+    0095 8042      LDD	R4,Z+2
+    0096 8053      LDD	R5,Z+3
+    0097 925A      ST	R5,-Y
+    0098 924A      ST	R4,-Y
+    0099 923A      ST	R3,-Y
+    009A 922A      ST	R2,-Y
+    009B E202      LDI	R16,0x22
+    009C E010      LDI	R17,0
+    009D D176      RCALL	lpm32
+    009E 933A      ST	R19,-Y
+    009F 932A      ST	R18,-Y
+    00A0 931A      ST	R17,-Y
+    00A1 930A      ST	R16,-Y
+    00A2 D26C      RCALL	cmp32f
+    00A3 F0B4      BLT	0x00BA
+    00A4 01FE      MOVW	R30,R28
+    00A5 8020      LDD	R2,Z+0
+    00A6 8031      LDD	R3,Z+1
+    00A7 8042      LDD	R4,Z+2
+    00A8 8053      LDD	R5,Z+3
+    00A9 925A      ST	R5,-Y
+    00AA 924A      ST	R4,-Y
+    00AB 923A      ST	R3,-Y
+    00AC 922A      ST	R2,-Y
+    00AD E202      LDI	R16,0x22
+    00AE E010      LDI	R17,0
+    00AF D164      RCALL	lpm32
+    00B0 933A      ST	R19,-Y
+    00B1 932A      ST	R18,-Y
+    00B2 931A      ST	R17,-Y
+    00B3 930A      ST	R16,-Y
+    00B4 D20D      RCALL	sub32f
+    00B5 D172      RCALL	fp2int
+    00B6 01A8      MOVW	R20,R16
+    00B7 5040      SUBI	R20,0
+    00B8 4850      SBCI	R21,0x80
+    00B9 C007      RJMP	0x00C1
+    00BA 01FE      MOVW	R30,R28
+    00BB 8100      LDD	R16,Z+0
+    00BC 8111      LDD	R17,Z+1
+    00BD 8122      LDD	R18,Z+2
+    00BE 8133      LDD	R19,Z+3
+    00BF D168      RCALL	fp2int
+    00C0 01A8      MOVW	R20,R16
+    00C1 9350007A  STS	_adc_val+1,R21
+    00C3 93400079  STS	_adc_val,R20
+(0025)  //debug_p = adc_val;
+(0026)  ADCSR|=0X40;
+    00C5 9A36      SBI	0x06,6
+(0027) }
+    00C6 9624      ADIW	R28,4
+    00C7 D129      RCALL	pop_gset1
+    00C8 9009      LD	R0,Y+
+    00C9 BE0F      OUT	0x3F,R0
+    00CA 91F9      LD	R31,Y+
+    00CB 91E9      LD	R30,Y+
+    00CC 9139      LD	R19,Y+
+    00CD 9129      LD	R18,Y+
+    00CE 9119      LD	R17,Y+
+    00CF 9109      LD	R16,Y+
+    00D0 9059      LD	R5,Y+
+    00D1 9049      LD	R4,Y+
+    00D2 9039      LD	R3,Y+
+    00D3 9029      LD	R2,Y+
+    00D4 9019      LD	R1,Y+
+    00D5 9009      LD	R0,Y+
+    00D6 9518      RETI
+_change_data:
+  temp_n               --> R22
+  dsp_data             --> R20
+    00D7 D12D      RCALL	push_gset2
+    00D8 01A8      MOVW	R20,R16
+FILE: E:\学习\AVR\adc\led_dsp.c
+(0001) #define _led_dsp_c
+(0002) #include <io8535v.h>
+(0003) #include <macros.h>
+(0004) #include <led_dsp.h>
+(0005) #include <adc.h>
+(0006) void change_data (int dsp_data)
+(0007) {
+(0008) 	uchar temp_n;
+(0009) 	if(dsp_data<=(AREF_VOL*100))
+    00D9 ED8C      LDI	R24,0xDC
+    00DA E095      LDI	R25,5
+    00DB 1784      CP	R24,R20
+    00DC 0795      CPC	R25,R21
+    00DD F40C      BGE	0x00DF
+    00DE C040      RJMP	0x011F
+(0010) 		{
+(0011) 			temp_n = dsp_data/1000;
+    00DF EE28      LDI	R18,0xE8
+    00E0 E033      LDI	R19,3
+    00E1 018A      MOVW	R16,R20
+    00E2 D0D2      RCALL	div16s
+    00E3 2F60      MOV	R22,R16
+(0012) 			disp_buffer[0]=led_tabel[temp_n];
+    00E4 E28E      LDI	R24,0x2E
+    00E5 E090      LDI	R25,0
+    00E6 2FE6      MOV	R30,R22
+    00E7 27FF      CLR	R31
+    00E8 0FE8      ADD	R30,R24
+    00E9 1FF9      ADC	R31,R25
+    00EA 91E4      LPM	R30,0(Z)
+    00EB 93E00060  STS	0x60,R30
+(0013) 			dsp_data %=1000;
+    00ED EE28      LDI	R18,0xE8
+    00EE E033      LDI	R19,3
+    00EF 018A      MOVW	R16,R20
+    00F0 D0C0      RCALL	mod16s
+    00F1 01A8      MOVW	R20,R16
+(0014) 			temp_n = dsp_data/100;
+    00F2 E624      LDI	R18,0x64
+    00F3 E030      LDI	R19,0
+    00F4 D0C0      RCALL	div16s
+    00F5 2F60      MOV	R22,R16
+(0015) 			disp_buffer[1]=(led_tabel[temp_n])|0x80;//加上小数点
+    00F6 E28E      LDI	R24,0x2E
+    00F7 E090      LDI	R25,0
+    00F8 2FE6      MOV	R30,R22
+    00F9 27FF      CLR	R31
+    00FA 0FE8      ADD	R30,R24
+    00FB 1FF9      ADC	R31,R25
+    00FC 91E4      LPM	R30,0(Z)
+    00FD 68E0      ORI	R30,0x80
+    00FE 93E00061  STS	0x61,R30
+(0016) 			dsp_data %=100;
+    0100 E624      LDI	R18,0x64
+    0101 E030      LDI	R19,0
+    0102 018A      MOVW	R16,R20
+    0103 D0AD      RCALL	mod16s
+    0104 01A8      MOVW	R20,R16
+(0017) 			temp_n = dsp_data/10;
+    0105 E02A      LDI	R18,0xA
+    0106 E030      LDI	R19,0
+    0107 D0AD      RCALL	div16s
+    0108 2F60      MOV	R22,R16
+(0018) 			disp_buffer[2]=led_tabel[temp_n];
+    0109 E28E      LDI	R24,0x2E
+    010A E090      LDI	R25,0
+    010B 2FE6      MOV	R30,R22
+    010C 27FF      CLR	R31
+    010D 0FE8      ADD	R30,R24
+    010E 1FF9      ADC	R31,R25
+    010F 91E4      LPM	R30,0(Z)
+    0110 93E00062  STS	0x62,R30
+(0019) 			dsp_data %=10;
+    0112 E02A      LDI	R18,0xA
+    0113 E030      LDI	R19,0
+    0114 018A      MOVW	R16,R20
+    0115 D09B      RCALL	mod16s
+    0116 01A8      MOVW	R20,R16
+(0020) 			disp_buffer[3]=led_tabel[dsp_data];
+    0117 E28E      LDI	R24,0x2E
+    0118 E090      LDI	R25,0
+    0119 01FA      MOVW	R30,R20
+    011A 0FE8      ADD	R30,R24
+    011B 1FF9      ADC	R31,R25
+    011C 91E4      LPM	R30,0(Z)
+    011D 93E00063  STS	0x63,R30
+(0021) 		}
+(0022) 	//scan_led(disp_buffer);
+(0023) 	return;
+    011F D0CA      RCALL	pop_gset2
+    0120 9508      RET
+_scan_led:
+  scan_n               --> R20
+  i                    --> R22
+  disp_p               --> R10
+    0121 D0E6      RCALL	push_gset3
+    0122 0158      MOVW	R10,R16
+(0024) }
+(0025) 
+(0026) void scan_led(uchar *disp_p)
+(0027) {
+(0028) 	uchar i,scan_n;
+(0029) 	scan_n=0xfe;
+    0123 EF4E      LDI	R20,0xFE
+(0030) 	for (i=0; i<4; i++)
+    0124 2766      CLR	R22
+    0125 C00E      RJMP	0x0134
+(0031) 	{
+(0032) 		data_port = *(disp_p+i);
+    0126 2FE6      MOV	R30,R22
+    0127 27FF      CLR	R31
+    0128 0DEA      ADD	R30,R10
+    0129 1DFB      ADC	R31,R11
+    012A 8020      LDD	R2,Z+0
+    012B BA28      OUT	0x18,R2
+(0033) 		scan_port = scan_n;
+    012C BB42      OUT	0x12,R20
+(0034) 		scan_n=(scan_n<<1)+1;
+    012D 0F44      LSL	R20
+    012E 5F4F      SUBI	R20,0xFF
+(0035) 		delay(50);
+    012F E302      LDI	R16,0x32
+    0130 D007      RCALL	_delay
+(0036) 		scan_port = 0xff;
+    0131 EF8F      LDI	R24,0xFF
+    0132 BB82      OUT	0x12,R24
+    0133 9563      INC	R22
+    0134 3064      CPI	R22,4
+    0135 F380      BCS	0x0126
+(0037) 	}
+(0038) 	return;
+    0136 D0B5      RCALL	pop_gset3
+    0137 9508      RET
+_delay:
+  c                    --> R20
+  delay_t              --> R16
+    0138 D0B5      RCALL	push_gset1
+(0039) 	
+(0040) }
+(0041) 
+(0042) void delay(uchar delay_t)
+(0043) {
+    0139 C006      RJMP	0x0140
+(0044) 	uchar c;
+(0045) 	while(delay_t--)
+(0046) 	{
+(0047) 		c=10;
+    013A E04A      LDI	R20,0xA
+(0048) 		while(c--);
+    013B 2E24      MOV	R2,R20
+    013C 2433      CLR	R3
+    013D 5041      SUBI	R20,1
+    013E 2022      TST	R2
+    013F F7D9      BNE	0x013B
+    0140 2E20      MOV	R2,R16
+    0141 2433      CLR	R3
+    0142 5001      SUBI	R16,1
+    0143 2022      TST	R2
+    0144 F7A9      BNE	0x013A
+(0049) 	}
+(0050) }
+    0145 D0AB      RCALL	pop_gset1
+    0146 9508      RET
+FILE: E:\学习\AVR\adc\main.c
+(0001) //ICC-AVR application builder : 00-1-16 4:13:00
+(0002) // Target : 8535
+(0003) // Crystal: 4.0000Mhz
+(0004) 
+(0005) #include <io8535v.h>
+(0006) #include <macros.h>
+(0007) #define uchar unsigned char
+(0008) #define uint unsigned int
+(0009) #include <adc.h>
+(0010) #include <led_dsp.h>
+(0011) #include <dac.h>
+(0012) 
+(0013) 
+(0014) 
+(0015) void port_init(void)
+(0016) {
+(0017)  PORTA = 0x00;
+_port_init:
+    0147 2422      CLR	R2
+    0148 BA2B      OUT	0x1B,R2
+(0018)  DDRA  = 0x00;
+    0149 BA2A      OUT	0x1A,R2
+(0019)  PORTB = 0xFF;
+    014A EF8F      LDI	R24,0xFF
+    014B BB88      OUT	0x18,R24
+(0020)  DDRB  = 0xFF;
+    014C BB87      OUT	0x17,R24
+(0021)  PORTC = 0x00;
+    014D BA25      OUT	0x15,R2
+(0022)  DDRC  = 0xff;
+    014E BB84      OUT	0x14,R24
+(0023)  PORTD = 0xF0;
+    014F EF80      LDI	R24,0xF0
+    0150 BB82      OUT	0x12,R24
+(0024)  DDRD  = 0x0F;
+    0151 E08F      LDI	R24,0xF
+    0152 BB81      OUT	0x11,R24
+(0025) }
+    0153 9508      RET
+(0026) 
+(0027) 
+(0028) void main (void)
+(0029) {
+(0030)  uchar i;
+(0031)  //stop errant interrupts until set up
+(0032)  CLI(); //disable all interrupts
+_main:
+  i                    --> Y+1
+    0154 94F8      BCLR	7
+(0033) port_init();
+    0155 DFF1      RCALL	_port_init
+(0034) adc_init();
+    0156 DEF7      RCALL	_adc_init
+(0035) dac_init ();
+    0157 D00F      RCALL	_dac_init
+(0036)  MCUCR = 0x00; 
+    0158 2422      CLR	R2
+    0159 BE25      OUT	0x35,R2
+(0037)  GIMSK = 0x00;
+    015A BE2B      OUT	0x3B,R2
+(0038)  SEI(); //re-enable interrupts
+    015B 9478      BSET	7
+    015C C008      RJMP	0x0165
+(0039)  //all peripherals are now initialised
+(0040)  while (1)
+(0041)  {
+(0042) 	change_data(adc_val);
+    015D 91000079  LDS	R16,_adc_val
+    015F 9110007A  LDS	R17,_adc_val+1
+    0161 DF75      RCALL	_change_data
+(0043)  	scan_led(disp_buffer);
+    0162 E600      LDI	R16,0x60
+    0163 E010      LDI	R17,0
+    0164 DFBC      RCALL	_scan_led
+    0165 CFF7      RJMP	0x015D
+(0044) // 	put_to_dac();
+(0045) 	}
+(0046) }
+    0166 9508      RET
+FILE: E:\学习\AVR\adc\dac.c
+(0001) #define _dac_c
+(0002) 
+(0003) #include <io8535v.h>
+(0004) #include <macros.h>
+(0005) #include <dac.h>
+(0006) #define debug_p (*(volatile uint *)0xa0)
+(0007) void dac_init (void)
+(0008) {
+(0009) 	 vol_data = 0;
+_dac_init:
+    0167 2422      CLR	R2
+    0168 9220007B  STS	_vol_data,R2
+(0010)  TIMSK = 0x04;//为什么是04啊？？？？？？？？？
+    016A E084      LDI	R24,4
+    016B BF89      OUT	0x39,R24
+(0011)  TCCR1B = 0x00; //stop
+    016C BC2E      OUT	0x2E,R2
+(0012)  TCNT1H = 0xf5; //setup
+    016D EF85      LDI	R24,0xF5
+    016E BD8D      OUT	0x2D,R24
+(0013)  TCNT1L = 0xEE;
+    016F EE8E      LDI	R24,0xEE
+    0170 BD8C      OUT	0x2C,R24
+(0014)  OCR1AH = 0x7A;
+    0171 E78A      LDI	R24,0x7A
+    0172 BD8B      OUT	0x2B,R24
+(0015)  OCR1AL = 0x12;
+    0173 E182      LDI	R24,0x12
+    0174 BD8A      OUT	0x2A,R24
+(0016)  OCR1BH = 0x7A;
+    0175 E78A      LDI	R24,0x7A
+    0176 BD89      OUT	0x29,R24
+(0017)  OCR1BL = 0x12;
+    0177 E182      LDI	R24,0x12
+    0178 BD88      OUT	0x28,R24
+(0018)  TCCR1A = 0x00;
+    0179 BC2F      OUT	0x2F,R2
+(0019)  TCCR1B = 0x02; //start Timer
+    017A E082      LDI	R24,2
+    017B BD8E      OUT	0x2E,R24
+(0020) 	 
+(0021) }
+    017C 9508      RET
+_put_to_dac:
+    017D 922A      ST	R2,-Y
+    017E 923A      ST	R3,-Y
+    017F 938A      ST	R24,-Y
+    0180 939A      ST	R25,-Y
+    0181 93EA      ST	R30,-Y
+    0182 93FA      ST	R31,-Y
+    0183 B62F      IN	R2,0x3F
+    0184 922A      ST	R2,-Y
+(0022) 
+(0023) 
+(0024) void put_to_dac (void)
+(0025) {
+(0026)  TCNT1H = 0xf5; //setup
+    0185 EF85      LDI	R24,0xF5
+    0186 BD8D      OUT	0x2D,R24
+(0027)  TCNT1L = 0xEE;
+    0187 EE8E      LDI	R24,0xEE
+    0188 BD8C      OUT	0x2C,R24
+(0028) 	data_port = sin_tabel[vol_data];
+    0189 E684      LDI	R24,0x64
+    018A E090      LDI	R25,0
+    018B 91E0007B  LDS	R30,_vol_data
+    018D 27FF      CLR	R31
+    018E 0FE8      ADD	R30,R24
+    018F 1FF9      ADC	R31,R25
+    0190 8020      LDD	R2,Z+0
+    0191 BA25      OUT	0x15,R2
+(0029) 	vol_data++;
+    0192 9180007B  LDS	R24,_vol_data
+    0194 5F8F      SUBI	R24,0xFF
+    0195 9380007B  STS	_vol_data,R24
+(0030) 	debug_p= vol_data;
+    0197 2E28      MOV	R2,R24
+    0198 2433      CLR	R3
+    0199 923000A1  STS	0xA1,R3
+    019B 922000A0  STS	0xA0,R2
+(0031) 	if (vol_data>20) vol_data =0;
+    019D E184      LDI	R24,0x14
+    019E 1582      CP	R24,R2
+    019F F418      BCC	0x01A3
+    01A0 2422      CLR	R2
+    01A1 9220007B  STS	_vol_data,R2
+(0032) }
+FILE: <library>
+    01A3 9029      LD	R2,Y+
+    01A4 BE2F      OUT	0x3F,R2
+    01A5 91F9      LD	R31,Y+
+    01A6 91E9      LD	R30,Y+
+    01A7 9199      LD	R25,Y+
+    01A8 9189      LD	R24,Y+
+    01A9 9039      LD	R3,Y+
+    01AA 9029      LD	R2,Y+
+    01AB 9518      RETI
+push_arg4:
+    01AC 933A      ST	R19,-Y
+    01AD 932A      ST	R18,-Y
+push_arg2:
+    01AE 931A      ST	R17,-Y
+    01AF 930A      ST	R16,-Y
+    01B0 9508      RET
+mod16s:
+    01B1 9468      BSET	6
+    01B2 92DA      ST	R13,-Y
+    01B3 2ED1      MOV	R13,R17
+    01B4 C004      RJMP	0x01B9
+div16s:
+    01B5 94E8      BCLR	6
+    01B6 92DA      ST	R13,-Y
+    01B7 2ED1      MOV	R13,R17
+    01B8 26D3      EOR	R13,R19
+    01B9 FF17      SBRS	R17,7
+    01BA C004      RJMP	0x01BF
+    01BB 9510      COM	R17
+    01BC 9500      COM	R16
+    01BD 5F0F      SUBI	R16,0xFF
+    01BE 4F1F      SBCI	R17,0xFF
+    01BF FF37      SBRS	R19,7
+    01C0 C004      RJMP	0x01C5
+    01C1 9530      COM	R19
+    01C2 9520      COM	R18
+    01C3 5F2F      SUBI	R18,0xFF
+    01C4 4F3F      SBCI	R19,0xFF
+    01C5 D00B      RCALL	xdiv16u
+    01C6 FED7      SBRS	R13,7
+    01C7 C004      RJMP	0x01CC
+    01C8 9510      COM	R17
+    01C9 9500      COM	R16
+    01CA 5F0F      SUBI	R16,0xFF
+    01CB 4F1F      SBCI	R17,0xFF
+    01CC 90D9      LD	R13,Y+
+    01CD 9508      RET
+mod16u:
+    01CE 9468      BSET	6
+    01CF C001      RJMP	xdiv16u
+div16u:
+    01D0 94E8      BCLR	6
+xdiv16u:
+    01D1 92EA      ST	R14,-Y
+    01D2 92FA      ST	R15,-Y
+    01D3 938A      ST	R24,-Y
+    01D4 24EE      CLR	R14
+    01D5 24FF      CLR	R15
+    01D6 E180      LDI	R24,0x10
+    01D7 0F00      LSL	R16
+    01D8 1F11      ROL	R17
+    01D9 1CEE      ROL	R14
+    01DA 1CFF      ROL	R15
+    01DB 16E2      CP	R14,R18
+    01DC 06F3      CPC	R15,R19
+    01DD F018      BCS	0x01E1
+    01DE 1AE2      SUB	R14,R18
+    01DF 0AF3      SBC	R15,R19
+    01E0 9503      INC	R16
+    01E1 958A      DEC	R24
+    01E2 F7A1      BNE	0x01D7
+    01E3 F416      BRTC	0x01E6
+    01E4 2D0E      MOV	R16,R14
+    01E5 2D1F      MOV	R17,R15
+    01E6 9189      LD	R24,Y+
+    01E7 90F9      LD	R15,Y+
+    01E8 90E9      LD	R14,Y+
+    01E9 9508      RET
+pop_gset2:
+    01EA E0E2      LDI	R30,2
+    01EB C006      RJMP	pop
+pop_gset3:
+    01EC E0E4      LDI	R30,4
+    01ED C004      RJMP	pop
+push_gset1:
+    01EE 935A      ST	R21,-Y
+    01EF 934A      ST	R20,-Y
+    01F0 9508      RET
+pop_gset1:
+    01F1 E0E1      LDI	R30,1
+pop:
+    01F2 9149      LD	R20,Y+
+    01F3 9159      LD	R21,Y+
+    01F4 FDE0      SBRC	R30,0
+    01F5 9508      RET
+    01F6 9169      LD	R22,Y+
+    01F7 9179      LD	R23,Y+
+    01F8 FDE1      SBRC	R30,1
+    01F9 9508      RET
+    01FA 90A9      LD	R10,Y+
+    01FB 90B9      LD	R11,Y+
+    01FC FDE2      SBRC	R30,2
+    01FD 9508      RET
+    01FE 90C9      LD	R12,Y+
+    01FF 90D9      LD	R13,Y+
+    0200 FDE3      SBRC	R30,3
+    0201 9508      RET
+    0202 90E9      LD	R14,Y+
+    0203 90F9      LD	R15,Y+
+    0204 9508      RET
+push_gset2:
+    0205 937A      ST	R23,-Y
+    0206 936A      ST	R22,-Y
+    0207 CFE6      RJMP	push_gset1
+push_gset3:
+    0208 92BA      ST	R11,-Y
+    0209 92AA      ST	R10,-Y
+    020A CFFA      RJMP	push_gset2
+neg32:
+    020B 9500      COM	R16
+    020C 9510      COM	R17
+    020D 9520      COM	R18
+    020E 9530      COM	R19
+    020F 5F0F      SUBI	R16,0xFF
+    0210 4F1F      SBCI	R17,0xFF
+    0211 4F2F      SBCI	R18,0xFF
+    0212 4F3F      SBCI	R19,0xFF
+    0213 9508      RET
+lpm32:
+    0214 93EA      ST	R30,-Y
+    0215 93FA      ST	R31,-Y
+    0216 920A      ST	R0,-Y
+    0217 2FE0      MOV	R30,R16
+    0218 2FF1      MOV	R31,R17
+    0219 95C8      LPM
+    021A 2D00      MOV	R16,R0
+    021B 9631      ADIW	R30,1
+    021C 95C8      LPM
+    021D 2D10      MOV	R17,R0
+    021E 9631      ADIW	R30,1
+    021F 95C8      LPM
+    0220 2D20      MOV	R18,R0
+    0221 9631      ADIW	R30,1
+    0222 95C8      LPM
+    0223 2D30      MOV	R19,R0
+    0224 9009      LD	R0,Y+
+    0225 91F9      LD	R31,Y+
+    0226 91E9      LD	R30,Y+
+    0227 9508      RET
+fp2int:
+    0228 D15B      RCALL	savfacc1
+    0229 D00F      RCALL	FTOI
+    022A 2F02      MOV	R16,R18
+    022B 2F13      MOV	R17,R19
+    022C FD87      SBRC	R24,7
+    022D C001      RJMP	nojump1
+    022E C158      RJMP	restorefacc1
+nojump1:
+    022F 9510      COM	R17
+    0230 9501      NEG	R16
+    0231 4F1F      SBCI	R17,0xFF
+    0232 C154      RJMP	restorefacc1
+fp2long:
+    0233 D150      RCALL	savfacc1
+    0234 D006      RCALL	FTOL
+    0235 FF87      SBRS	R24,7
+    0236 C001      RJMP	nojump2
+    0237 DFD3      RCALL	neg32
+nojump2:
+    0238 C14E      RJMP	restorefacc1
+FTOI:
+    0239 E0BE      LDI	R27,0xE
+    023A C001      RJMP	0x023C
+FTOL:
+    023B E1BE      LDI	R27,0x1E
+    023C D14D      RCALL	unpackfacc1
+    023D F059      BEQ	0x0249
+    023E 1BB3      SUB	R27,R19
+    023F F009      BEQ	0x0241
+    0240 F45A      BPL	0x024C
+    0241 2388      TST	R24
+    0242 F01A      BMI	0x0246
+    0243 E010      LDI	R17,0
+    0244 E308      LDI	R16,0x38
+    0245 CFCE      RJMP	lpm32
+    0246 E010      LDI	R17,0
+    0247 E30E      LDI	R16,0x3E
+    0248 CFCB      RJMP	lpm32
+    0249 E010      LDI	R17,0
+    024A E30C      LDI	R16,0x3C
+    024B CFC8      RJMP	lpm32
+    024C 9533      INC	R19
+    024D F3DA      BMI	0x0249
+    024E E030      LDI	R19,0
+    024F 50B8      SUBI	R27,0x8
+    0250 F452      BPL	0x025B
+    0251 5FB8      SUBI	R27,0xF8
+    0252 2F32      MOV	R19,R18
+    0253 2F21      MOV	R18,R17
+    0254 2F10      MOV	R17,R16
+    0255 E800      LDI	R16,0x80
+    0256 C006      RJMP	0x025D
+    0257 2F01      MOV	R16,R17
+    0258 2F12      MOV	R17,R18
+    0259 E020      LDI	R18,0
+    025A 50B8      SUBI	R27,0x8
+    025B 30B8      CPI	R27,0x8
+    025C F7D0      BCC	0x0257
+    025D 23BB      TST	R27
+    025E F031      BEQ	0x0265
+    025F 9536      LSR	R19
+    0260 9527      ROR	R18
+    0261 9517      ROR	R17
+    0262 9507      ROR	R16
+    0263 95BA      DEC	R27
+    0264 F7D1      BNE	0x025F
+    0265 9508      RET
+int2fp:
+    0266 2722      CLR	R18
+    0267 FD17      SBRC	R17,7
+    0268 9520      COM	R18
+    0269 2733      CLR	R19
+    026A FD27      SBRC	R18,7
+    026B 9530      COM	R19
+long2fp:
+    026C D117      RCALL	savfacc1
+    026D D001      RCALL	ITOF
+    026E C118      RJMP	restorefacc1
+ITOF:
+    026F 2788      CLR	R24
+    0270 2333      TST	R19
+    0271 F412      BPL	0x0274
+    0272 DF98      RCALL	neg32
+    0273 9580      COM	R24
+    0274 2FB0      MOV	R27,R16
+    0275 2BB1      OR	R27,R17
+    0276 2BB2      OR	R27,R18
+    0277 2BB3      OR	R27,R19
+    0278 F409      BNE	0x027A
+    0279 C126      RJMP	minres
+    027A E1B6      LDI	R27,0x16
+    027B C005      RJMP	0x0281
+    027C 95B3      INC	R27
+    027D 9536      LSR	R19
+    027E 9527      ROR	R18
+    027F 9517      ROR	R17
+    0280 9507      ROR	R16
+    0281 2333      TST	R19
+    0282 F7C9      BNE	0x027C
+    0283 2322      TST	R18
+    0284 F449      BNE	0x028E
+    0285 50B8      SUBI	R27,0x8
+    0286 2F21      MOV	R18,R17
+    0287 2F10      MOV	R17,R16
+    0288 E000      LDI	R16,0
+    0289 CFF9      RJMP	0x0283
+    028A 95BA      DEC	R27
+    028B 0F00      LSL	R16
+    028C 1F11      ROL	R17
+    028D 1F22      ROL	R18
+    028E F7DA      BPL	0x028A
+    028F 2F3B      MOV	R19,R27
+    0290 C139      RJMP	repack
+save_floatregs:
+    0291 92DA      ST	R13,-Y
+    0292 92EA      ST	R14,-Y
+    0293 92FA      ST	R15,-Y
+    0294 938A      ST	R24,-Y
+    0295 922A      ST	R2,-Y
+    0296 923A      ST	R3,-Y
+    0297 924A      ST	R4,-Y
+    0298 939A      ST	R25,-Y
+    0299 93AA      ST	R26,-Y
+    029A 93BA      ST	R27,-Y
+    029B 9508      RET
+restore_floatregs:
+    029C 91B9      LD	R27,Y+
+    029D 91A9      LD	R26,Y+
+    029E 9199      LD	R25,Y+
+    029F 9049      LD	R4,Y+
+    02A0 9039      LD	R3,Y+
+    02A1 9029      LD	R2,Y+
+    02A2 9189      LD	R24,Y+
+    02A3 90F9      LD	R15,Y+
+    02A4 90E9      LD	R14,Y+
+    02A5 90D9      LD	R13,Y+
+    02A6 9508      RET
+stk2arg1:
+    02A7 842A      LDD	R2,Y+10
+    02A8 843B      LDD	R3,Y+11
+    02A9 844C      LDD	R4,Y+12
+    02AA 859D      LDD	R25,Y+13
+    02AB 9508      RET
+stk2arg0:
+    02AC 850E      LDD	R16,Y+14
+    02AD 851F      LDD	R17,Y+15
+    02AE 8928      LDD	R18,Y+16
+    02AF 8939      LDD	R19,Y+17
+    02B0 9508      RET
+float_epilog:
+    02B1 DFEA      RCALL	restore_floatregs
+    02B2 920F      PUSH	R0
+    02B3 B60F      IN	R0,0x3F
+    02B4 9628      ADIW	R28,0x8
+    02B5 BE0F      OUT	0x3F,R0
+    02B6 900F      POP	R0
+    02B7 9508      RET
+float_prolog:
+    02B8 DFD8      RCALL	save_floatregs
+    02B9 DFF2      RCALL	stk2arg0
+    02BA CFEC      RJMP	stk2arg1
+add32fs:
+    02BB D001      RCALL	add32f
+    02BC CEEF      RJMP	push_arg4
+add32f:
+    02BD DFFA      RCALL	float_prolog
+    02BE D00D      RCALL	FADD
+    02BF CFF1      RJMP	float_epilog
+sub32fs:
+    02C0 D001      RCALL	sub32f
+    02C1 CEEA      RJMP	push_arg4
+sub32f:
+    02C2 DFF5      RCALL	float_prolog
+    02C3 D007      RCALL	FSUB
+    02C4 CFEC      RJMP	float_epilog
+fret2:
+    02C5 2F8A      MOV	R24,R26
+    02C6 2F39      MOV	R19,R25
+    02C7 2D24      MOV	R18,R4
+    02C8 2D13      MOV	R17,R3
+    02C9 2D02      MOV	R16,R2
+    02CA C0FF      RJMP	repack
+FSUB:
+    02CB 5890      SUBI	R25,0x80
+FADD:
+    02CC D0EB      RCALL	unpack
+    02CD 3890      CPI	R25,0x80
+    02CE F3D9      BEQ	0x02CA
+    02CF 3830      CPI	R19,0x80
+    02D0 F3A1      BEQ	0x02C5
+    02D1 2FB3      MOV	R27,R19
+    02D2 1BB9      SUB	R27,R25
+    02D3 F3B3      BVS	0x02CA
+    02D4 F02A      BMI	0x02DA
+    02D5 F431      BNE	0x02DC
+    02D6 1502      CP	R16,R2
+    02D7 0513      CPC	R17,R3
+    02D8 0524      CPC	R18,R4
+    02D9 F410      BCC	0x02DC
+    02DA D0D1      RCALL	swapacc
+    02DB CFF5      RJMP	0x02D1
+    02DC 31B8      CPI	R27,0x18
+    02DD F018      BCS	0x02E1
+    02DE 2422      CLR	R2
+    02DF 2433      CLR	R3
+    02E0 2444      CLR	R4
+    02E1 30B8      CPI	R27,0x8
+    02E2 F028      BCS	0x02E8
+    02E3 2C23      MOV	R2,R3
+    02E4 2C34      MOV	R3,R4
+    02E5 2444      CLR	R4
+    02E6 50B8      SUBI	R27,0x8
+    02E7 CFF9      RJMP	0x02E1
+    02E8 23BB      TST	R27
+    02E9 F029      BEQ	0x02EF
+    02EA 9446      LSR	R4
+    02EB 9437      ROR	R3
+    02EC 9427      ROR	R2
+    02ED 95BA      DEC	R27
+    02EE F7D9      BNE	0x02EA
+    02EF 2FB8      MOV	R27,R24
+    02F0 27BA      EOR	R27,R26
+    02F1 F042      BMI	0x02FA
+    02F2 D014      RCALL	0x0307
+    02F3 F6B0      BCC	0x02CA
+    02F4 9527      ROR	R18
+    02F5 9517      ROR	R17
+    02F6 9507      ROR	R16
+    02F7 5F3F      SUBI	R19,0xFF
+    02F8 F68B      BVC	0x02CA
+    02F9 C09F      RJMP	maxres
+    02FA D010      RCALL	usub24
+    02FB F409      BNE	0x02FD
+    02FC C0A3      RJMP	minres
+    02FD F408      BCC	0x02FF
+    02FE D094      RCALL	negmant
+    02FF 2322      TST	R18
+    0300 F24A      BMI	0x02CA
+    0301 0F00      LSL	R16
+    0302 1F11      ROL	R17
+    0303 1F22      ROL	R18
+    0304 5031      SUBI	R19,1
+    0305 F7CB      BVC	0x02FF
+    0306 C092      RJMP	maxres
+    0307 0D02      ADD	R16,R2
+    0308 1D13      ADC	R17,R3
+    0309 1D24      ADC	R18,R4
+    030A 9508      RET
+usub24:
+    030B 1902      SUB	R16,R2
+    030C 0913      SBC	R17,R3
+    030D 0924      SBC	R18,R4
+    030E 9508      RET
+cmp32f:
+    030F DFA8      RCALL	float_prolog
+    0310 D001      RCALL	FLTCP
+    0311 CF9F      RJMP	float_epilog
+FLTCP:
+    0312 D002      RCALL	0x0315
+    0313 23BB      TST	R27
+    0314 9508      RET
+    0315 2333      TST	R19
+    0316 F082      BMI	0x0327
+    0317 2399      TST	R25
+    0318 F042      BMI	0x0321
+    0319 1739      CP	R19,R25
+    031A F040      BCS	0x0323
+    031B F429      BNE	0x0321
+    031C 1502      CP	R16,R2
+    031D 0513      CPC	R17,R3
+    031E 0524      CPC	R18,R4
+    031F F018      BCS	0x0323
+    0320 F021      BEQ	0x0325
+    0321 E0B1      LDI	R27,1
+    0322 9508      RET
+    0323 EFBF      LDI	R27,0xFF
+    0324 9508      RET
+    0325 27BB      CLR	R27
+    0326 9508      RET
+    0327 2399      TST	R25
+    0328 F7D2      BPL	0x0323
+    0329 1739      CP	R19,R25
+    032A F3B0      BCS	0x0321
+    032B F7B9      BNE	0x0323
+    032C 1502      CP	R16,R2
+    032D 0513      CPC	R17,R3
+    032E 0524      CPC	R18,R4
+    032F F388      BCS	0x0321
+    0330 F3A1      BEQ	0x0325
+    0331 CFF1      RJMP	0x0323
+    0332 E7BF      LDI	R27,0x7F
+    0333 2F3B      MOV	R19,R27
+    0334 2B2B      OR	R18,R27
+    0335 EF0F      LDI	R16,0xFF
+    0336 EF1F      LDI	R17,0xFF
+    0337 9508      RET
+    0338 2700      CLR	R16
+    0339 2711      CLR	R17
+    033A 2722      CLR	R18
+    033B 2733      CLR	R19
+    033C 2788      CLR	R24
+    033D 9508      RET
+empy32fs:
+    033E D001      RCALL	empy32f
+    033F CE6C      RJMP	push_arg4
+empy32f:
+    0340 DF77      RCALL	float_prolog
+    0341 920F      PUSH	R0
+    0342 92CF      PUSH	R12
+    0343 D003      RCALL	eFMUL
+    0344 90CF      POP	R12
+    0345 900F      POP	R0
+    0346 CF6A      RJMP	float_epilog
+eFMUL:
+    0347 D070      RCALL	unpack
+    0348 F379      BEQ	0x0338
+    0349 3890      CPI	R25,0x80
+    034A F369      BEQ	0x0338
+    034B 278A      EOR	R24,R26
+    034C 9408      BSET	0
+    034D 1F39      ADC	R19,R25
+    034E F31B      BVS	0x0332
+    034F D00D      RCALL	eumul24
+    0350 2D2F      MOV	R18,R15
+    0351 2D1E      MOV	R17,R14
+    0352 2D0D      MOV	R16,R13
+    0353 2322      TST	R18
+    0354 F02A      BMI	0x035A
+    0355 953A      DEC	R19
+    0356 0CCC      LSL	R12
+    0357 1F00      ROL	R16
+    0358 1F11      ROL	R17
+    0359 1F22      ROL	R18
+    035A 5F3F      SUBI	R19,0xFF
+    035B F2B3      BVS	0x0332
+    035C C06D      RJMP	repack
+eumul24:
+    035D 9D22      MUL	R18,R2
+    035E 2CC0      MOV	R12,R0
+    035F 2CD1      MOV	R13,R1
+    0360 9D24      MUL	R18,R4
+    0361 2CE0      MOV	R14,R0
+    0362 2CF1      MOV	R15,R1
+    0363 9D14      MUL	R17,R4
+    0364 0CC1      ADD	R12,R1
+    0365 1EDB      ADC	R13,R27
+    0366 1EEB      ADC	R14,R27
+    0367 1EFB      ADC	R15,R27
+    0368 9D03      MUL	R16,R3
+    0369 0CC1      ADD	R12,R1
+    036A 1EDB      ADC	R13,R27
+    036B 1EEB      ADC	R14,R27
+    036C 1EFB      ADC	R15,R27
+    036D 9D13      MUL	R17,R3
+    036E 0CC0      ADD	R12,R0
+    036F 1CD1      ADC	R13,R1
+    0370 1EEB      ADC	R14,R27
+    0371 1EFB      ADC	R15,R27
+    0372 9D04      MUL	R16,R4
+    0373 0CC0      ADD	R12,R0
+    0374 1CD1      ADC	R13,R1
+    0375 1EEB      ADC	R14,R27
+    0376 1EFB      ADC	R15,R27
+    0377 9D23      MUL	R18,R3
+    0378 0CD0      ADD	R13,R0
+    0379 1CE1      ADC	R14,R1
+    037A 1EFB      ADC	R15,R27
+    037B 9D14      MUL	R17,R4
+    037C 0CD0      ADD	R13,R0
+    037D 1CE1      ADC	R14,R1
+    037E 1EFB      ADC	R15,R27
+    037F F41A      BPL	0x0383
+    0380 94D3      INC	R13
+    0381 1EEB      ADC	R14,R27
+    0382 1EFB      ADC	R15,R27
+    0383 9508      RET
+savfacc1:
+    0384 938A      ST	R24,-Y
+    0385 93BA      ST	R27,-Y
+    0386 9508      RET
+restorefacc1:
+    0387 91B9      LD	R27,Y+
+    0388 9189      LD	R24,Y+
+    0389 9508      RET
+unpackfacc1:
+    038A 2F83      MOV	R24,R19
+    038B 7880      ANDI	R24,0x80
+    038C 0F22      LSL	R18
+    038D 1F33      ROL	R19
+    038E 5830      SUBI	R19,0x80
+    038F 9408      BSET	0
+    0390 9527      ROR	R18
+    0391 3830      CPI	R19,0x80
+    0392 9508      RET
+negmant:
+    0393 9510      COM	R17
+    0394 9520      COM	R18
+    0395 9501      NEG	R16
+    0396 4F1F      SBCI	R17,0xFF
+    0397 4F2F      SBCI	R18,0xFF
+    0398 9508      RET
+maxres:
+    0399 E7BF      LDI	R27,0x7F
+    039A 2F3B      MOV	R19,R27
+    039B 2B2B      OR	R18,R27
+    039C EFBF      LDI	R27,0xFF
+    039D 2F0B      MOV	R16,R27
+    039E 2F1B      MOV	R17,R27
+    039F 9508      RET
+minres:
+    03A0 2700      CLR	R16
+    03A1 2711      CLR	R17
+    03A2 2722      CLR	R18
+    03A3 2733      CLR	R19
+    03A4 2788      CLR	R24
+    03A5 9508      RET
+ac1toac2:
+    03A6 2F93      MOV	R25,R19
+    03A7 2E20      MOV	R2,R16
+    03A8 2E31      MOV	R3,R17
+    03A9 2E42      MOV	R4,R18
+    03AA 2FA8      MOV	R26,R24
+    03AB 9508      RET
+swapacc:
+    03AC 922A      ST	R2,-Y
+    03AD 923A      ST	R3,-Y
+    03AE 924A      ST	R4,-Y
+    03AF 939A      ST	R25,-Y
+    03B0 93AA      ST	R26,-Y
+    03B1 DFF4      RCALL	ac1toac2
+    03B2 9189      LD	R24,Y+
+    03B3 9139      LD	R19,Y+
+    03B4 9129      LD	R18,Y+
+    03B5 9119      LD	R17,Y+
+    03B6 9109      LD	R16,Y+
+    03B7 9508      RET
+unpack:
+    03B8 2F83      MOV	R24,R19
+    03B9 E8B0      LDI	R27,0x80
+    03BA 0F22      LSL	R18
+    03BB 1F33      ROL	R19
+    03BC 273B      EOR	R19,R27
+    03BD 0FBB      LSL	R27
+    03BE 9527      ROR	R18
+    03BF 7880      ANDI	R24,0x80
+    03C0 2FA9      MOV	R26,R25
+    03C1 E8B0      LDI	R27,0x80
+    03C2 0C44      LSL	R4
+    03C3 1F99      ROL	R25
+    03C4 279B      EOR	R25,R27
+    03C5 0FBB      LSL	R27
+    03C6 9447      ROR	R4
+    03C7 78A0      ANDI	R26,0x80
+    03C8 3830      CPI	R19,0x80
+    03C9 9508      RET
+repack:
+    03CA 0F22      LSL	R18
+    03CB E8B0      LDI	R27,0x80
+    03CC 27B3      EOR	R27,R19
+    03CD 0F88      LSL	R24
+    03CE 95B7      ROR	R27
+    03CF 9527      ROR	R18
+    03D0 2F3B      MOV	R19,R27
+    03D1 9508      RET

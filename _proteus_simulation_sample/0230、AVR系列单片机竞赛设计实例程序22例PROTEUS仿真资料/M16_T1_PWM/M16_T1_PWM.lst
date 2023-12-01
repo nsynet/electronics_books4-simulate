@@ -1,0 +1,447 @@
+__start:
+__text_start:
+    0034 E5CF      LDI	R28,0x5F
+    0035 E0D4      LDI	R29,4
+    0036 BFCD      OUT	0x3D,R28
+    0037 BFDE      OUT	0x3E,R29
+    0038 51C0      SUBI	R28,0x10
+    0039 40D0      SBCI	R29,0
+    003A EA0A      LDI	R16,0xAA
+    003B 8308      STD	Y+0,R16
+    003C 2400      CLR	R0
+    003D E7E4      LDI	R30,0x74
+    003E E0F0      LDI	R31,0
+    003F E010      LDI	R17,0
+    0040 37E6      CPI	R30,0x76
+    0041 07F1      CPC	R31,R17
+    0042 F011      BEQ	0x0045
+    0043 9201      ST	R0,Z+
+    0044 CFFB      RJMP	0x0040
+    0045 8300      STD	Z+0,R16
+    0046 E5E4      LDI	R30,0x54
+    0047 E0F0      LDI	R31,0
+    0048 E6A0      LDI	R26,0x60
+    0049 E0B0      LDI	R27,0
+    004A E010      LDI	R17,0
+    004B 36E8      CPI	R30,0x68
+    004C 07F1      CPC	R31,R17
+    004D F021      BEQ	0x0052
+    004E 95C8      LPM
+    004F 9631      ADIW	R30,1
+    0050 920D      ST	R0,X+
+    0051 CFF9      RJMP	0x004B
+    0052 940E010B  CALL	_main
+_exit:
+    0054 CFFF      RJMP	_exit
+_DelayMs:
+  j                    --> R20
+  i                    --> R16
+    0055 940E0166  CALL	push_gset1
+FILE: F:\myavr\temp\M16_T1_PWM\M16_T1_PWM.c
+(0001) #include <iom16v.h>
+(0002) #define uchar unsigned char
+(0003) #define uint unsigned int
+(0004) 
+(0005) uchar Table[12]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x79};
+(0006) uchar Data1[4]={10,0,5,0};
+(0007) uchar Data2[4]={3,9,1,0};
+(0008) uchar Key1,Key2;
+(0009) 
+(0010) void DelayMs(uchar i)
+(0011) {
+(0012)  uchar j;
+(0013)  for(;i!=0;i--)
+    0057 C006      RJMP	0x005E
+(0014)  {
+(0015)   for(j=25;j!=0;j--);
+    0058 E149      LDI	R20,0x19
+    0059 C001      RJMP	0x005B
+    005A 954A      DEC	R20
+    005B 2344      TST	R20
+    005C F7E9      BNE	0x005A
+    005D 950A      DEC	R16
+    005E 2300      TST	R16
+    005F F7C1      BNE	0x0058
+(0016)  }
+(0017) }
+    0060 940E0169  CALL	pop_gset1
+    0062 9508      RET
+_Display:
+  sel                  --> R20
+  i                    --> R22
+  p                    --> R10
+    0063 940E0181  CALL	push_gset3
+    0065 0158      MOVW	R10,R16
+(0018) 
+(0019) void Display(uchar *p)
+(0020) {
+(0021)  uchar i,sel=0x01;
+    0066 E041      LDI	R20,1
+(0022)  for(i=0;i<4;i++)
+    0067 2766      CLR	R22
+    0068 C016      RJMP	0x007F
+(0023)  {
+(0024)   PORTC=sel;
+    0069 BB45      OUT	0x15,R20
+(0025)   PORTA=0xff-Table[p[i]];
+    006A 2FE6      MOV	R30,R22
+    006B 27FF      CLR	R31
+    006C 0DEA      ADD	R30,R10
+    006D 1DFB      ADC	R31,R11
+    006E 81E0      LDD	R30,Z+0
+    006F 27FF      CLR	R31
+    0070 E680      LDI	R24,0x60
+    0071 E090      LDI	R25,0
+    0072 0FE8      ADD	R30,R24
+    0073 1FF9      ADC	R31,R25
+    0074 8020      LDD	R2,Z+0
+    0075 2433      CLR	R3
+    0076 EF8F      LDI	R24,0xFF
+    0077 E090      LDI	R25,0
+    0078 1982      SUB	R24,R2
+    0079 0993      SBC	R25,R3
+    007A BB8B      OUT	0x1B,R24
+(0026)   DelayMs(2);
+    007B E002      LDI	R16,2
+    007C DFD8      RCALL	_DelayMs
+(0027)   sel=sel<<1;
+    007D 0F44      LSL	R20
+    007E 9563      INC	R22
+    007F 3064      CPI	R22,4
+    0080 F340      BCS	0x0069
+(0028)  }
+(0029) }
+    0081 940E0163  CALL	pop_gset3
+    0083 9508      RET
+(0030) 
+(0031) void Add_Process(uchar *p)
+(0032) {
+(0033)  if(p[1]!=1)
+_Add_Process:
+  p                    --> R16
+    0084 01F8      MOVW	R30,R16
+    0085 8181      LDD	R24,Z+1
+    0086 3081      CPI	R24,1
+    0087 F099      BEQ	0x009B
+(0034)  {
+(0035)   p[2]++;
+    0088 01C8      MOVW	R24,R16
+    0089 9602      ADIW	R24,2
+    008A 01FC      MOVW	R30,R24
+    008B 8180      LDD	R24,Z+0
+    008C 5F8F      SUBI	R24,0xFF
+    008D 8380      STD	Z+0,R24
+(0036)   if(p[2]==10) {p[2]=0;p[1]++;}
+    008E 01F8      MOVW	R30,R16
+    008F 8182      LDD	R24,Z+2
+    0090 308A      CPI	R24,0xA
+    0091 F449      BNE	0x009B
+    0092 2422      CLR	R2
+    0093 01F8      MOVW	R30,R16
+    0094 8222      STD	Z+2,R2
+    0095 01C8      MOVW	R24,R16
+    0096 9601      ADIW	R24,1
+    0097 01FC      MOVW	R30,R24
+    0098 8180      LDD	R24,Z+0
+    0099 5F8F      SUBI	R24,0xFF
+    009A 8380      STD	Z+0,R24
+(0037)  }
+(0038) }
+    009B 9508      RET
+_Sub_Process:
+  temp                 --> R22
+  p                    --> R20
+    009C 940E017D  CALL	push_gset2
+    009E 01A8      MOVW	R20,R16
+(0039) void Sub_Process(uchar *p)
+(0040) {
+(0041)  uchar temp;
+(0042)  temp=p[1]*10+p[2];
+(0043)  if(temp!=0)
+    009F 01FA      MOVW	R30,R20
+    00A0 8021      LDD	R2,Z+1
+    00A1 E08A      LDI	R24,0xA
+    00A2 9D82      MUL	R24,R2
+    00A3 2D60      MOV	R22,R0
+    00A4 01FA      MOVW	R30,R20
+    00A5 8022      LDD	R2,Z+2
+    00A6 0D62      ADD	R22,R2
+    00A7 F069      BEQ	0x00B5
+(0044)  {
+(0045)   temp=temp-1;
+(0046)   p[1]=temp/10;
+    00A8 956A      DEC	R22
+    00A9 E01A      LDI	R17,0xA
+    00AA 2F06      MOV	R16,R22
+    00AB 940E013A  CALL	div8u
+    00AD 01FA      MOVW	R30,R20
+    00AE 8301      STD	Z+1,R16
+(0047)   p[2]=temp%10;
+    00AF E01A      LDI	R17,0xA
+    00B0 2F06      MOV	R16,R22
+    00B1 940E0138  CALL	mod8u
+    00B3 01FA      MOVW	R30,R20
+    00B4 8302      STD	Z+2,R16
+(0048)  }
+(0049) }
+    00B5 940E0160  CALL	pop_gset2
+    00B7 9508      RET
+(0050) void Key_Process()
+(0051) {
+_Key_Process:
+    00B8 C006      RJMP	0x00BF
+(0052)  while((PINB&0x01)==0){Display(Data1);Key1=1;}
+    00B9 E60C      LDI	R16,0x6C
+    00BA E010      LDI	R17,0
+    00BB DFA7      RCALL	_Display
+    00BC E081      LDI	R24,1
+    00BD 93800075  STS	_Key1,R24
+    00BF 9BB0      SBIS	0x16,0
+    00C0 CFF8      RJMP	0x00B9
+    00C1 C006      RJMP	0x00C8
+(0053)  while((PINB&0x02)==0){Display(Data1);Key2=1;}
+    00C2 E60C      LDI	R16,0x6C
+    00C3 E010      LDI	R17,0
+    00C4 DF9E      RCALL	_Display
+    00C5 E081      LDI	R24,1
+    00C6 93800074  STS	_Key2,R24
+    00C8 9BB1      SBIS	0x16,1
+    00C9 CFF8      RJMP	0x00C2
+(0054)  if(Key1==1)
+    00CA 91800075  LDS	R24,_Key1
+    00CC 3081      CPI	R24,1
+    00CD F431      BNE	0x00D4
+(0055)  {
+(0056)   Add_Process(Data1);
+    00CE E60C      LDI	R16,0x6C
+    00CF E010      LDI	R17,0
+    00D0 DFB3      RCALL	_Add_Process
+(0057)   Key1=0;
+    00D1 2422      CLR	R2
+    00D2 92200075  STS	_Key1,R2
+(0058)  }
+(0059)  if(Key2==1)
+    00D4 91800074  LDS	R24,_Key2
+    00D6 3081      CPI	R24,1
+    00D7 F431      BNE	0x00DE
+(0060)  {
+(0061)   Sub_Process(Data1);
+    00D8 E60C      LDI	R16,0x6C
+    00D9 E010      LDI	R17,0
+    00DA DFC1      RCALL	_Sub_Process
+(0062)   Key2=0;
+    00DB 2422      CLR	R2
+    00DC 92200074  STS	_Key2,R2
+(0063)  }
+(0064) }
+    00DE 9508      RET
+_Set_Process:
+  i                    --> R20
+  p                    --> R20
+    00DF 940E0166  CALL	push_gset1
+    00E1 01A8      MOVW	R20,R16
+(0065) void Set_Process(uchar *p)
+(0066) {
+(0067)  uint i;
+(0068)  i=p[1]*10+p[2];
+(0069)  i=1023*i/10;
+(0070)  OCR1AH=i>>8;
+    00E2 01FA      MOVW	R30,R20
+    00E3 8021      LDD	R2,Z+1
+    00E4 E08A      LDI	R24,0xA
+    00E5 9D82      MUL	R24,R2
+    00E6 0110      MOVW	R2,R0
+    00E7 01FA      MOVW	R30,R20
+    00E8 8042      LDD	R4,Z+2
+    00E9 2455      CLR	R5
+    00EA 0C24      ADD	R2,R4
+    00EB 1C35      ADC	R3,R5
+    00EC EF0F      LDI	R16,0xFF
+    00ED E013      LDI	R17,3
+    00EE 0191      MOVW	R18,R2
+    00EF 940E0150  CALL	empy16s
+    00F1 E02A      LDI	R18,0xA
+    00F2 E030      LDI	R19,0
+    00F3 940E011E  CALL	div16u
+    00F5 01A8      MOVW	R20,R16
+    00F6 011A      MOVW	R2,R20
+    00F7 2C23      MOV	R2,R3
+    00F8 2433      CLR	R3
+    00F9 BC2B      OUT	0x2B,R2
+(0071)  OCR1AL=i&0x00ff;
+    00FA 01CA      MOVW	R24,R20
+    00FB 7090      ANDI	R25,0
+    00FC BD8A      OUT	0x2A,R24
+(0072) }
+    00FD 940E0169  CALL	pop_gset1
+    00FF 9508      RET
+(0073) void Init_IO(void)
+(0074) {
+(0075)  DDRA=0xff;
+_Init_IO:
+    0100 EF8F      LDI	R24,0xFF
+    0101 BB8A      OUT	0x1A,R24
+(0076)  PORTA=0xff;
+    0102 BB8B      OUT	0x1B,R24
+(0077)  DDRC=0xff;
+    0103 BB84      OUT	0x14,R24
+(0078)  PORTC=0xff;
+    0104 BB85      OUT	0x15,R24
+(0079)  DDRB=0x00;
+    0105 2422      CLR	R2
+    0106 BA27      OUT	0x17,R2
+(0080)  PORTB=0x00;
+    0107 BA28      OUT	0x18,R2
+(0081)  DDRD=0xff;
+    0108 BB81      OUT	0x11,R24
+(0082)  PORTD=0xff;
+    0109 BB82      OUT	0x12,R24
+(0083) }
+    010A 9508      RET
+(0084) void main(void)
+(0085) {
+(0086)  Init_IO();
+_main:
+    010B DFF4      RCALL	_Init_IO
+(0087)  TCCR1A=0xc3;
+    010C EC83      LDI	R24,0xC3
+    010D BD8F      OUT	0x2F,R24
+(0088)  TCCR1B=0x02;
+    010E E082      LDI	R24,2
+    010F BD8E      OUT	0x2E,R24
+(0089)  DelayMs(50);
+    0110 E302      LDI	R16,0x32
+    0111 DF43      RCALL	_DelayMs
+    0112 C007      RJMP	0x011A
+(0090)  while(1)
+(0091)  {
+(0092)   Key_Process();
+    0113 DFA4      RCALL	_Key_Process
+(0093)   Set_Process(Data1);
+    0114 E60C      LDI	R16,0x6C
+    0115 E010      LDI	R17,0
+    0116 DFC8      RCALL	_Set_Process
+(0094)   Display(Data1);
+    0117 E60C      LDI	R16,0x6C
+    0118 E010      LDI	R17,0
+    0119 DF49      RCALL	_Display
+    011A CFF8      RJMP	0x0113
+(0095)  }
+(0096) }
+FILE: <library>
+    011B 9508      RET
+mod16u:
+    011C 9468      BSET	6
+    011D C001      RJMP	xdiv16u
+div16u:
+    011E 94E8      BCLR	6
+xdiv16u:
+    011F 92EA      ST	R14,-Y
+    0120 92FA      ST	R15,-Y
+    0121 938A      ST	R24,-Y
+    0122 24EE      CLR	R14
+    0123 24FF      CLR	R15
+    0124 E180      LDI	R24,0x10
+    0125 0F00      LSL	R16
+    0126 1F11      ROL	R17
+    0127 1CEE      ROL	R14
+    0128 1CFF      ROL	R15
+    0129 16E2      CP	R14,R18
+    012A 06F3      CPC	R15,R19
+    012B F018      BCS	0x012F
+    012C 1AE2      SUB	R14,R18
+    012D 0AF3      SBC	R15,R19
+    012E 9503      INC	R16
+    012F 958A      DEC	R24
+    0130 F7A1      BNE	0x0125
+    0131 F416      BRTC	0x0134
+    0132 2D0E      MOV	R16,R14
+    0133 2D1F      MOV	R17,R15
+    0134 9189      LD	R24,Y+
+    0135 90F9      LD	R15,Y+
+    0136 90E9      LD	R14,Y+
+    0137 9508      RET
+mod8u:
+    0138 9468      BSET	6
+    0139 C001      RJMP	xdiv8u
+div8u:
+    013A 94E8      BCLR	6
+xdiv8u:
+    013B 932A      ST	R18,-Y
+    013C 92FA      ST	R15,-Y
+    013D 92EA      ST	R14,-Y
+    013E 24FF      CLR	R15
+    013F 24EE      CLR	R14
+    0140 E120      LDI	R18,0x10
+    0141 0F00      LSL	R16
+    0142 1CFF      ROL	R15
+    0143 1CEE      ROL	R14
+    0144 16E1      CP	R14,R17
+    0145 F010      BCS	0x0148
+    0146 1AE1      SUB	R14,R17
+    0147 9503      INC	R16
+    0148 952A      DEC	R18
+    0149 F7B9      BNE	0x0141
+    014A F40E      BRTC	0x014C
+    014B 2D0E      MOV	R16,R14
+    014C 90E9      LD	R14,Y+
+    014D 90F9      LD	R15,Y+
+    014E 9129      LD	R18,Y+
+    014F 9508      RET
+empy16s:
+    0150 920A      ST	R0,-Y
+    0151 921A      ST	R1,-Y
+    0152 938A      ST	R24,-Y
+    0153 939A      ST	R25,-Y
+    0154 9F02      MUL	R16,R18
+    0155 01C0      MOVW	R24,R0
+    0156 9F12      MUL	R17,R18
+    0157 0D90      ADD	R25,R0
+    0158 9F03      MUL	R16,R19
+    0159 0D90      ADD	R25,R0
+    015A 018C      MOVW	R16,R24
+    015B 9199      LD	R25,Y+
+    015C 9189      LD	R24,Y+
+    015D 9019      LD	R1,Y+
+    015E 9009      LD	R0,Y+
+    015F 9508      RET
+pop_gset2:
+    0160 E0E2      LDI	R30,2
+    0161 940C016A  JMP	pop
+pop_gset3:
+    0163 E0E4      LDI	R30,4
+    0164 940C016A  JMP	pop
+push_gset1:
+    0166 935A      ST	R21,-Y
+    0167 934A      ST	R20,-Y
+    0168 9508      RET
+pop_gset1:
+    0169 E0E1      LDI	R30,1
+pop:
+    016A 9149      LD	R20,Y+
+    016B 9159      LD	R21,Y+
+    016C FDE0      SBRC	R30,0
+    016D 9508      RET
+    016E 9169      LD	R22,Y+
+    016F 9179      LD	R23,Y+
+    0170 FDE1      SBRC	R30,1
+    0171 9508      RET
+    0172 90A9      LD	R10,Y+
+    0173 90B9      LD	R11,Y+
+    0174 FDE2      SBRC	R30,2
+    0175 9508      RET
+    0176 90C9      LD	R12,Y+
+    0177 90D9      LD	R13,Y+
+    0178 FDE3      SBRC	R30,3
+    0179 9508      RET
+    017A 90E9      LD	R14,Y+
+    017B 90F9      LD	R15,Y+
+    017C 9508      RET
+push_gset2:
+    017D 937A      ST	R23,-Y
+    017E 936A      ST	R22,-Y
+    017F 940C0166  JMP	push_gset1
+push_gset3:
+    0181 92BA      ST	R11,-Y
+    0182 92AA      ST	R10,-Y
+    0183 940C017D  JMP	push_gset2

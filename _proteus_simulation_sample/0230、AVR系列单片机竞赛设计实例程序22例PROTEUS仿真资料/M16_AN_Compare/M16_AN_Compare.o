@@ -1,0 +1,28 @@
+XL
+H 1 areas 1 global symbols
+M M16_AN_Compare.c
+A text size 26 flags 0
+dbfile F:\myavr\temp\M16_AN_Compare\M16_AN_Compare.c
+dbfunc e main 0 fV
+dbsym l i 1 c
+dbline FFFFFFFF 0
+dbline 6 0
+dbline 8 0
+dbline 9 4
+dbline A 8
+dbline C C
+dbline D C
+dbline E 14
+dbline 10 1C
+dbline 11 22
+dbline B 22
+dbline FFFFFFFE 24
+dbline 12 24
+dbline 0 24
+S _main Def0000
+T 00 00 80 EF 87 BB 22 24 28 BA 28 B8 0B C0 88 B1
+R 00 00 00 00
+T 0E 00 80 72 80 32 21 F4 88 B3 80 6F 88 BB 03 C0
+R 00 00 00 00
+T 1C 00 88 B3 8F 70 88 BB F4 CF 08 95
+R 00 00 00 00

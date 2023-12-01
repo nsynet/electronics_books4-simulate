@@ -1,0 +1,295 @@
+__text_start:
+__start:
+    0034 E5CF      LDI	R28,0x5F
+    0035 E0D4      LDI	R29,4
+    0036 BFCD      OUT	0x3D,R28
+    0037 BFDE      OUT	0x3E,R29
+    0038 51C4      SUBI	R28,0x14
+    0039 40D0      SBCI	R29,0
+    003A EA0A      LDI	R16,0xAA
+    003B 8308      STD	Y+0,R16
+    003C 2400      CLR	R0
+    003D E7E4      LDI	R30,0x74
+    003E E0F0      LDI	R31,0
+    003F E010      LDI	R17,0
+    0040 37E4      CPI	R30,0x74
+    0041 07F1      CPC	R31,R17
+    0042 F011      BEQ	0x0045
+    0043 9201      ST	R0,Z+
+    0044 CFFB      RJMP	0x0040
+    0045 8300      STD	Z+0,R16
+    0046 E5E4      LDI	R30,0x54
+    0047 E0F0      LDI	R31,0
+    0048 E6A0      LDI	R26,0x60
+    0049 E0B0      LDI	R27,0
+    004A E010      LDI	R17,0
+    004B 36E8      CPI	R30,0x68
+    004C 07F1      CPC	R31,R17
+    004D F021      BEQ	0x0052
+    004E 95C8      LPM
+    004F 9631      ADIW	R30,1
+    0050 920D      ST	R0,X+
+    0051 CFF9      RJMP	0x004B
+    0052 940E00BD  CALL	_main
+_exit:
+    0054 CFFF      RJMP	_exit
+_DelayMs:
+  j                    --> R20
+  i                    --> R16
+    0055 940E00EE  CALL	push_gset1
+FILE: F:\myavr\temp\M16_T0_Counter\M16_T0_Counter.c
+(0001) #include <iom16v.h>
+(0002) #define uchar unsigned char
+(0003) #define uint unsigned int
+(0004) 
+(0005) //segment code 0123456789
+(0006) uchar Table[10]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90};
+(0007) uint Data[4]={0,0,0,0};
+(0008) uint CNT=0;
+(0009) 
+(0010) void DelayMs(uchar i)
+(0011) {
+(0012)  uchar j;
+(0013)  for(;i>0;i--)
+    0057 C006      RJMP	0x005E
+(0014)  {
+(0015)   for(j=0;j<250;j++);
+    0058 2744      CLR	R20
+    0059 C001      RJMP	0x005B
+    005A 9543      INC	R20
+    005B 3F4A      CPI	R20,0xFA
+    005C F3E8      BCS	0x005A
+    005D 950A      DEC	R16
+    005E 2422      CLR	R2
+    005F 1620      CP	R2,R16
+    0060 F3B8      BCS	0x0058
+(0016)  }
+(0017) }
+    0061 940E00F1  CALL	pop_gset1
+    0063 9508      RET
+_Display:
+  sel                  --> R20
+  i                    --> R22
+  p                    --> R10
+    0064 940E0109  CALL	push_gset3
+    0066 0158      MOVW	R10,R16
+(0018) 
+(0019) void Display(uint *p)
+(0020) {
+(0021)  uchar i,sel=0x01;
+    0067 E041      LDI	R20,1
+(0022)  for(i=0;i<4;i++)
+    0068 2766      CLR	R22
+    0069 C013      RJMP	0x007D
+(0023)  {
+(0024)   PORTC=sel;
+    006A BB45      OUT	0x15,R20
+(0025)   PORTA=Table[p[i]];
+    006B E082      LDI	R24,2
+    006C 9F86      MUL	R24,R22
+    006D 01F0      MOVW	R30,R0
+    006E 0DEA      ADD	R30,R10
+    006F 1DFB      ADC	R31,R11
+    0070 8020      LDD	R2,Z+0
+    0071 8031      LDD	R3,Z+1
+    0072 E680      LDI	R24,0x60
+    0073 E090      LDI	R25,0
+    0074 01F1      MOVW	R30,R2
+    0075 0FE8      ADD	R30,R24
+    0076 1FF9      ADC	R31,R25
+    0077 8020      LDD	R2,Z+0
+    0078 BA2B      OUT	0x1B,R2
+(0026)   DelayMs(2);
+    0079 E002      LDI	R16,2
+    007A DFDA      RCALL	_DelayMs
+(0027)   sel=sel<<1;
+    007B 0F44      LSL	R20
+    007C 9563      INC	R22
+    007D 3064      CPI	R22,4
+    007E F358      BCS	0x006A
+(0028)  }
+(0029) }
+    007F 940E00EB  CALL	pop_gset3
+    0081 9508      RET
+_Process:
+  p                    --> R22
+  i                    --> R20
+    0082 940E0105  CALL	push_gset2
+    0084 01B9      MOVW	R22,R18
+    0085 01A8      MOVW	R20,R16
+(0030) 
+(0031) void Process(uint i,uint *p)//由于T0是8位定时/计数器，最大计数值为255
+(0032) {                           // 所以下面的p[0]用不着
+(0033)  p[0]=i/1000;
+    0086 EE28      LDI	R18,0xE8
+    0087 E033      LDI	R19,3
+    0088 018A      MOVW	R16,R20
+    0089 940E00CE  CALL	div16u
+    008B 01FB      MOVW	R30,R22
+    008C 8311      STD	Z+1,R17
+    008D 8300      STD	Z+0,R16
+(0034)  i=i%1000;
+(0035)  p[1]=i/100;
+    008E EE28      LDI	R18,0xE8
+    008F E033      LDI	R19,3
+    0090 018A      MOVW	R16,R20
+    0091 940E00CC  CALL	mod16u
+    0093 01A8      MOVW	R20,R16
+    0094 E624      LDI	R18,0x64
+    0095 E030      LDI	R19,0
+    0096 940E00CE  CALL	div16u
+    0098 01FB      MOVW	R30,R22
+    0099 8313      STD	Z+3,R17
+    009A 8302      STD	Z+2,R16
+(0036)  i=i%100;
+(0037)  p[2]=i/10;
+    009B E624      LDI	R18,0x64
+    009C E030      LDI	R19,0
+    009D 018A      MOVW	R16,R20
+    009E 940E00CC  CALL	mod16u
+    00A0 01A8      MOVW	R20,R16
+    00A1 E02A      LDI	R18,0xA
+    00A2 E030      LDI	R19,0
+    00A3 940E00CE  CALL	div16u
+    00A5 01FB      MOVW	R30,R22
+    00A6 8315      STD	Z+5,R17
+    00A7 8304      STD	Z+4,R16
+(0038)  i=i%10;
+(0039)  p[3]=i;
+    00A8 E02A      LDI	R18,0xA
+    00A9 E030      LDI	R19,0
+    00AA 018A      MOVW	R16,R20
+    00AB 940E00CC  CALL	mod16u
+    00AD 01A8      MOVW	R20,R16
+    00AE 01FB      MOVW	R30,R22
+    00AF 8357      STD	Z+7,R21
+    00B0 8346      STD	Z+6,R20
+(0040) }
+    00B1 940E00E8  CALL	pop_gset2
+    00B3 9508      RET
+(0041) 
+(0042) void Init_IO(void)
+(0043) {
+(0044)  DDRA=0xff;
+_Init_IO:
+    00B4 EF8F      LDI	R24,0xFF
+    00B5 BB8A      OUT	0x1A,R24
+(0045)  PORTA=0xff;
+    00B6 BB8B      OUT	0x1B,R24
+(0046)  DDRC=0xff;
+    00B7 BB84      OUT	0x14,R24
+(0047)  PORTC=0xff;
+    00B8 BB85      OUT	0x15,R24
+(0048)  DDRB=0x00;
+    00B9 2422      CLR	R2
+    00BA BA27      OUT	0x17,R2
+(0049)  PORTB=0x00;
+    00BB BA28      OUT	0x18,R2
+(0050) }
+    00BC 9508      RET
+(0051) 
+(0052) void main(void)
+(0053) {
+(0054)  uint load;
+(0055)  Init_IO();
+_main:
+  load                 --> R20
+    00BD DFF6      RCALL	_Init_IO
+(0056)  TCCR0=0x06;//T0工作在计数方式，T0是8位，所以最大计数值为255；
+    00BE E086      LDI	R24,6
+    00BF BF83      OUT	0x33,R24
+    00C0 C009      RJMP	0x00CA
+(0057)  //TCCR1B=0x07;//T1工作在计数方式，T1是16位，所以最大计数值为65535；
+(0058)  //TCNT1H=CNT;
+(0059)  //TCNT1L=CNT;
+(0060)  while(1)
+(0061)  {
+(0062)   load=TCNT0;//T0工作在8位计数方式
+(0063)   //load=(TCNT1H<<8)+TCNT1L;//T1工作在16位计数方式
+(0064)   Process(load,Data);
+    00C1 B742      IN	R20,0x32
+    00C2 2755      CLR	R21
+    00C3 E62A      LDI	R18,0x6A
+    00C4 E030      LDI	R19,0
+    00C5 018A      MOVW	R16,R20
+    00C6 DFBB      RCALL	_Process
+(0065)   Display(Data);
+    00C7 E60A      LDI	R16,0x6A
+    00C8 E010      LDI	R17,0
+    00C9 DF9A      RCALL	_Display
+    00CA CFF6      RJMP	0x00C1
+(0066)  }
+(0067) }
+FILE: <library>
+    00CB 9508      RET
+mod16u:
+    00CC 9468      BSET	6
+    00CD C001      RJMP	xdiv16u
+div16u:
+    00CE 94E8      BCLR	6
+xdiv16u:
+    00CF 92EA      ST	R14,-Y
+    00D0 92FA      ST	R15,-Y
+    00D1 938A      ST	R24,-Y
+    00D2 24EE      CLR	R14
+    00D3 24FF      CLR	R15
+    00D4 E180      LDI	R24,0x10
+    00D5 0F00      LSL	R16
+    00D6 1F11      ROL	R17
+    00D7 1CEE      ROL	R14
+    00D8 1CFF      ROL	R15
+    00D9 16E2      CP	R14,R18
+    00DA 06F3      CPC	R15,R19
+    00DB F018      BCS	0x00DF
+    00DC 1AE2      SUB	R14,R18
+    00DD 0AF3      SBC	R15,R19
+    00DE 9503      INC	R16
+    00DF 958A      DEC	R24
+    00E0 F7A1      BNE	0x00D5
+    00E1 F416      BRTC	0x00E4
+    00E2 2D0E      MOV	R16,R14
+    00E3 2D1F      MOV	R17,R15
+    00E4 9189      LD	R24,Y+
+    00E5 90F9      LD	R15,Y+
+    00E6 90E9      LD	R14,Y+
+    00E7 9508      RET
+pop_gset2:
+    00E8 E0E2      LDI	R30,2
+    00E9 940C00F2  JMP	pop
+pop_gset3:
+    00EB E0E4      LDI	R30,4
+    00EC 940C00F2  JMP	pop
+push_gset1:
+    00EE 935A      ST	R21,-Y
+    00EF 934A      ST	R20,-Y
+    00F0 9508      RET
+pop_gset1:
+    00F1 E0E1      LDI	R30,1
+pop:
+    00F2 9149      LD	R20,Y+
+    00F3 9159      LD	R21,Y+
+    00F4 FDE0      SBRC	R30,0
+    00F5 9508      RET
+    00F6 9169      LD	R22,Y+
+    00F7 9179      LD	R23,Y+
+    00F8 FDE1      SBRC	R30,1
+    00F9 9508      RET
+    00FA 90A9      LD	R10,Y+
+    00FB 90B9      LD	R11,Y+
+    00FC FDE2      SBRC	R30,2
+    00FD 9508      RET
+    00FE 90C9      LD	R12,Y+
+    00FF 90D9      LD	R13,Y+
+    0100 FDE3      SBRC	R30,3
+    0101 9508      RET
+    0102 90E9      LD	R14,Y+
+    0103 90F9      LD	R15,Y+
+    0104 9508      RET
+push_gset2:
+    0105 937A      ST	R23,-Y
+    0106 936A      ST	R22,-Y
+    0107 940C00EE  JMP	push_gset1
+push_gset3:
+    0109 92BA      ST	R11,-Y
+    010A 92AA      ST	R10,-Y
+    010B 940C0105  JMP	push_gset2

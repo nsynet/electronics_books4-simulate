@@ -1,0 +1,66 @@
+                        .module M16_AN_Compare.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile F:\myavr\temp\M16_AN_Compare\M16_AN_Compare.c
+ 0000                   .dbfunc e main _main fV
+ 0000           ;              i -> <dead>
+                        .even
+ 0000           _main::
+ 0000                   .dbline -1
+ 0000                   .dbline 6
+ 0000           ; #include <iom16v.h>
+ 0000           ; #define uchar unsigned char
+ 0000           ; #define uint unsigned int
+ 0000           ; 
+ 0000           ; void main(void)
+ 0000           ; {
+ 0000                   .dbline 8
+ 0000           ;  uchar i;
+ 0000           ;  DDRB=0xf0;
+ 0000 80EF              ldi R24,240
+ 0002 87BB              out 0x17,R24
+ 0004                   .dbline 9
+ 0004           ;  PORTB=0x00;
+ 0004 2224              clr R2
+ 0006 28BA              out 0x18,R2
+ 0008                   .dbline 10
+ 0008           ;  ACSR=0x00;
+ 0008 28B8              out 0x8,R2
+ 000A 0BC0              xjmp L3
+ 000C           L2:
+ 000C                   .dbline 12
+ 000C           ;  while(1)
+ 000C           ;  {
+ 000C                   .dbline 13
+ 000C           ;   if((ACSR&0x20)==0x20)
+ 000C 88B1              in R24,0x8
+ 000E 8072              andi R24,32
+ 0010 8032              cpi R24,32
+ 0012 21F4              brne L5
+ 0014                   .dbline 14
+ 0014           ;   PORTB=PORTB|0xf0;
+ 0014 88B3              in R24,0x18
+ 0016 806F              ori R24,240
+ 0018 88BB              out 0x18,R24
+ 001A 03C0              xjmp L6
+ 001C           L5:
+ 001C                   .dbline 16
+ 001C           ;   else
+ 001C           ;   PORTB=PORTB&0x0f;
+ 001C 88B3              in R24,0x18
+ 001E 8F70              andi R24,15
+ 0020 88BB              out 0x18,R24
+ 0022           L6:
+ 0022                   .dbline 17
+ 0022           L3:
+ 0022                   .dbline 11
+ 0022 F4CF              xjmp L2
+ 0024           X0:
+ 0024                   .dbline -2
+ 0024                   .dbline 18
+ 0024           ;  }
+ 0024           ; }
+ 0024           L1:
+ 0024                   .dbline 0 ; func end
+ 0024 0895              ret
+ 0026                   .dbsym l i 1 c
+ 0026                   .dbend

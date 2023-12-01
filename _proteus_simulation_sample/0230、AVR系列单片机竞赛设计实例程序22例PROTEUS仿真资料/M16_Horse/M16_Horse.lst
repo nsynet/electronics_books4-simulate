@@ -1,0 +1,228 @@
+__start:
+__text_start:
+    002A E5CF      LDI	R28,0x5F
+    002B E0D4      LDI	R29,4
+    002C BFCD      OUT	0x3D,R28
+    002D BFDE      OUT	0x3E,R29
+    002E 51C0      SUBI	R28,0x10
+    002F 40D0      SBCI	R29,0
+    0030 EA0A      LDI	R16,0xAA
+    0031 8308      STD	Y+0,R16
+    0032 2400      CLR	R0
+    0033 E6E0      LDI	R30,0x60
+    0034 E0F0      LDI	R31,0
+    0035 E010      LDI	R17,0
+    0036 36E0      CPI	R30,0x60
+    0037 07F1      CPC	R31,R17
+    0038 F011      BEQ	0x003B
+    0039 9201      ST	R0,Z+
+    003A CFFB      RJMP	0x0036
+    003B 8300      STD	Z+0,R16
+    003C E5E4      LDI	R30,0x54
+    003D E0F0      LDI	R31,0
+    003E E6A0      LDI	R26,0x60
+    003F E0B0      LDI	R27,0
+    0040 E010      LDI	R17,0
+    0041 35E4      CPI	R30,0x54
+    0042 07F1      CPC	R31,R17
+    0043 F021      BEQ	0x0048
+    0044 95C8      LPM
+    0045 9631      ADIW	R30,1
+    0046 920D      ST	R0,X+
+    0047 CFF9      RJMP	0x0041
+    0048 940E009E  CALL	_main
+_exit:
+    004A CFFF      RJMP	_exit
+_Delay:
+  j                    --> R20
+  i                    --> R16
+    004B 940E00BA  CALL	push_gset1
+FILE: F:\myavr\mydesign\M16_Horse\M16_Horse.c
+(0001) #include<iom16v.h>
+(0002) #define uchar unsigned char
+(0003) #define uint unsigned int
+(0004) 
+(0005) void Delay(uchar i)
+(0006) {
+(0007)  uchar j;
+(0008)  for(;i!=0;i--)
+    004D C006      RJMP	0x0054
+(0009)  {
+(0010)   for(j=250;j!=0;j--);
+    004E EF4A      LDI	R20,0xFA
+    004F C001      RJMP	0x0051
+    0050 954A      DEC	R20
+    0051 2344      TST	R20
+    0052 F7E9      BNE	0x0050
+    0053 950A      DEC	R16
+    0054 2300      TST	R16
+    0055 F7C1      BNE	0x004E
+(0011)  }
+(0012) }
+    0056 940E00BD  CALL	pop_gset1
+    0058 9508      RET
+_Horse:
+  i                    --> R16
+    0059 940E00BA  CALL	push_gset1
+(0013) 
+(0014) void Horse(uchar i)
+(0015) {
+(0016)  switch(i)
+    005B 2F40      MOV	R20,R16
+    005C 2755      CLR	R21
+    005D 3040      CPI	R20,0
+    005E 0745      CPC	R20,R21
+    005F F109      BEQ	0x0081
+    0060 3041      CPI	R20,1
+    0061 E0E0      LDI	R30,0
+    0062 075E      CPC	R21,R30
+    0063 F101      BEQ	0x0084
+    0064 3042      CPI	R20,2
+    0065 E0E0      LDI	R30,0
+    0066 075E      CPC	R21,R30
+    0067 F0F9      BEQ	0x0087
+    0068 3043      CPI	R20,3
+    0069 E0E0      LDI	R30,0
+    006A 075E      CPC	R21,R30
+    006B F0F1      BEQ	0x008A
+    006C 3044      CPI	R20,4
+    006D E0E0      LDI	R30,0
+    006E 075E      CPC	R21,R30
+    006F F0E9      BEQ	0x008D
+    0070 3045      CPI	R20,5
+    0071 E0E0      LDI	R30,0
+    0072 075E      CPC	R21,R30
+    0073 F0E1      BEQ	0x0090
+    0074 3046      CPI	R20,6
+    0075 E0E0      LDI	R30,0
+    0076 075E      CPC	R21,R30
+    0077 F0D9      BEQ	0x0093
+    0078 3047      CPI	R20,7
+    0079 E0E0      LDI	R30,0
+    007A 075E      CPC	R21,R30
+    007B F0D1      BEQ	0x0096
+    007C 3048      CPI	R20,0x8
+    007D E0E0      LDI	R30,0
+    007E 075E      CPC	R21,R30
+    007F F0C9      BEQ	0x0099
+    0080 C01A      RJMP	0x009B
+(0017)  {
+(0018)   case 0:PORTA=0x00;break;
+    0081 2422      CLR	R2
+    0082 BA2B      OUT	0x1B,R2
+    0083 C017      RJMP	0x009B
+(0019)   case 1:PORTA=0x01;break;
+    0084 E081      LDI	R24,1
+    0085 BB8B      OUT	0x1B,R24
+    0086 C014      RJMP	0x009B
+(0020)   case 2:PORTA=0x03;break;
+    0087 E083      LDI	R24,3
+    0088 BB8B      OUT	0x1B,R24
+    0089 C011      RJMP	0x009B
+(0021)   case 3:PORTA=0x07;break;
+    008A E087      LDI	R24,7
+    008B BB8B      OUT	0x1B,R24
+    008C C00E      RJMP	0x009B
+(0022)   case 4:PORTA=0x0f;break;
+    008D E08F      LDI	R24,0xF
+    008E BB8B      OUT	0x1B,R24
+    008F C00B      RJMP	0x009B
+(0023)   case 5:PORTA=0x1f;break;
+    0090 E18F      LDI	R24,0x1F
+    0091 BB8B      OUT	0x1B,R24
+    0092 C008      RJMP	0x009B
+(0024)   case 6:PORTA=0x3f;break;
+    0093 E38F      LDI	R24,0x3F
+    0094 BB8B      OUT	0x1B,R24
+    0095 C005      RJMP	0x009B
+(0025)   case 7:PORTA=0x7f;break;
+    0096 E78F      LDI	R24,0x7F
+    0097 BB8B      OUT	0x1B,R24
+    0098 C002      RJMP	0x009B
+(0026)   case 8:PORTA=0xff;break;
+    0099 EF8F      LDI	R24,0xFF
+    009A BB8B      OUT	0x1B,R24
+(0027)   default:break;
+(0028)  }
+(0029) }
+    009B 940E00BD  CALL	pop_gset1
+    009D 9508      RET
+(0030) 
+(0031) void main()
+(0032) {
+(0033)  uchar i;
+(0034)  DDRA=0xff;
+_main:
+  i                    --> R20
+    009E EF8F      LDI	R24,0xFF
+    009F BB8A      OUT	0x1A,R24
+(0035)  PORTA=0xff;
+    00A0 BB8B      OUT	0x1B,R24
+(0036)  Delay(10);
+    00A1 E00A      LDI	R16,0xA
+    00A2 DFA8      RCALL	_Delay
+(0037)  PORTA=0x00;
+    00A3 2422      CLR	R2
+    00A4 BA2B      OUT	0x1B,R2
+    00A5 C012      RJMP	0x00B8
+(0038)  while(1)
+(0039)  {
+(0040)   for(i=0;i<9;i++)
+    00A6 2744      CLR	R20
+    00A7 C005      RJMP	0x00AD
+(0041)   {
+(0042)    Horse(i);
+    00A8 2F04      MOV	R16,R20
+    00A9 DFAF      RCALL	_Horse
+(0043)    Delay(100);
+    00AA E604      LDI	R16,0x64
+    00AB DF9F      RCALL	_Delay
+    00AC 9543      INC	R20
+    00AD 3049      CPI	R20,0x9
+    00AE F3C8      BCS	0x00A8
+(0044)   }
+(0045)   for(i=8;i!=0;i--)
+    00AF E048      LDI	R20,0x8
+    00B0 C005      RJMP	0x00B6
+(0046)   {
+(0047)    Horse(i);
+    00B1 2F04      MOV	R16,R20
+    00B2 DFA6      RCALL	_Horse
+(0048)    Delay(100);
+    00B3 E604      LDI	R16,0x64
+    00B4 DF96      RCALL	_Delay
+    00B5 954A      DEC	R20
+    00B6 2344      TST	R20
+    00B7 F7C9      BNE	0x00B1
+    00B8 CFED      RJMP	0x00A6
+(0049)   }
+(0050)  }
+(0051) }
+FILE: <library>
+    00B9 9508      RET
+push_gset1:
+    00BA 935A      ST	R21,-Y
+    00BB 934A      ST	R20,-Y
+    00BC 9508      RET
+pop_gset1:
+    00BD E0E1      LDI	R30,1
+pop:
+    00BE 9149      LD	R20,Y+
+    00BF 9159      LD	R21,Y+
+    00C0 FDE0      SBRC	R30,0
+    00C1 9508      RET
+    00C2 9169      LD	R22,Y+
+    00C3 9179      LD	R23,Y+
+    00C4 FDE1      SBRC	R30,1
+    00C5 9508      RET
+    00C6 90A9      LD	R10,Y+
+    00C7 90B9      LD	R11,Y+
+    00C8 FDE2      SBRC	R30,2
+    00C9 9508      RET
+    00CA 90C9      LD	R12,Y+
+    00CB 90D9      LD	R13,Y+
+    00CC FDE3      SBRC	R30,3
+    00CD 9508      RET
+    00CE 90E9      LD	R14,Y+
+    00CF 90F9      LD	R15,Y+
+    00D0 9508      RET

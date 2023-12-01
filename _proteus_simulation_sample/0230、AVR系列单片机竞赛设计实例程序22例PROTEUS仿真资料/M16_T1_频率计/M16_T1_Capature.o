@@ -1,0 +1,275 @@
+XL
+H 4 areas 14 global symbols
+M M16_T1_Capature.c
+S push_gset1 Ref0000
+S push_gset3 Ref0000
+S mod16u Ref0000
+S div16u Ref0000
+S pop_gset1 Ref0000
+S pop_gset3 Ref0000
+S empy16s Ref0000
+A text size 1FC flags 0
+dbfile F:\myavr\temp\M16_T1_Capature\M16_T1_Capature.c
+dbfunc e DelayMs 0 fV
+dbsym r j 14 i
+dbsym r i 10 i
+dbline FFFFFFFF 4
+dbline 15 4
+dbline 16 4
+dbline 17 6
+dbline 17 6
+dbline 17 C
+dbline 17 C
+dbline 17 C
+dbline 17 C
+dbline 17 10
+dbline 17 16
+dbline 16 16
+dbline 16 1A
+dbline FFFFFFFE 20
+dbline 18 20
+dbline 0 24
+dbfunc e Pre_Display 26 fV
+dbsym r i 14 c
+dbline FFFFFFFF 2A
+dbline 1B 2A
+dbline 1C 2A
+dbline 1D 2E
+dbline 1D 2E
+dbline 1E 32
+dbline 1F 42
+dbline 20 48
+dbline 1C 48
+dbline 1C 4A
+dbline FFFFFFFE 4E
+dbline 21 4E
+dbline 0 52
+dbfunc e Display 54 fV
+dbsym r sel 14 c
+dbsym r i 16 c
+dbsym r p A pc
+dbline FFFFFFFF 5A
+dbline 24 5A
+dbline 24 5A
+dbline 25 5C
+dbline 26 60
+dbline 26 60
+dbline 27 66
+dbline 28 7E
+dbline 29 84
+dbline 2A 86
+dbline 25 86
+dbline 25 88
+dbline FFFFFFFE 8C
+dbline 2B 8C
+dbline 0 90
+dbfunc e HZ 92 fV
+dbsym r TEM 16 i
+dbsym r p 14 pc
+dbsym r i A i
+dbline FFFFFFFF 9A
+dbline 2E 9A
+dbline 2F 9A
+dbline 30 A8
+dbline 31 A8
+dbline 32 A8
+dbline 33 CA
+dbline 34 CA
+dbline 35 CA
+dbline 36 EA
+dbline 37 EA
+dbline 38 EA
+dbline FFFFFFFE 10A
+dbline 39 10A
+dbline 0 10E
+dbfunc e Init_IO 110 fV
+dbline FFFFFFFF 110
+dbline 3C 110
+dbline 3C 110
+dbline 3D 114
+dbline 3E 116
+dbline 3F 118
+dbline 40 11A
+dbline 41 11E
+dbline FFFFFFFE 120
+dbline 42 120
+dbline 0 120
+dbfunc e Init_Timer1 122 fV
+dbline FFFFFFFF 122
+dbline 45 122
+dbline 45 122
+dbline 46 128
+dbline 47 12C
+dbline 48 130
+dbline FFFFFFFE 136
+dbline 49 136
+dbline 0 136
+dbfunc e main 138 fV
+dbsym r i 14 c
+dbline FFFFFFFF 138
+dbline 4C 138
+dbline 4D 138
+dbline 4E 13A
+dbline 4F 13E
+dbline 50 142
+dbline 51 148
+dbline 52 14C
+dbline 53 14E
+dbline 54 152
+dbline 56 156
+dbline 58 156
+dbline 58 156
+dbline 59 15C
+dbline 5A 15C
+dbline 5B 15C
+dbline 5C 15C
+dbline 5D 15C
+dbline 5D 1AA
+dbline 57 1AA
+dbline 5E 1B0
+dbline 5F 1B8
+dbline 5F 1B8
+dbline 60 1B8
+dbline 61 1CC
+dbline 62 1D0
+dbline 61 1D6
+dbline 61 1D8
+dbline 63 1DC
+dbline 63 1DC
+dbline 63 1DC
+dbline 63 1F8
+dbline 63 1F8
+dbline 55 1F8
+dbline FFFFFFFE 1FA
+dbline 64 1FA
+dbline 0 1FA
+S _HZ Def0092
+S _main Def0138
+S _DelayMs Def0000
+S _Display Def0054
+S _Init_Timer1 Def0122
+S _Pre_Display Def0026
+S _Init_IO Def0110
+A data size 1B flags 20
+dbfile F:\myavr\temp\M16_T1_Capature\M16_T1_Capature.c
+dbsym e Flag 0 c
+dbsym e Table 1 A[20:20]c
+dbsym e Data 15 A[4:4]c
+dbsym e CNT 19 i
+S _CNT Def0019
+S _Table Def0001
+S _Data Def0015
+S _Flag Def0000
+A idata size 1B flags 0
+A bss size 4 flags 20
+dbfile F:\myavr\temp\M16_T1_Capature\M16_T1_Capature.c
+dbsym e CNT2 0 i
+dbsym e CNT1 2 i
+S _CNT1 Def0002
+S _CNT2 Def0000
+T 00 00 00
+R 00 00 02 00
+T 01 00 3F 06
+R 00 00 02 00
+T 03 00 5B 4F
+R 00 00 02 00
+T 05 00 66 6D
+R 00 00 02 00
+T 07 00 7D 07
+R 00 00 02 00
+T 09 00 7F 6F
+R 00 00 02 00
+T 0B 00 77 7C
+R 00 00 02 00
+T 0D 00 39 5E
+R 00 00 02 00
+T 0F 00 79 71
+R 00 00 02 00
+T 11 00 00 00 00 00
+R 00 00 02 00
+T 15 00 00 00
+R 00 00 02 00
+T 17 00 00 00
+R 00 00 02 00
+T 19 00 64 00
+R 00 00 02 00
+T 00 00 0E 94 00 00 0A C0 4A EF 50 E0 02 C0 41 50
+R 00 00 00 00 12 04 00 00
+T 0E 00 50 40 40 30 45 07 D9 F7 01 50 10 40 00 30
+R 00 00 00 00
+T 1C 00 01 07 99 F7 0E 94 00 00 08 95
+R 00 00 00 00 12 08 04 00
+T 26 00 0E 94 00 00 44 27 0E C0 22 24 25 BA 80 E0
+R 00 00 00 00 12 04 00 00 20 0E 01 00 01 00
+T 34 00 90 E0 E4 2F FF 27 E8 0F F9 1F 20 80 2B BA
+R 00 00 00 00 40 02 01 00 01 00
+T 42 00 04 E6 10 E0 DC DF 43 95 40 31 80 F3 0E 94
+R 00 00 00 00
+T 50 00 00 00 08 95
+R 00 00 00 00 12 02 04 00
+T 54 00 0E 94 00 00 58 01 48 E0 66 27 14 C0 24 2E
+R 00 00 00 00 12 04 01 00
+T 62 00 20 94 25 BA E6 2F FF 27 EA 0D FB 1D E0 81
+R 00 00 00 00
+T 70 00 FF 27 80 E0 90 E0 E8 0F F9 1F 20 80 2B BA
+R 00 00 00 00 20 04 01 00 01 00 40 06 01 00 01 00
+T 7E 00 02 E0 10 E0 BE DF 46 95 63 95 64 30 50 F3
+R 00 00 00 00
+T 8C 00 0E 94 00 00 08 95
+R 00 00 00 00 12 04 05 00
+T 92 00 0E 94 00 00 A9 01 58 01 08 EE 13 E0 95 01
+R 00 00 00 00 12 04 01 00
+T A0 00 0E 94 00 00 FA 01 00 83 08 EE 13 E0 95 01
+R 00 00 00 00 12 04 03 00
+T AE 00 0E 94 00 00 B8 01 0A E0 10 E0 9B 01 0E 94
+R 00 00 00 00 12 04 02 00
+T BC 00 00 00 B8 01 95 01 0E 94 00 00 FA 01 01 83
+R 00 00 00 00 12 02 06 00 12 0A 03 00
+T CA 00 95 01 8B 01 0E 94 00 00 B8 01 0A E0 10 E0
+R 00 00 00 00 12 08 02 00
+T D8 00 9B 01 0E 94 00 00 B8 01 95 01 0E 94 00 00
+R 00 00 00 00 12 06 06 00 12 0E 03 00
+T E6 00 FA 01 02 83 95 01 8B 01 0E 94 00 00 B8 01
+R 00 00 00 00 12 0C 02 00
+T F4 00 0A E0 10 E0 9B 01 0E 94 00 00 B8 01 95 01
+R 00 00 00 00 12 0A 06 00
+T 02 01 0E 94 00 00 FA 01 03 83 0E 94 00 00 08 95
+R 00 00 00 00 12 04 03 00 12 0C 05 00
+T 10 01 8F EF 8A BB 8B BB 84 BB 85 BB 22 24 21 BA
+R 00 00 00 00
+T 1E 01 22 BA 08 95
+R 00 00 00 00
+T 22 01 89 B7 80 62 89 BF 82 EC 8E BD 80 E2 88 BF
+R 00 00 00 00
+T 30 01 8F B7 8F 77 8F BF 08 95
+R 00 00 00 00
+T 38 01 EB DF 8F EF 8B BB 80 EF 85 BB 0C E2 11 E0
+R 00 00 00 00
+T 46 01 5C DF 8F EF 85 BB 6C DF 8F EF 85 BB E7 DF
+R 00 00 00 00
+T 54 01 51 C0 88 B7 80 62 88 BF 26 B4 33 24 30 92
+R 00 00 00 00
+T 62 01 1A 00 20 92 19 00 26 B4 37 B4 30 92 01 00
+R 00 00 00 00 00 02 01 00 00 06 01 00 00 0E 03 00
+T 70 01 20 92 00 00 20 90 02 00 30 90 03 00 40 90
+R 00 00 00 00 00 04 03 00 00 08 03 00 00 0C 03 00
+T 7E 01 00 00 50 90 01 00 42 18 53 08 50 92 1A 00
+R 00 00 00 00 00 02 03 00 00 06 03 00 00 0E 01 00
+T 8C 01 40 92 19 00 20 90 00 00 30 90 01 00 30 92
+R 00 00 00 00 00 04 01 00 00 08 03 00 00 0C 03 00
+T 9A 01 03 00 20 92 02 00 80 91 00 00 8F 5F 80 93
+R 00 00 00 00 00 02 03 00 00 06 03 00 00 0A 01 00
+T A8 01 00 00 28 B6 25 FC D3 CF 80 91 00 00 82 30
+R 00 00 00 00 00 02 01 00 00 0C 01 00
+T B6 01 01 F5 22 24 20 92 00 00 20 E0
+R 00 00 00 00 00 08 01 00 20 0A 01 00 15 00
+T C0 01 30 E0 00 91 19 00 10 91
+R 00 00 00 00 40 02 01 00 15 00 00 06 01 00
+T C8 01 1A 00 63 DF 44 27 04 C0 00 E0
+R 00 00 00 00 00 02 01 00 20 0A 01 00 15 00
+T D2 01 10 E0 3F DF 43 95 44 36 D0 F3 22 24 33 24
+R 00 00 00 00 40 02 01 00 15 00
+T E0 01 30 92 1A 00 20 92 19 00 30 92 03 00 20 92
+R 00 00 00 00 00 04 01 00 00 08 01 00 00 0C 03 00
+T EE 01 02 00 30 92 01 00 20 92 00 00 D8 CF 08 95
+R 00 00 00 00 00 02 03 00 00 06 03 00 00 0A 03 00

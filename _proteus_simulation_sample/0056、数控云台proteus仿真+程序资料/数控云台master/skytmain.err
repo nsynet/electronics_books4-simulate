@@ -1,0 +1,15 @@
+Creating   'skytmain.eep'
+Creating   'skytmain.obj'
+Creating   'skytmain.lst'
+
+Assembling 'skytmain.asm'
+Including  'skytmain.vec'
+Including  'skytmain.inc'
+
+Program memory usage:
+Code             : 1212 words
+Constants (dw/db): 1808 words
+Unused           :    0 words
+Total            : 3020 words
+
+Assembly complete with no errors.

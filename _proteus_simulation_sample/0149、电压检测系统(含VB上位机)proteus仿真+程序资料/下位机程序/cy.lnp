@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"caiyang.obj" 
+TO "cy" 
+RAMSIZE(256) 

@@ -1,0 +1,10 @@
+[Files]
+main.c
+uart.c
+ds18b20.c
+delay.c
+[Headers]
+uart.h
+ds18b20.h
+delay.h
+[Documents]

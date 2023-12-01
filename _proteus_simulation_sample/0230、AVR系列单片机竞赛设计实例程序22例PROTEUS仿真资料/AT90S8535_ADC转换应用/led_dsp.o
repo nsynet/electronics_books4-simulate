@@ -1,0 +1,125 @@
+XL
+H 4 areas D global symbols
+M led_dsp.c
+S push_gset1 Ref0000
+S push_gset2 Ref0000
+S push_gset3 Ref0000
+S mod16s Ref0000
+S div16s Ref0000
+S pop_gset1 Ref0000
+S pop_gset2 Ref0000
+S pop_gset3 Ref0000
+A text size E0 flags 0
+dbfile E:/ѧϰ/AVR/adc/led_dsp.h
+dbfile E:\ѧϰ\AVR\adc\led_dsp.c
+dbfunc e change_data 0 fV
+dbsym r temp_n 16 c
+dbsym r dsp_data 14 I
+dbline FFFFFFFF 4
+dbline 7 4
+dbline 9 4
+dbline A 10
+dbline B 10
+dbline C 1A
+dbline D 2C
+dbline E 36
+dbline F 3E
+dbline 10 52
+dbline 11 5C
+dbline 12 64
+dbline 13 76
+dbline 14 80
+dbline 15 90
+dbline 17 90
+dbline FFFFFFFE 90
+dbline 0 92
+dbfunc e scan_led 94 fV
+dbsym r scan_n 14 c
+dbsym r i 16 c
+dbsym r disp_p A pc
+dbline FFFFFFFF 98
+dbline 1B 98
+dbline 1D 98
+dbline 1E 9A
+dbline 1F 9E
+dbline 20 9E
+dbline 21 AA
+dbline 22 AC
+dbline 23 B0
+dbline 24 B4
+dbline 25 B8
+dbline 1E B8
+dbline 1E BA
+dbline 26 BE
+dbline FFFFFFFE BE
+dbline 0 C0
+dbfunc e delay C2 fV
+dbsym r c 14 c
+dbsym r delay_t 10 c
+dbline FFFFFFFF C4
+dbline 2B C4
+dbline 2E C6
+dbline 2F C6
+dbline 30 C8
+dbline 30 C8
+dbline 31 D2
+dbline 2D D2
+dbline FFFFFFFE DC
+dbline 32 DC
+dbline 0 DE
+S _delay Def00C2
+S _scan_led Def0094
+S _change_data Def0000
+A lit size A flags 0
+dbfile E:/ѧϰ/AVR/adc/led_dsp.h
+dbsym e led_tabel 0 A[10:10]kc
+S _led_tabel Def0000
+A data size 4 flags 20
+dbfile E:/ѧϰ/AVR/adc/led_dsp.h
+dbsym e disp_buffer 0 A[4:4]c
+S _disp_buffer Def0000
+A idata size 4 flags 0
+T 00 00 3F 06 5B 4F 66 6D 7D 07 7F 6F
+R 00 00 01 00
+T 00 00 3F 3F
+R 00 00 03 00
+T 02 00 3F 3F
+R 00 00 03 00
+T 00 00 00 D0 A8 01 8C ED 95 E0 84 17 95 07 0C F4
+R 00 00 00 00 82 02 01 00
+T 0E 00 40 C0 28 EE 33 E0 8A 01 00 D0 60 2F 80 E0
+R 00 00 00 00 82 0A 04 00 20 0E 01 00 00 00
+T 1C 00 90 E0 E6 2F FF 27 E8 0F F9 1F E4 91 E0 93
+R 00 00 00 00 40 02 01 00 00 00
+T 2A 00 00 00 28 EE 33 E0 8A 01 00 D0 A8 01 24 E6
+R 00 00 00 00 00 02 02 00 82 0A 03 00
+T 38 00 30 E0 00 D0 60 2F 80 E0
+R 00 00 00 00 82 04 04 00 20 08 01 00 00 00
+T 40 00 90 E0 E6 2F FF 27 E8 0F F9 1F E4 91 E0 68
+R 00 00 00 00 40 02 01 00 00 00
+T 4E 00 E0 93 01 00 24 E6 30 E0 8A 01 00 D0 A8 01
+R 00 00 00 00 00 04 02 00 82 0C 03 00
+T 5C 00 2A E0 30 E0 00 D0 60 2F 80 E0
+R 00 00 00 00 82 06 04 00 20 0A 01 00 00 00
+T 66 00 90 E0 E6 2F FF 27 E8 0F F9 1F E4 91 E0 93
+R 00 00 00 00 40 02 01 00 00 00
+T 74 00 02 00 2A E0 30 E0 8A 01 00 D0 A8 01
+R 00 00 00 00 00 02 02 00 82 0A 03 00
+T 80 00 80 E0 90 E0 FA 01 E8 0F F9 1F E4 91 E0 93
+R 00 00 00 00 20 02 01 00 00 00 40 04 01 00 00 00
+T 8E 00 03 00 00 D0 08 95
+R 00 00 00 00 00 02 02 00 82 04 06 00
+T 94 00 00 D0 58 01 4E EF 66 27 0E C0 E6 2F FF 27
+R 00 00 00 00 82 02 02 00
+T A2 00 EA 0D FB 1D 20 80 28 BA 42 BB 44 0F 4F 5F
+R 00 00 00 00
+T B0 00 02 E3 07 D0 8F EF 82 BB 63 95 64 30 80 F3
+R 00 00 00 00
+T BE 00 00 D0 08 95
+R 00 00 00 00 82 02 07 00
+T C2 00 00 D0 06 C0 4A E0 24 2E 33 24 41 50 22 20
+R 00 00 00 00 82 02 00 00
+T D0 00 D9 F7 20 2E 33 24 01 50 22 20 A9 F7 00 D0
+R 00 00 00 00 82 0E 05 00
+T DE 00 08 95
+R 00 00 00 00

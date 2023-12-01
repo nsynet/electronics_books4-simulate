@@ -1,0 +1,171 @@
+A51 MACRO ASSEMBLER  CAIYANG                                                              03/17/2007 14:02:45 PAGE     1
+
+
+MACRO ASSEMBLER A51 V7.10
+OBJECT MODULE PLACED IN caiyang.OBJ
+ASSEMBLER INVOKED BY: d:\Keil\C51\BIN\A51.EXE caiyang.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+                       2     ;ADCS BIT P3.5 ;使能接口
+                       3     ;ADCLK BIT P3.6 ;时钟接口
+                       4     ;ADDO BIT P3.7 ;数据输出接口（复用）
+                       5     ;ADDI BIT P3.7 ;数据输入接口
+0000                   6     ORG     0000H
+0000 020030            7     LJMP INITOUT
+0023                   8     ORG 0023H
+0023 02004F            9     LJMP SERVE
+0030                  10     ORG 30H
+0030                  11     INITOUT:
+0030 758160           12     MOV SP,#60H   ;栈顶地址
+0033 758920           13     MOV TMOD,#20H  ;定时器1初始化
+0036 758DF3           14     MOV TH1,#0F3H  ;设置波特率为1200MHz，6MHz的晶振
+0039 758BF3           15     MOV TL1,#0F3H  ;
+003C 759850           16     MOV SCON,#50H  ;串口初始化为可以接收
+003F 758700           17     MOV PCON,#00H  ;波特率不倍增
+0042 D28E             18     SETB TR1   ;启动定时器
+0044 D2AF             19     SETB EA   ;开中断
+0046 D2AC             20     SETB ES   ;允许串口中断
+0048                  21     MainProgram:    
+0048 00               22     NOP    ;主程序主要是等中断
+0049 00               23     NOP
+004A 12006D           24     LCALL CONV
+004D 80F9             25     SJMP Mainprogram
+                      26     ;=======================================================
+004F                  27     SERVE:
+004F C0D0             28     PUSH PSW        ;将程序状态字压入堆栈 
+0051 C0E0             29     PUSH ACC        ;将累加器压入堆栈 
+0053 C2AF             30     CLR EA        ;关闭系统中断          
+0055 C298             31     CLR RI          ;清除中断标志位 
+0057 E599             32     MOV A,SBUF
+0059 B40110           33     CJNE A,#01,NEXTI;判断，01号单片机
+                      34     
+005C 853199           35     MOV SBUF,31H
+                      36     
+                      37     
+005F 3099FD           38     wait:jnb ti,wait
+0062 C299             39          clr ti
+                      40     
+0064 C298             41     CLR RI          ;清除中断标志位 
+0066 D2AF             42     SETB EA         ;打开系统中断 
+0068 D0E0             43     POP ACC         ;累加器出栈 
+006A D0D0             44     POP PSW         ;程序状态字出栈 
+006C 32               45     NEXTI:RETI            ;中断程序返回 
+                      46     
+                      47     
+                      48     
+                      49     ;==============================================
+                      50          
+006D 753002           51     CONV:MOV 30H,#02H;方式字选择
+0070 7831             52          MOV R0,#31H;数据存储首地址
+0072 120076           53          LCALL ADC0832;调用A/D转换子程序
+                      54     
+0075 22               55          RET
+                      56     ;========================================
+0076 D2B7             57     ADC0832:SETB P3.7 ;初始化通道选择
+0078 00               58             NOP
+A51 MACRO ASSEMBLER  CAIYANG                                                              03/17/2007 14:02:45 PAGE     2
+
+0079 00               59             NOP
+007A C2B5             60             CLR P3.5 ;拉低/CS端
+007C 00               61             NOP
+007D 00               62             NOP
+007E D2B6             63             SETB P3.6 ;拉高CLK端
+0080 00               64             NOP
+0081 00               65             NOP
+0082 C2B6             66             CLR P3.6 ;拉低CLK端,形成下降沿
+0084 E530             67             MOV A,30H
+0086 A2E1             68             MOV C,ACC.1 ;确定取值通道选择
+0088 92B7             69             MOV P3.7,C
+008A 00               70             NOP
+008B 00               71             NOP
+008C D2B6             72             SETB P3.6 ;拉高CLK端
+008E 00               73             NOP
+008F 00               74             NOP
+0090 C2B6             75             CLR P3.6 ;拉低CLK端,形成下降沿2
+0092 E530             76             MOV A,30H
+0094 A2E0             77             MOV C,ACC.0 ;确定取值通道选择
+0096 92B7             78             MOV P3.7,C
+0098 00               79             NOP
+0099 00               80             NOP
+009A D2B6             81             SETB P3.6 ;拉高CLK端
+009C 00               82             NOP
+009D 00               83             NOP
+009E C2B6             84             CLR P3.6 ;拉低CLK端,形成下降沿3
+00A0 D2B7             85             SETB P3.7
+00A2 00               86             NOP
+00A3 00               87             NOP
+00A4 7F08             88         MOV R7,#8 ;准备送下后8个时钟脉冲
+00A6 A2B7             89     ADH:MOV C,P3.7 ;接收数据
+00A8 92E0             90         MOV ACC.0,C
+00AA 23               91         RL A ;左移一次
+00AB D2B6             92         SETB P3.6
+00AD 00               93         NOP
+00AE 00               94         NOP
+00AF C2B6             95         CLR P3.6 ;形成一次时钟脉冲
+00B1 00               96         NOP
+00B2 00               97         NOP
+00B3 DFF1             98         DJNZ R7,ADH ;循环8次
+00B5 A2B7             99         MOV C,P3.7 ;接收数据
+00B7 92E0            100         MOV ACC.0,C
+00B9 F6              101         MOV @R0,A
+00BA 7F08            102         MOV R7,#8
+00BC A2B7            103     ADL:MOV C,P3.7 ;接收数据
+00BE 92E0            104         MOV ACC.0,C
+00C0 03              105         RR A ;左移一次
+00C1 D2B6            106         SETB P3.6
+00C3 00              107         NOP
+00C4 00              108         NOP
+00C5 C2B6            109         CLR P3.6 ;形成一次时钟脉冲
+00C7 00              110         NOP
+00C8 00              111         NOP
+00C9 DFF1            112         DJNZ R7,ADL ;循环8次
+00CB 86F0            113         MOV B,@R0
+00CD B5F0A6          114         CJNE A,B,ADC0832 ;数据校验
+00D0 D2B5            115         SETB P3.5 ;拉高/CS端
+00D2 C2B6            116         CLR P3.6 ;拉低CLK端
+00D4 D2B7            117         SETB P3.7 ;拉高数据端,回到初始状态
+00D6 22              118         RET
+                     119     ;=======================================
+                     120     
+*** WARNING #A41 IN 120 (caiyang.asm, LINE 120): MISSING 'END' STATEMENT
+A51 MACRO ASSEMBLER  CAIYANG                                                              03/17/2007 14:02:45 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+ADC0832. . . . . .  C ADDR   0076H   A   
+ADH. . . . . . . .  C ADDR   00A6H   A   
+ADL. . . . . . . .  C ADDR   00BCH   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+CONV . . . . . . .  C ADDR   006DH   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ES . . . . . . . .  B ADDR   00A8H.4 A   
+INITOUT. . . . . .  C ADDR   0030H   A   
+MAINPROGRAM. . . .  C ADDR   0048H   A   
+NEXTI. . . . . . .  C ADDR   006CH   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+PCON . . . . . . .  D ADDR   0087H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+SERVE. . . . . . .  C ADDR   004FH   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+WAIT . . . . . . .  C ADDR   005FH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  1 WARNING(S), 0 ERROR(S)

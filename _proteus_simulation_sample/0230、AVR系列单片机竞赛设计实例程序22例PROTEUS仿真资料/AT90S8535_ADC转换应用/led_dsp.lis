@@ -1,0 +1,267 @@
+                        .module led_dsp.c
+                        .area lit(rom, con, rel)
+ 0000           _led_tabel::
+ 0000 3F06              .byte 63,6
+ 0002 5B4F              .byte 91,'O
+ 0004 666D              .byte 'f,'m
+ 0006 7D07              .byte 125,7
+ 0008 7F6F              .byte 127,'o
+ 000A                   .dbfile E:/学习/AVR/adc/led_dsp.h
+ 000A                   .dbsym e led_tabel _led_tabel A[10:10]kc
+                        .area data(ram, con, rel)
+ 0000                   .dbfile E:/学习/AVR/adc/led_dsp.h
+ 0000           _disp_buffer::
+ 0000                   .blkb 2
+                        .area idata
+ 0000 3F3F              .byte 63,63
+                        .area data(ram, con, rel)
+ 0002                   .dbfile E:/学习/AVR/adc/led_dsp.h
+ 0002                   .blkb 2
+                        .area idata
+ 0002 3F3F              .byte 63,63
+                        .area data(ram, con, rel)
+ 0004                   .dbfile E:/学习/AVR/adc/led_dsp.h
+ 0004                   .dbsym e disp_buffer _disp_buffer A[4:4]c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile E:/学习/AVR/adc/led_dsp.h
+ 0000                   .dbfile E:\学习\AVR\adc\led_dsp.c
+ 0000                   .dbfunc e change_data _change_data fV
+ 0000           ;         temp_n -> R22
+ 0000           ;       dsp_data -> R20,R21
+                        .even
+ 0000           _change_data::
+ 0000 00D0              rcall push_gset2
+ 0002 A801              movw R20,R16
+ 0004                   .dbline -1
+ 0004                   .dbline 7
+ 0004           ; #define _led_dsp_c
+ 0004           ; #include <io8535v.h>
+ 0004           ; #include <macros.h>
+ 0004           ; #include <led_dsp.h>
+ 0004           ; #include <adc.h>
+ 0004           ; void change_data (int dsp_data)
+ 0004           ; {
+ 0004                   .dbline 9
+ 0004           ;       uchar temp_n;
+ 0004           ;       if(dsp_data<=(AREF_VOL*100))
+ 0004 8CED              ldi R24,1500
+ 0006 95E0              ldi R25,5
+ 0008 8417              cp R24,R20
+ 000A 9507              cpc R25,R21
+ 000C 0CF4              brge X0
+ 000E 40C0              rjmp L1
+ 0010           X0:
+ 0010                   .dbline 10
+ 0010           ;               {
+ 0010                   .dbline 11
+ 0010           ;                       temp_n = dsp_data/1000;
+ 0010 28EE              ldi R18,1000
+ 0012 33E0              ldi R19,3
+ 0014 8A01              movw R16,R20
+ 0016 00D0              rcall div16s
+ 0018 602F              mov R22,R16
+ 001A                   .dbline 12
+ 001A           ;                       disp_buffer[0]=led_tabel[temp_n];
+ 001A 80E0              ldi R24,<_led_tabel
+ 001C 90E0              ldi R25,>_led_tabel
+ 001E E62F              mov R30,R22
+ 0020 FF27              clr R31
+ 0022 E80F              add R30,R24
+ 0024 F91F              adc R31,R25
+ 0026 E491              lpm R30,Z
+ 0028 E0930000          sts _disp_buffer,R30
+ 002C                   .dbline 13
+ 002C           ;                       dsp_data %=1000;
+ 002C 28EE              ldi R18,1000
+ 002E 33E0              ldi R19,3
+ 0030 8A01              movw R16,R20
+ 0032 00D0              rcall mod16s
+ 0034 A801              movw R20,R16
+ 0036                   .dbline 14
+ 0036           ;                       temp_n = dsp_data/100;
+ 0036 24E6              ldi R18,100
+ 0038 30E0              ldi R19,0
+ 003A 00D0              rcall div16s
+ 003C 602F              mov R22,R16
+ 003E                   .dbline 15
+ 003E           ;                       disp_buffer[1]=(led_tabel[temp_n])|0x80;//加上小数点
+ 003E 80E0              ldi R24,<_led_tabel
+ 0040 90E0              ldi R25,>_led_tabel
+ 0042 E62F              mov R30,R22
+ 0044 FF27              clr R31
+ 0046 E80F              add R30,R24
+ 0048 F91F              adc R31,R25
+ 004A E491              lpm R30,Z
+ 004C E068              ori R30,128
+ 004E E0930100          sts _disp_buffer+1,R30
+ 0052                   .dbline 16
+ 0052           ;                       dsp_data %=100;
+ 0052 24E6              ldi R18,100
+ 0054 30E0              ldi R19,0
+ 0056 8A01              movw R16,R20
+ 0058 00D0              rcall mod16s
+ 005A A801              movw R20,R16
+ 005C                   .dbline 17
+ 005C           ;                       temp_n = dsp_data/10;
+ 005C 2AE0              ldi R18,10
+ 005E 30E0              ldi R19,0
+ 0060 00D0              rcall div16s
+ 0062 602F              mov R22,R16
+ 0064                   .dbline 18
+ 0064           ;                       disp_buffer[2]=led_tabel[temp_n];
+ 0064 80E0              ldi R24,<_led_tabel
+ 0066 90E0              ldi R25,>_led_tabel
+ 0068 E62F              mov R30,R22
+ 006A FF27              clr R31
+ 006C E80F              add R30,R24
+ 006E F91F              adc R31,R25
+ 0070 E491              lpm R30,Z
+ 0072 E0930200          sts _disp_buffer+2,R30
+ 0076                   .dbline 19
+ 0076           ;                       dsp_data %=10;
+ 0076 2AE0              ldi R18,10
+ 0078 30E0              ldi R19,0
+ 007A 8A01              movw R16,R20
+ 007C 00D0              rcall mod16s
+ 007E A801              movw R20,R16
+ 0080                   .dbline 20
+ 0080           ;                       disp_buffer[3]=led_tabel[dsp_data];
+ 0080 80E0              ldi R24,<_led_tabel
+ 0082 90E0              ldi R25,>_led_tabel
+ 0084 FA01              movw R30,R20
+ 0086 E80F              add R30,R24
+ 0088 F91F              adc R31,R25
+ 008A E491              lpm R30,Z
+ 008C E0930300          sts _disp_buffer+3,R30
+ 0090                   .dbline 21
+ 0090           ;               }
+ 0090                   .dbline 23
+ 0090           ;       //scan_led(disp_buffer);
+ 0090           ;       return;
+ 0090                   .dbline -2
+ 0090           L1:
+ 0090 00D0              rcall pop_gset2
+ 0092                   .dbline 0 ; func end
+ 0092 0895              ret
+ 0094                   .dbsym r temp_n 22 c
+ 0094                   .dbsym r dsp_data 20 I
+ 0094                   .dbend
+ 0094                   .dbfunc e scan_led _scan_led fV
+ 0094           ;         scan_n -> R20
+ 0094           ;              i -> R22
+ 0094           ;         disp_p -> R10,R11
+                        .even
+ 0094           _scan_led::
+ 0094 00D0              rcall push_gset3
+ 0096 5801              movw R10,R16
+ 0098                   .dbline -1
+ 0098                   .dbline 27
+ 0098           ; }
+ 0098           ; 
+ 0098           ; void scan_led(uchar *disp_p)
+ 0098           ; {
+ 0098                   .dbline 29
+ 0098           ;       uchar i,scan_n;
+ 0098           ;       scan_n=0xfe;
+ 0098 4EEF              ldi R20,254
+ 009A                   .dbline 30
+ 009A           ;       for (i=0; i<4; i++)
+ 009A 6627              clr R22
+ 009C 0EC0              rjmp L11
+ 009E           L8:
+ 009E                   .dbline 31
+ 009E                   .dbline 32
+ 009E E62F              mov R30,R22
+ 00A0 FF27              clr R31
+ 00A2 EA0D              add R30,R10
+ 00A4 FB1D              adc R31,R11
+ 00A6 2080              ldd R2,z+0
+ 00A8 28BA              out 0x18,R2
+ 00AA                   .dbline 33
+ 00AA 42BB              out 0x12,R20
+ 00AC                   .dbline 34
+ 00AC 440F              lsl R20
+ 00AE 4F5F              subi R20,255    ; addi 1
+ 00B0                   .dbline 35
+ 00B0 02E3              ldi R16,50
+ 00B2 07D0              rcall _delay
+ 00B4                   .dbline 36
+ 00B4 8FEF              ldi R24,255
+ 00B6 82BB              out 0x12,R24
+ 00B8                   .dbline 37
+ 00B8           L9:
+ 00B8                   .dbline 30
+ 00B8 6395              inc R22
+ 00BA           L11:
+ 00BA                   .dbline 30
+ 00BA 6430              cpi R22,4
+ 00BC 80F3              brlo L8
+ 00BE                   .dbline 38
+ 00BE           ;       {
+ 00BE           ;               data_port = *(disp_p+i);
+ 00BE           ;               scan_port = scan_n;
+ 00BE           ;               scan_n=(scan_n<<1)+1;
+ 00BE           ;               delay(50);
+ 00BE           ;               scan_port = 0xff;
+ 00BE           ;       }
+ 00BE           ;       return;
+ 00BE                   .dbline -2
+ 00BE           L7:
+ 00BE 00D0              rcall pop_gset3
+ 00C0                   .dbline 0 ; func end
+ 00C0 0895              ret
+ 00C2                   .dbsym r scan_n 20 c
+ 00C2                   .dbsym r i 22 c
+ 00C2                   .dbsym r disp_p 10 pc
+ 00C2                   .dbend
+ 00C2                   .dbfunc e delay _delay fV
+ 00C2           ;              c -> R20
+ 00C2           ;        delay_t -> R16
+                        .even
+ 00C2           _delay::
+ 00C2 00D0              rcall push_gset1
+ 00C4                   .dbline -1
+ 00C4                   .dbline 43
+ 00C4           ;       
+ 00C4           ; }
+ 00C4           ; 
+ 00C4           ; void delay(uchar delay_t)
+ 00C4           ; {
+ 00C4 06C0              rjmp L14
+ 00C6           L13:
+ 00C6                   .dbline 46
+ 00C6           ;       uchar c;
+ 00C6           ;       while(delay_t--)
+ 00C6           ;       {
+ 00C6                   .dbline 47
+ 00C6           ;               c=10;
+ 00C6 4AE0              ldi R20,10
+ 00C8           L16:
+ 00C8                   .dbline 48
+ 00C8           L17:
+ 00C8                   .dbline 48
+ 00C8 242E              mov R2,R20
+ 00CA 3324              clr R3
+ 00CC 4150              subi R20,1
+ 00CE 2220              tst R2
+ 00D0 D9F7              brne L16
+ 00D2                   .dbline 49
+ 00D2           L14:
+ 00D2                   .dbline 45
+ 00D2 202E              mov R2,R16
+ 00D4 3324              clr R3
+ 00D6 0150              subi R16,1
+ 00D8 2220              tst R2
+ 00DA A9F7              brne L13
+ 00DC                   .dbline -2
+ 00DC                   .dbline 50
+ 00DC           ;               while(c--);
+ 00DC           ;       }
+ 00DC           ; }
+ 00DC           L12:
+ 00DC 00D0              rcall pop_gset1
+ 00DE                   .dbline 0 ; func end
+ 00DE 0895              ret
+ 00E0                   .dbsym r c 20 c
+ 00E0                   .dbsym r delay_t 16 c
+ 00E0                   .dbend

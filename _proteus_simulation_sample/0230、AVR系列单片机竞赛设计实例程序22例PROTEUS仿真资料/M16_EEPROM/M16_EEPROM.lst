@@ -1,0 +1,317 @@
+__start:
+__text_start:
+    0032 E5CF      LDI	R28,0x5F
+    0033 E0D4      LDI	R29,4
+    0034 BFCD      OUT	0x3D,R28
+    0035 BFDE      OUT	0x3E,R29
+    0036 51C4      SUBI	R28,0x14
+    0037 40D0      SBCI	R29,0
+    0038 EA0A      LDI	R16,0xAA
+    0039 8308      STD	Y+0,R16
+    003A 2400      CLR	R0
+    003B E7E0      LDI	R30,0x70
+    003C E0F0      LDI	R31,0
+    003D E010      LDI	R17,0
+    003E 37E6      CPI	R30,0x76
+    003F 07F1      CPC	R31,R17
+    0040 F011      BEQ	0x0043
+    0041 9201      ST	R0,Z+
+    0042 CFFB      RJMP	0x003E
+    0043 8300      STD	Z+0,R16
+    0044 E5E4      LDI	R30,0x54
+    0045 E0F0      LDI	R31,0
+    0046 E6A0      LDI	R26,0x60
+    0047 E0B0      LDI	R27,0
+    0048 E010      LDI	R17,0
+    0049 36E4      CPI	R30,0x64
+    004A 07F1      CPC	R31,R17
+    004B F021      BEQ	0x0050
+    004C 95C8      LPM
+    004D 9631      ADIW	R30,1
+    004E 920D      ST	R0,X+
+    004F CFF9      RJMP	0x0049
+    0050 940E00BF  CALL	_main
+_exit:
+    0052 CFFF      RJMP	_exit
+_DelayMs:
+  j                    --> R20
+  i                    --> R16
+    0053 940E00F8  CALL	push_gset1
+FILE: F:\myavr\temp\M16_EEPROM\M16_EEPROM.C
+(0001) //***************FileName:Capature.C***************//
+(0002) //***************ICCAVR V6.30编译*****************//
+(0003) 
+(0004) #include <iom16v.h>                 
+(0005) #define uchar unsigned char
+(0006) #define uint  unsigned int
+(0007) 
+(0008) //数码管字型表，对应0，1，2，3，4，5，6，7，8，9，A,B,C,D,E,F//
+(0009) uchar Table[16]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,
+(0010)                  0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71};
+(0011) uchar Read_Data[4];            //定义读出数据
+(0012) uchar *p1;
+(0013) 
+(0014) void DelayMs(uint i)           //Ms级延时，参数i为延时时间
+(0015) {uint j;
+(0016)  for(;i!=0;i--)
+    0055 C00A      RJMP	0x0060
+(0017)   {for(j=250;j!=0;j--) {;}}
+    0056 EF4A      LDI	R20,0xFA
+    0057 E050      LDI	R21,0
+    0058 C002      RJMP	0x005B
+    0059 5041      SUBI	R20,1
+    005A 4050      SBCI	R21,0
+    005B 3040      CPI	R20,0
+    005C 0745      CPC	R20,R21
+    005D F7D9      BNE	0x0059
+    005E 5001      SUBI	R16,1
+    005F 4010      SBCI	R17,0
+    0060 3000      CPI	R16,0
+    0061 0701      CPC	R16,R17
+    0062 F799      BNE	0x0056
+(0018) }
+    0063 940E00FB  CALL	pop_gset1
+    0065 9508      RET
+_Display:
+  sel                  --> R20
+  i                    --> R22
+  p                    --> R10
+    0066 940E0113  CALL	push_gset3
+    0068 0158      MOVW	R10,R16
+(0019) 
+(0020) void Display(uchar *p)         //动态显示函数，参数p为待显示的数组名
+(0021) {uchar i,sel=0x01;           
+    0069 E041      LDI	R20,1
+(0022)  for(i=0;i<4;i++)
+    006A 2766      CLR	R22
+    006B C017      RJMP	0x0083
+(0023)   {PORTC=sel;                  //选通最右边的数码管
+    006C BB45      OUT	0x15,R20
+(0024)    PORTA=0xff-Table[p[i]];     //送字型码
+    006D 2FE6      MOV	R30,R22
+    006E 27FF      CLR	R31
+    006F 0DEA      ADD	R30,R10
+    0070 1DFB      ADC	R31,R11
+    0071 81E0      LDD	R30,Z+0
+    0072 27FF      CLR	R31
+    0073 E680      LDI	R24,0x60
+    0074 E090      LDI	R25,0
+    0075 0FE8      ADD	R30,R24
+    0076 1FF9      ADC	R31,R25
+    0077 8020      LDD	R2,Z+0
+    0078 2433      CLR	R3
+    0079 EF8F      LDI	R24,0xFF
+    007A E090      LDI	R25,0
+    007B 1982      SUB	R24,R2
+    007C 0993      SBC	R25,R3
+    007D BB8B      OUT	0x1B,R24
+(0025)    DelayMs(2);                 //显示延时    
+    007E E002      LDI	R16,2
+    007F E010      LDI	R17,0
+    0080 DFD2      RCALL	_DelayMs
+(0026)    sel=sel<<1;                 //移位以显示前一位
+    0081 0F44      LSL	R20
+    0082 9563      INC	R22
+    0083 3064      CPI	R22,4
+    0084 F338      BCS	0x006C
+(0027)   }
+(0028) }
+    0085 940E00F5  CALL	pop_gset3
+    0087 9508      RET
+(0029) 
+(0030) void Init_IO(void)             //初始化I/O口
+(0031) {DDRA=0xff;                    //设置A口为推挽1输出
+_Init_IO:
+    0088 EF8F      LDI	R24,0xFF
+    0089 BB8A      OUT	0x1A,R24
+(0032)  PORTA=0xff;
+    008A BB8B      OUT	0x1B,R24
+(0033)  DDRC=0xff;                    //设置C口为推挽1输出             
+    008B BB84      OUT	0x14,R24
+(0034)  PORTC=0xff;
+    008C BB85      OUT	0x15,R24
+(0035) }
+    008D 9508      RET
+_Write_EEPROM:
+  Address              --> R22
+  Data                 --> R20
+    008E 940E010F  CALL	push_gset2
+    0090 01B9      MOVW	R22,R18
+    0091 2F40      MOV	R20,R16
+(0036) 
+(0037) void Write_EEPROM(uchar Data,uint Address)
+(0038) {if(EECR&0x20) DelayMs(4);
+    0092 9BE5      SBIS	0x1C,5
+    0093 C003      RJMP	0x0097
+    0094 E004      LDI	R16,4
+    0095 E010      LDI	R17,0
+    0096 DFBC      RCALL	_DelayMs
+(0039)  EEARH=Address>>8;
+    0097 011B      MOVW	R2,R22
+    0098 2C23      MOV	R2,R3
+    0099 2433      CLR	R3
+    009A BA2F      OUT	0x1F,R2
+(0040)  EEARL=Address&0x00ff;
+    009B 01CB      MOVW	R24,R22
+    009C 7090      ANDI	R25,0
+    009D BB8E      OUT	0x1E,R24
+(0041)  EEDR=Data;
+    009E BB4D      OUT	0x1D,R20
+(0042)  EECR=EECR|0x04;
+    009F 9AE2      SBI	0x1C,2
+(0043)  EECR=EECR|0x02;
+    00A0 9AE1      SBI	0x1C,1
+(0044)  DelayMs(4);
+    00A1 E004      LDI	R16,4
+    00A2 E010      LDI	R17,0
+    00A3 DFAF      RCALL	_DelayMs
+(0045) }
+    00A4 940E00F2  CALL	pop_gset2
+    00A6 9508      RET
+_Read_EEPROM:
+  i                    --> R20
+  Address              --> R20
+    00A7 940E00F8  CALL	push_gset1
+    00A9 01A8      MOVW	R20,R16
+(0046) 
+(0047) uchar Read_EEPROM(uint Address)
+(0048) {uchar i;
+(0049)  if(EECR&0x01) DelayMs(4);
+    00AA 9BE0      SBIS	0x1C,0
+    00AB C003      RJMP	0x00AF
+    00AC E004      LDI	R16,4
+    00AD E010      LDI	R17,0
+    00AE DFA4      RCALL	_DelayMs
+(0050)  EEARH=Address>>8;
+    00AF 011A      MOVW	R2,R20
+    00B0 2C23      MOV	R2,R3
+    00B1 2433      CLR	R3
+    00B2 BA2F      OUT	0x1F,R2
+(0051)  EEARL=Address&0x00ff;
+    00B3 01CA      MOVW	R24,R20
+    00B4 7090      ANDI	R25,0
+    00B5 BB8E      OUT	0x1E,R24
+(0052)  EECR=EECR|0x01;
+    00B6 9AE0      SBI	0x1C,0
+(0053)  DelayMs(5);
+    00B7 E005      LDI	R16,5
+    00B8 E010      LDI	R17,0
+    00B9 DF99      RCALL	_DelayMs
+(0054)  i=EEDR;
+(0055)  return(i);
+    00BA B34D      IN	R20,0x1D
+    00BB 2F04      MOV	R16,R20
+    00BC 940E00FB  CALL	pop_gset1
+    00BE 9508      RET
+(0056) }
+(0057) 
+(0058) void main(void)
+(0059) {uchar i;
+(0060)  Init_IO();                    //初始化I/O口
+_main:
+  i                    --> R20
+    00BF DFC8      RCALL	_Init_IO
+(0061)  PORTA=0xff;                   //点亮以测试所有的数码管
+    00C0 EF8F      LDI	R24,0xFF
+    00C1 BB8B      OUT	0x1B,R24
+(0062)  PORTC=0x00;   
+    00C2 2422      CLR	R2
+    00C3 BA25      OUT	0x15,R2
+(0063)  DelayMs(30);                 //延时
+    00C4 E10E      LDI	R16,0x1E
+    00C5 E010      LDI	R17,0
+    00C6 DF8C      RCALL	_DelayMs
+(0064)  PORTC=0xff;                   //熄灭所有的数码管
+    00C7 EF8F      LDI	R24,0xFF
+    00C8 BB85      OUT	0x15,R24
+(0065)  for(i=0;i<4;i++)
+    00C9 2744      CLR	R20
+    00CA C007      RJMP	0x00D2
+(0066)     {Write_EEPROM(5*i,i);}
+    00CB 2F24      MOV	R18,R20
+    00CC 2733      CLR	R19
+    00CD E085      LDI	R24,5
+    00CE 9F84      MUL	R24,R20
+    00CF 2D00      MOV	R16,R0
+    00D0 DFBD      RCALL	_Write_EEPROM
+    00D1 9543      INC	R20
+    00D2 3044      CPI	R20,4
+    00D3 F3B8      BCS	0x00CB
+(0067)  for(i=0;i<4;i++)
+    00D4 2744      CLR	R20
+    00D5 C00B      RJMP	0x00E1
+(0068)     {Read_Data[i]=Read_EEPROM(i);
+    00D6 2F04      MOV	R16,R20
+    00D7 2711      CLR	R17
+    00D8 DFCE      RCALL	_Read_EEPROM
+    00D9 E782      LDI	R24,0x72
+    00DA E090      LDI	R25,0
+    00DB 2FE4      MOV	R30,R20
+    00DC 27FF      CLR	R31
+    00DD 0FE8      ADD	R30,R24
+    00DE 1FF9      ADC	R31,R25
+    00DF 8300      STD	Z+0,R16
+    00E0 9543      INC	R20
+    00E1 3044      CPI	R20,4
+    00E2 F398      BCS	0x00D6
+    00E3 C00C      RJMP	0x00F0
+(0069) 	}
+(0070)  while(1)
+(0071)  {
+(0072)   p1[0]=Read_Data[0];
+    00E4 90200072  LDS	R2,_Read_Data
+    00E6 91E00070  LDS	R30,_p1
+    00E8 91F00071  LDS	R31,_p1+1
+    00EA 8220      STD	Z+0,R2
+(0073)   Display(p1);
+    00EB 018F      MOVW	R16,R30
+    00EC DF79      RCALL	_Display
+(0074)   DelayMs(2);
+    00ED E002      LDI	R16,2
+    00EE E010      LDI	R17,0
+    00EF DF63      RCALL	_DelayMs
+    00F0 CFF3      RJMP	0x00E4
+(0075)  }
+(0076) }
+FILE: <library>
+    00F1 9508      RET
+pop_gset2:
+    00F2 E0E2      LDI	R30,2
+    00F3 940C00FC  JMP	pop
+pop_gset3:
+    00F5 E0E4      LDI	R30,4
+    00F6 940C00FC  JMP	pop
+push_gset1:
+    00F8 935A      ST	R21,-Y
+    00F9 934A      ST	R20,-Y
+    00FA 9508      RET
+pop_gset1:
+    00FB E0E1      LDI	R30,1
+pop:
+    00FC 9149      LD	R20,Y+
+    00FD 9159      LD	R21,Y+
+    00FE FDE0      SBRC	R30,0
+    00FF 9508      RET
+    0100 9169      LD	R22,Y+
+    0101 9179      LD	R23,Y+
+    0102 FDE1      SBRC	R30,1
+    0103 9508      RET
+    0104 90A9      LD	R10,Y+
+    0105 90B9      LD	R11,Y+
+    0106 FDE2      SBRC	R30,2
+    0107 9508      RET
+    0108 90C9      LD	R12,Y+
+    0109 90D9      LD	R13,Y+
+    010A FDE3      SBRC	R30,3
+    010B 9508      RET
+    010C 90E9      LD	R14,Y+
+    010D 90F9      LD	R15,Y+
+    010E 9508      RET
+push_gset2:
+    010F 937A      ST	R23,-Y
+    0110 936A      ST	R22,-Y
+    0111 940C00F8  JMP	push_gset1
+push_gset3:
+    0113 92BA      ST	R11,-Y
+    0114 92AA      ST	R10,-Y
+    0115 940C010F  JMP	push_gset2

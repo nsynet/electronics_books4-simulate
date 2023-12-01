@@ -1,0 +1,56 @@
+C51 COMPILER V7.06   485__©зм__е                                                           03/01/2008 13:20:58 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE 485__©зм__е
+OBJECT MODULE PLACED IN 485╢╝©зм╗пе.OBJ
+COMPILER INVOKED BY: d:\Keil\C51\BIN\C51.EXE 485╢╝©зм╗пе.c BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include <reg51.h>
+   2          #include <intrins.h>
+   3          #define uchar unsigned char
+   4          #define uint unsigned int
+   5          sbit P12=P1^2;
+   6          char code str[] = "xiehui,you are the best! \n\r";
+   7          //uchar idata trdata[10]={'1','2','3','4','5','6',0x0d,0x0a,0x00};
+   8          main()
+   9          {
+  10   1      uint j;
+  11   1      TMOD=0x20;
+  12   1      TL1=0xfd;TH1=0xfd;
+  13   1      SCON=0x50;
+  14   1      PCON &= 0xef;
+  15   1      TR1=1;
+  16   1      IE=0x00;
+  17   1      P12=1;
+  18   1      while(1)
+  19   1      {
+  20   2      //if(P12==0)
+  21   2      //{
+  22   2      uchar i=0;
+  23   2      while(str[i]!='\0')
+  24   2      {
+  25   3      SBUF=str[i];
+  26   3      while(!TI);
+  27   3      TI=0;
+  28   3      i++;
+  29   3      }
+  30   2      //}
+  31   2      for(j=0;j<50000;j++);
+  32   2      }
+  33   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     78    ----
+   CONSTANT SIZE    =     28    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

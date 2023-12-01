@@ -1,0 +1,124 @@
+                        .module main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile E:\ѧϰ\AVR\adc\main.c
+ 0000                   .dbfunc e port_init _port_init fV
+                        .even
+ 0000           _port_init::
+ 0000                   .dbline -1
+ 0000                   .dbline 16
+ 0000           ; //ICC-AVR application builder : 00-1-16 4:13:00
+ 0000           ; // Target : 8535
+ 0000           ; // Crystal: 4.0000Mhz
+ 0000           ; 
+ 0000           ; #include <io8535v.h>
+ 0000           ; #include <macros.h>
+ 0000           ; #define uchar unsigned char
+ 0000           ; #define uint unsigned int
+ 0000           ; #include <adc.h>
+ 0000           ; #include <led_dsp.h>
+ 0000           ; #include <dac.h>
+ 0000           ; 
+ 0000           ; 
+ 0000           ; 
+ 0000           ; void port_init(void)
+ 0000           ; {
+ 0000                   .dbline 17
+ 0000           ;  PORTA = 0x00;
+ 0000 2224              clr R2
+ 0002 2BBA              out 0x1b,R2
+ 0004                   .dbline 18
+ 0004           ;  DDRA  = 0x00;
+ 0004 2ABA              out 0x1a,R2
+ 0006                   .dbline 19
+ 0006           ;  PORTB = 0xFF;
+ 0006 8FEF              ldi R24,255
+ 0008 88BB              out 0x18,R24
+ 000A                   .dbline 20
+ 000A           ;  DDRB  = 0xFF;
+ 000A 87BB              out 0x17,R24
+ 000C                   .dbline 21
+ 000C           ;  PORTC = 0x00;
+ 000C 25BA              out 0x15,R2
+ 000E                   .dbline 22
+ 000E           ;  DDRC  = 0xff;
+ 000E 84BB              out 0x14,R24
+ 0010                   .dbline 23
+ 0010           ;  PORTD = 0xF0;
+ 0010 80EF              ldi R24,240
+ 0012 82BB              out 0x12,R24
+ 0014                   .dbline 24
+ 0014           ;  DDRD  = 0x0F;
+ 0014 8FE0              ldi R24,15
+ 0016 81BB              out 0x11,R24
+ 0018                   .dbline -2
+ 0018                   .dbline 25
+ 0018           ; }
+ 0018           L1:
+ 0018                   .dbline 0 ; func end
+ 0018 0895              ret
+ 001A                   .dbend
+ 001A                   .dbfunc e main _main fV
+ 001A           ;              i -> <dead>
+                        .even
+ 001A           _main::
+ 001A                   .dbline -1
+ 001A                   .dbline 29
+ 001A           ; 
+ 001A           ; 
+ 001A           ; void main (void)
+ 001A           ; {
+ 001A                   .dbline 32
+ 001A           ;  uchar i;
+ 001A           ;  //stop errant interrupts until set up
+ 001A           ;  CLI(); //disable all interrupts
+ 001A F894              cli
+ 001C                   .dbline 33
+ 001C           ; port_init();
+ 001C F1DF              rcall _port_init
+ 001E                   .dbline 34
+ 001E           ; adc_init();
+ 001E 00D0              rcall _adc_init
+ 0020                   .dbline 35
+ 0020           ; dac_init ();
+ 0020 00D0              rcall _dac_init
+ 0022                   .dbline 36
+ 0022           ;  MCUCR = 0x00; 
+ 0022 2224              clr R2
+ 0024 25BE              out 0x35,R2
+ 0026                   .dbline 37
+ 0026           ;  GIMSK = 0x00;
+ 0026 2BBE              out 0x3b,R2
+ 0028                   .dbline 38
+ 0028           ;  SEI(); //re-enable interrupts
+ 0028 7894              sei
+ 002A 08C0              rjmp L4
+ 002C           L3:
+ 002C                   .dbline 41
+ 002C                   .dbline 42
+ 002C 00910000          lds R16,_adc_val
+ 0030 10910100          lds R17,_adc_val+1
+ 0034 00D0              rcall _change_data
+ 0036                   .dbline 43
+ 0036 00E0              ldi R16,<_disp_buffer
+ 0038 10E0              ldi R17,>_disp_buffer
+ 003A 00D0              rcall _scan_led
+ 003C                   .dbline 45
+ 003C           L4:
+ 003C                   .dbline 40
+ 003C F7CF              rjmp L3
+ 003E           X0:
+ 003E                   .dbline -2
+ 003E                   .dbline 46
+ 003E           ;  //all peripherals are now initialised
+ 003E           ;  while (1)
+ 003E           ;  {
+ 003E           ;       change_data(adc_val);
+ 003E           ;       scan_led(disp_buffer);
+ 003E           ; //    put_to_dac();
+ 003E           ;       }
+ 003E           ; }
+ 003E           L2:
+ 003E                   .dbline 0 ; func end
+ 003E 0895              ret
+ 0040                   .dbsym l i 1 c
+ 0040                   .dbend

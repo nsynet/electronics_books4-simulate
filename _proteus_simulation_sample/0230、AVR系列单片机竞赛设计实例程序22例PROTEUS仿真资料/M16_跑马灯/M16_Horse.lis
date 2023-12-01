@@ -1,0 +1,277 @@
+                        .module M16_Horse.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile F:\myavr\mydesign\M16_Horse\M16_Horse.c
+ 0000                   .dbfunc e Delay _Delay fV
+ 0000           ;              j -> R20
+ 0000           ;              i -> R16
+                        .even
+ 0000           _Delay::
+ 0000 0E940000          xcall push_gset1
+ 0004                   .dbline -1
+ 0004                   .dbline 6
+ 0004           ; #include<iom16v.h>
+ 0004           ; #define uchar unsigned char
+ 0004           ; #define uint unsigned int
+ 0004           ; 
+ 0004           ; void Delay(uchar i)
+ 0004           ; {
+ 0004                   .dbline 8
+ 0004           ;  uchar j;
+ 0004           ;  for(;i!=0;i--)
+ 0004 06C0              xjmp L5
+ 0006           L2:
+ 0006                   .dbline 9
+ 0006           ;  {
+ 0006                   .dbline 10
+ 0006 4AEF              ldi R20,250
+ 0008 01C0              xjmp L9
+ 000A           L6:
+ 000A                   .dbline 10
+ 000A           L7:
+ 000A                   .dbline 10
+ 000A 4A95              dec R20
+ 000C           L9:
+ 000C                   .dbline 10
+ 000C 4423              tst R20
+ 000E E9F7              brne L6
+ 0010                   .dbline 11
+ 0010           L3:
+ 0010                   .dbline 8
+ 0010 0A95              dec R16
+ 0012           L5:
+ 0012                   .dbline 8
+ 0012 0023              tst R16
+ 0014 C1F7              brne L2
+ 0016                   .dbline -2
+ 0016                   .dbline 12
+ 0016           ;   for(j=250;j!=0;j--);
+ 0016           ;  }
+ 0016           ; }
+ 0016           L1:
+ 0016 0E940000          xcall pop_gset1
+ 001A                   .dbline 0 ; func end
+ 001A 0895              ret
+ 001C                   .dbsym r j 20 c
+ 001C                   .dbsym r i 16 c
+ 001C                   .dbend
+ 001C                   .dbfunc e Horse _Horse fV
+ 001C           ;              i -> R16
+                        .even
+ 001C           _Horse::
+ 001C 0E940000          xcall push_gset1
+ 0020                   .dbline -1
+ 0020                   .dbline 15
+ 0020           ; 
+ 0020           ; void Horse(uchar i)
+ 0020           ; {
+ 0020                   .dbline 16
+ 0020           ;  switch(i)
+ 0020 402F              mov R20,R16
+ 0022 5527              clr R21
+ 0024 4030              cpi R20,0
+ 0026 4507              cpc R20,R21
+ 0028 09F1              breq L14
+ 002A           X0:
+ 002A 4130              cpi R20,1
+ 002C E0E0              ldi R30,0
+ 002E 5E07              cpc R21,R30
+ 0030 01F1              breq L15
+ 0032 4230              cpi R20,2
+ 0034 E0E0              ldi R30,0
+ 0036 5E07              cpc R21,R30
+ 0038 F9F0              breq L16
+ 003A 4330              cpi R20,3
+ 003C E0E0              ldi R30,0
+ 003E 5E07              cpc R21,R30
+ 0040 F1F0              breq L17
+ 0042 4430              cpi R20,4
+ 0044 E0E0              ldi R30,0
+ 0046 5E07              cpc R21,R30
+ 0048 E9F0              breq L18
+ 004A 4530              cpi R20,5
+ 004C E0E0              ldi R30,0
+ 004E 5E07              cpc R21,R30
+ 0050 E1F0              breq L19
+ 0052 4630              cpi R20,6
+ 0054 E0E0              ldi R30,0
+ 0056 5E07              cpc R21,R30
+ 0058 D9F0              breq L20
+ 005A 4730              cpi R20,7
+ 005C E0E0              ldi R30,0
+ 005E 5E07              cpc R21,R30
+ 0060 D1F0              breq L21
+ 0062 4830              cpi R20,8
+ 0064 E0E0              ldi R30,0
+ 0066 5E07              cpc R21,R30
+ 0068 C9F0              breq L22
+ 006A 1AC0              xjmp L12
+ 006C           X1:
+ 006C                   .dbline 17
+ 006C           ;  {
+ 006C           L14:
+ 006C                   .dbline 18
+ 006C           ;   case 0:PORTA=0x00;break;
+ 006C 2224              clr R2
+ 006E 2BBA              out 0x1b,R2
+ 0070                   .dbline 18
+ 0070 17C0              xjmp L12
+ 0072           L15:
+ 0072                   .dbline 19
+ 0072           ;   case 1:PORTA=0x01;break;
+ 0072 81E0              ldi R24,1
+ 0074 8BBB              out 0x1b,R24
+ 0076                   .dbline 19
+ 0076 14C0              xjmp L12
+ 0078           L16:
+ 0078                   .dbline 20
+ 0078           ;   case 2:PORTA=0x03;break;
+ 0078 83E0              ldi R24,3
+ 007A 8BBB              out 0x1b,R24
+ 007C                   .dbline 20
+ 007C 11C0              xjmp L12
+ 007E           L17:
+ 007E                   .dbline 21
+ 007E           ;   case 3:PORTA=0x07;break;
+ 007E 87E0              ldi R24,7
+ 0080 8BBB              out 0x1b,R24
+ 0082                   .dbline 21
+ 0082 0EC0              xjmp L12
+ 0084           L18:
+ 0084                   .dbline 22
+ 0084           ;   case 4:PORTA=0x0f;break;
+ 0084 8FE0              ldi R24,15
+ 0086 8BBB              out 0x1b,R24
+ 0088                   .dbline 22
+ 0088 0BC0              xjmp L12
+ 008A           L19:
+ 008A                   .dbline 23
+ 008A           ;   case 5:PORTA=0x1f;break;
+ 008A 8FE1              ldi R24,31
+ 008C 8BBB              out 0x1b,R24
+ 008E                   .dbline 23
+ 008E 08C0              xjmp L12
+ 0090           L20:
+ 0090                   .dbline 24
+ 0090           ;   case 6:PORTA=0x3f;break;
+ 0090 8FE3              ldi R24,63
+ 0092 8BBB              out 0x1b,R24
+ 0094                   .dbline 24
+ 0094 05C0              xjmp L12
+ 0096           L21:
+ 0096                   .dbline 25
+ 0096           ;   case 7:PORTA=0x7f;break;
+ 0096 8FE7              ldi R24,127
+ 0098 8BBB              out 0x1b,R24
+ 009A                   .dbline 25
+ 009A 02C0              xjmp L12
+ 009C           L22:
+ 009C                   .dbline 26
+ 009C 8FEF              ldi R24,255
+ 009E 8BBB              out 0x1b,R24
+ 00A0                   .dbline 26
+ 00A0                   .dbline 27
+ 00A0           L12:
+ 00A0                   .dbline -2
+ 00A0                   .dbline 29
+ 00A0           ;   case 8:PORTA=0xff;break;
+ 00A0           ;   default:break;
+ 00A0           ;  }
+ 00A0           ; }
+ 00A0           L10:
+ 00A0 0E940000          xcall pop_gset1
+ 00A4                   .dbline 0 ; func end
+ 00A4 0895              ret
+ 00A6                   .dbsym r i 16 c
+ 00A6                   .dbend
+ 00A6                   .dbfunc e main _main fV
+ 00A6           ;              i -> R20
+                        .even
+ 00A6           _main::
+ 00A6                   .dbline -1
+ 00A6                   .dbline 32
+ 00A6           ; 
+ 00A6           ; void main()
+ 00A6           ; {
+ 00A6                   .dbline 34
+ 00A6           ;  uchar i;
+ 00A6           ;  DDRA=0xff;
+ 00A6 8FEF              ldi R24,255
+ 00A8 8ABB              out 0x1a,R24
+ 00AA                   .dbline 35
+ 00AA           ;  PORTA=0xff;
+ 00AA 8BBB              out 0x1b,R24
+ 00AC                   .dbline 36
+ 00AC           ;  Delay(10);
+ 00AC 0AE0              ldi R16,10
+ 00AE A8DF              xcall _Delay
+ 00B0                   .dbline 37
+ 00B0           ;  PORTA=0x00;
+ 00B0 2224              clr R2
+ 00B2 2BBA              out 0x1b,R2
+ 00B4 12C0              xjmp L25
+ 00B6           L24:
+ 00B6                   .dbline 39
+ 00B6           ;  while(1)
+ 00B6           ;  {
+ 00B6                   .dbline 40
+ 00B6           ;   for(i=0;i<9;i++)
+ 00B6 4427              clr R20
+ 00B8 05C0              xjmp L30
+ 00BA           L27:
+ 00BA                   .dbline 41
+ 00BA                   .dbline 42
+ 00BA 042F              mov R16,R20
+ 00BC AFDF              xcall _Horse
+ 00BE                   .dbline 43
+ 00BE 04E6              ldi R16,100
+ 00C0 9FDF              xcall _Delay
+ 00C2                   .dbline 44
+ 00C2           L28:
+ 00C2                   .dbline 40
+ 00C2 4395              inc R20
+ 00C4           L30:
+ 00C4                   .dbline 40
+ 00C4 4930              cpi R20,9
+ 00C6 C8F3              brlo L27
+ 00C8                   .dbline 45
+ 00C8           ;   {
+ 00C8           ;    Horse(i);
+ 00C8           ;    Delay(100);
+ 00C8           ;   }
+ 00C8           ;   for(i=8;i!=0;i--)
+ 00C8 48E0              ldi R20,8
+ 00CA 05C0              xjmp L34
+ 00CC           L31:
+ 00CC                   .dbline 46
+ 00CC                   .dbline 47
+ 00CC 042F              mov R16,R20
+ 00CE A6DF              xcall _Horse
+ 00D0                   .dbline 48
+ 00D0 04E6              ldi R16,100
+ 00D2 96DF              xcall _Delay
+ 00D4                   .dbline 49
+ 00D4           L32:
+ 00D4                   .dbline 45
+ 00D4 4A95              dec R20
+ 00D6           L34:
+ 00D6                   .dbline 45
+ 00D6 4423              tst R20
+ 00D8 C9F7              brne L31
+ 00DA                   .dbline 50
+ 00DA           L25:
+ 00DA                   .dbline 38
+ 00DA EDCF              xjmp L24
+ 00DC           X2:
+ 00DC                   .dbline -2
+ 00DC                   .dbline 51
+ 00DC           ;   {
+ 00DC           ;    Horse(i);
+ 00DC           ;    Delay(100);
+ 00DC           ;   }
+ 00DC           ;  }
+ 00DC           ; }
+ 00DC           L23:
+ 00DC                   .dbline 0 ; func end
+ 00DC 0895              ret
+ 00DE                   .dbsym r i 20 c
+ 00DE                   .dbend

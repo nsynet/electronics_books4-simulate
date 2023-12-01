@@ -1,0 +1,26 @@
+CodeVisionAVR C Compiler V1.23.8c Standard
+(C) Copyright 1998-2003 HP InfoTech s.r.l.
+http://www.hpinfotech.ro
+e-mail:office@hpinfotech.ro
+
+File: E:\proteus\Èí¼þ\Êý¿ØÔÆÌ¨slave\skytslave.c
+Global variables memory map:
+
+Variable                          Address   Size
+rx_buffer                            160h      8
+rx_wr_index                            R4      1
+rx_rd_index                            R5      1
+rx_counter                             R6      1
+rx_buffer_overflow                   R2.0    1/8
+tx_buffer                            168h      8
+tx_wr_index                            R7      1
+tx_rd_index                            R8      1
+tx_counter                             R9      1
+ucInputValue                          R10      1
+uiLastADValue                        170h      6
+ucInputParam0                         R11      1
+ucChannelN                            R12      1
+uc_ReceiveSta                         R13      1
+bInputChange                         R2.1    1/8
+bMotorSpeed                          R2.2    1/8
+bLight                               R2.3    1/8

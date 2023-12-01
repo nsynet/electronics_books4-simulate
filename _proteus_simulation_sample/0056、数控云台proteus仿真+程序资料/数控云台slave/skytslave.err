@@ -1,0 +1,15 @@
+Creating   'skytslave.eep'
+Creating   'skytslave.obj'
+Creating   'skytslave.lst'
+
+Assembling 'skytslave.asm'
+Including  'skytslave.vec'
+Including  'skytslave.inc'
+
+Program memory usage:
+Code             :  987 words
+Constants (dw/db):   12 words
+Unused           :    0 words
+Total            :  999 words
+
+Assembly complete with no errors.

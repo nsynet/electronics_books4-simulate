@@ -1,0 +1,818 @@
+__text_start:
+__start:
+    079C E5CF      LDI	R28,0x5F
+    079D E0D4      LDI	R29,4
+    079E BFCD      OUT	0x3D,R28
+    079F BFDE      OUT	0x3E,R29
+    07A0 51C0      SUBI	R28,0x10
+    07A1 40D0      SBCI	R29,0
+    07A2 EA0A      LDI	R16,0xAA
+    07A3 8308      STD	Y+0,R16
+    07A4 2400      CLR	R0
+    07A5 E0E8      LDI	R30,0x8
+    07A6 E0F1      LDI	R31,1
+    07A7 E011      LDI	R17,1
+    07A8 34E9      CPI	R30,0x49
+    07A9 07F1      CPC	R31,R17
+    07AA F011      BEQ	0x07AD
+    07AB 9201      ST	R0,Z+
+    07AC CFFB      RJMP	0x07A8
+    07AD 8300      STD	Z+0,R16
+    07AE E9E0      LDI	R30,0x90
+    07AF E0FE      LDI	R31,0xE
+    07B0 E6A0      LDI	R26,0x60
+    07B1 E0B0      LDI	R27,0
+    07B2 E01F      LDI	R17,0xF
+    07B3 33E8      CPI	R30,0x38
+    07B4 07F1      CPC	R31,R17
+    07B5 F021      BEQ	0x07BA
+    07B6 95C8      LPM
+    07B7 9631      ADIW	R30,1
+    07B8 920D      ST	R0,X+
+    07B9 CFF9      RJMP	0x07B3
+    07BA 940E0970  CALL	_main
+_exit:
+    07BC CFFF      RJMP	_exit
+FILE: E:\32x16汉字\32x16led.h
+(0001) /**********************************************
+(0002) 功能：32x16LED汉字字幕程序
+(0003) 编译：ICC AVR
+(0004) 作者：刘伟
+(0005) **********************************************/
+(0006) 
+(0007) 
+(0008) 
+(0009) #include <iom16v.h>
+(0010) #include <macros.h>
+(0011) #include <font.h>
+(0012) #define LED_DATA_LOW    PORTA
+(0013) #define LED_DDR_LOW     DDRA
+(0014) #define LED_DATA_HIGH   PORTB
+(0015) #define LED_DDR_HIGH    DDRB
+(0016) #define LED_SCAN_DATA		PORTC
+(0017) #define LED_SCAN_DDR		DDRC
+(0018) #define uchar unsigned char 
+(0019) #define uint unsigned int
+(0020) //缓存大小，对应LED屏的大小
+(0021) #define buffer_long	64
+(0022) //定义字模数据数组的大小，即所存字的个数	 	
+(0023) #define gb16_tabel_long 62
+(0024) /*        利用定时器1 定时扫描LED屏   */
+(0025) /*        定时参数对显示效果影响很大  */
+(0026) #define T1_TIME_H 0xe7
+(0027) #define T1_TIME_L 0x50
+(0028) 
+(0029) enum direction {right,left}dir_f;
+(0030) uchar display_buffer[buffer_long];
+(0031) 
+(0032) /**************** LED屏初始化**************************/
+(0033) void led_initial ( void )
+(0034) {
+(0035)  uchar i;
+(0036)  	//display_buffer initial
+(0037)  for (i=0; i<buffer_long; i++)
+_led_initial:
+  i                    --> R16
+    07BD 2700      CLR	R16
+    07BE C009      RJMP	0x07C8
+(0038)  		display_buffer[i] = 0x00;
+    07BF E088      LDI	R24,0x8
+    07C0 E091      LDI	R25,1
+    07C1 2FE0      MOV	R30,R16
+    07C2 27FF      CLR	R31
+    07C3 0FE8      ADD	R30,R24
+    07C4 1FF9      ADC	R31,R25
+    07C5 2422      CLR	R2
+    07C6 8220      STD	Z+0,R2
+    07C7 9503      INC	R16
+    07C8 3400      CPI	R16,0x40
+    07C9 F3A8      BCS	0x07BF
+(0039)  		
+(0040) 	// port initial
+(0041) 	LED_DDR_LOW = 0xff;
+    07CA EF8F      LDI	R24,0xFF
+    07CB BB8A      OUT	0x1A,R24
+(0042) 	LED_DDR_HIGH = 0xff;
+    07CC BB87      OUT	0x17,R24
+(0043) 	LED_SCAN_DDR = 0x1f;
+    07CD E18F      LDI	R24,0x1F
+    07CE BB84      OUT	0x14,R24
+(0044) 	
+(0045) 	//移动方向 right or left
+(0046) 	dir_f = left;
+    07CF E081      LDI	R24,1
+    07D0 93800148  STS	_dir_f,R24
+(0047) 	//t0 initial
+(0048)  CLI(); //disable all interrupts
+    07D2 94F8      BCLR	7
+(0049)  TCCR1B = 0xe0; //stop
+    07D3 EE80      LDI	R24,0xE0
+    07D4 BD8E      OUT	0x2E,R24
+(0050)  TCNT1H = T1_TIME_H; //setup
+    07D5 EE87      LDI	R24,0xE7
+    07D6 BD8D      OUT	0x2D,R24
+(0051)  TCNT1L = T1_TIME_L;
+    07D7 E580      LDI	R24,0x50
+    07D8 BD8C      OUT	0x2C,R24
+(0052)  OCR1AH = 0x01;
+    07D9 E081      LDI	R24,1
+    07DA BD8B      OUT	0x2B,R24
+(0053)  OCR1AL = 0xF4;
+    07DB EF84      LDI	R24,0xF4
+    07DC BD8A      OUT	0x2A,R24
+(0054)  OCR1BH = 0x01;
+    07DD E081      LDI	R24,1
+    07DE BD89      OUT	0x29,R24
+(0055)  OCR1BL = 0xF4;
+    07DF EF84      LDI	R24,0xF4
+    07E0 BD88      OUT	0x28,R24
+(0056) 
+(0057)  ICR1H  = 0x01;
+    07E1 E081      LDI	R24,1
+    07E2 BD87      OUT	0x27,R24
+(0058)  ICR1L  = 0xF4;
+    07E3 EF84      LDI	R24,0xF4
+    07E4 BD86      OUT	0x26,R24
+(0059)  TCCR1A = 0x00;
+    07E5 2422      CLR	R2
+    07E6 BC2F      OUT	0x2F,R2
+(0060)  TCCR1B = 0x02; //start Timer
+    07E7 E082      LDI	R24,2
+    07E8 BD8E      OUT	0x2E,R24
+(0061)  MCUCR = 0x00;
+    07E9 BE25      OUT	0x35,R2
+(0062)  GICR  = 0x00;
+    07EA BE2B      OUT	0x3B,R2
+(0063)  TIMSK = 0x04; //timer interrupt sources
+    07EB E084      LDI	R24,4
+    07EC BF89      OUT	0x39,R24
+(0064)  SEI(); //re-enable interrupts
+    07ED 9478      BSET	7
+(0065) }
+    07EE 9508      RET
+_print_char:
+  tab_n                --> Y+1
+  i                    --> R22
+  d1                   --> R12
+  d0                   --> R14
+  j                    --> R10
+  k                    --> R20
+  p                    --> Y+10
+    07EF 931A      ST	R17,-Y
+    07F0 930A      ST	R16,-Y
+    07F1 940E09B3  CALL	push_gset5
+(0066) /*************** 字符串输出子程序***********************/
+(0067) 
+(0068) void print_char (char *p)
+(0069) {
+(0070) 	uchar tab_n,j,i=0;
+    07F3 2766      CLR	R22
+    07F4 C0F8      RJMP	0x08ED
+(0071) 	int k;
+(0072) 	uchar d0,d1;
+(0073) 	while(p[i] > 0)
+(0074) 	{
+(0075) 		if (p[i] >=128)//如果是汉字
+    07F5 2FE6      MOV	R30,R22
+    07F6 27FF      CLR	R31
+    07F7 840A      LDD	R0,Y+10
+    07F8 841B      LDD	R1,Y+11
+    07F9 0DE0      ADD	R30,R0
+    07FA 1DF1      ADC	R31,R1
+    07FB 8180      LDD	R24,Z+0
+    07FC 3880      CPI	R24,0x80
+    07FD F408      BCC	0x07FF
+    07FE C093      RJMP	0x0892
+(0076) 		{
+(0077) 			/*     查找 移位输出     */
+(0078) 			for(j=0; j<=gb16_tabel_long; j++)
+    07FF 24AA      CLR	R10
+    0800 C076      RJMP	0x0877
+(0079) 			{
+(0080) 				if ((gb_16[j].index[0] == p[i]) && (gb_16[j].index[1] == p[i+1]))
+    0801 E282      LDI	R24,0x22
+    0802 9D8A      MUL	R24,R10
+    0803 0110      MOVW	R2,R0
+    0804 2E46      MOV	R4,R22
+    0805 2455      CLR	R5
+    0806 840A      LDD	R0,Y+10
+    0807 841B      LDD	R1,Y+11
+    0808 0C40      ADD	R4,R0
+    0809 1C51      ADC	R5,R1
+    080A E584      LDI	R24,0x54
+    080B E096      LDI	R25,6
+    080C 01F1      MOVW	R30,R2
+    080D 0FE8      ADD	R30,R24
+    080E 1FF9      ADC	R31,R25
+    080F 91E4      LPM	R30,0(Z)
+    0810 01D2      MOVW	R26,R4
+    0811 906C      LD	R6,0(X)
+    0812 15E6      CP	R30,R6
+    0813 F009      BEQ	0x0815
+    0814 C061      RJMP	0x0876
+    0815 E585      LDI	R24,0x55
+    0816 E096      LDI	R25,6
+    0817 01F1      MOVW	R30,R2
+    0818 0FE8      ADD	R30,R24
+    0819 1FF9      ADC	R31,R25
+    081A 91E4      LPM	R30,0(Z)
+    081B 9611      ADIW	R26,1
+    081C 902C      LD	R2,0(X)
+    081D 15E2      CP	R30,R2
+    081E F009      BEQ	0x0820
+    081F C056      RJMP	0x0876
+(0081) 					{
+(0082) 					 if ( dir_f == left )//如果字向左移动就顺序读字模			   					
+    0820 91800148  LDS	R24,_dir_f
+    0822 3081      CPI	R24,1
+    0823 F549      BNE	0x084D
+(0083) 						for (k=0; k<32; k++)
+    0824 2744      CLR	R20
+    0825 2755      CLR	R21
+(0084) 						{
+(0085) 							d0 = gb_16[j].mask[k];
+    0826 E282      LDI	R24,0x22
+    0827 9D8A      MUL	R24,R10
+    0828 0110      MOVW	R2,R0
+    0829 E586      LDI	R24,0x56
+    082A E096      LDI	R25,6
+    082B 0E28      ADD	R2,R24
+    082C 1E39      ADC	R3,R25
+    082D 01FA      MOVW	R30,R20
+    082E 0DE2      ADD	R30,R2
+    082F 1DF3      ADC	R31,R3
+    0830 90E4      LPM	R14,0(Z)
+(0086) 							k++;
+    0831 5F4F      SUBI	R20,0xFF
+    0832 4F5F      SBCI	R21,0xFF
+(0087) 							d1 = gb_16[j].mask[k];
+    0833 E282      LDI	R24,0x22
+    0834 9D8A      MUL	R24,R10
+    0835 0110      MOVW	R2,R0
+    0836 E586      LDI	R24,0x56
+    0837 E096      LDI	R25,6
+    0838 0E28      ADD	R2,R24
+    0839 1E39      ADC	R3,R25
+    083A 01FA      MOVW	R30,R20
+    083B 0DE2      ADD	R30,R2
+    083C 1DF3      ADC	R31,R3
+    083D 90C4      LPM	R12,0(Z)
+(0088) 							move_to_buffer (d0,d1);
+    083E 2D2C      MOV	R18,R12
+    083F 2733      CLR	R19
+    0840 2D0E      MOV	R16,R14
+    0841 2711      CLR	R17
+    0842 D0B9      RCALL	_move_to_buffer
+(0089) 							delay(1);
+    0843 E001      LDI	R16,1
+    0844 E010      LDI	R17,0
+    0845 D11A      RCALL	_delay
+    0846 5F4F      SUBI	R20,0xFF
+    0847 4F5F      SBCI	R21,0xFF
+    0848 3240      CPI	R20,0x20
+    0849 E0E0      LDI	R30,0
+    084A 075E      CPC	R21,R30
+    084B F2D4      BLT	0x0826
+    084C C02E      RJMP	0x087B
+(0090) 						}
+(0091) 					 else //如果字向右移动就逆序读字模
+(0092) 					 	for (k=31; k>=0; k--)
+    084D E14F      LDI	R20,0x1F
+    084E E050      LDI	R21,0
+(0093) 						{
+(0094) 							d1 = gb_16[j].mask[k];
+    084F E282      LDI	R24,0x22
+    0850 9D8A      MUL	R24,R10
+    0851 0110      MOVW	R2,R0
+    0852 E586      LDI	R24,0x56
+    0853 E096      LDI	R25,6
+    0854 0E28      ADD	R2,R24
+    0855 1E39      ADC	R3,R25
+    0856 01FA      MOVW	R30,R20
+    0857 0DE2      ADD	R30,R2
+    0858 1DF3      ADC	R31,R3
+    0859 90C4      LPM	R12,0(Z)
+(0095) 							k--;
+    085A 5041      SUBI	R20,1
+    085B 4050      SBCI	R21,0
+(0096) 							d0 = gb_16[j].mask[k];
+    085C E282      LDI	R24,0x22
+    085D 9D8A      MUL	R24,R10
+    085E 0110      MOVW	R2,R0
+    085F E586      LDI	R24,0x56
+    0860 E096      LDI	R25,6
+    0861 0E28      ADD	R2,R24
+    0862 1E39      ADC	R3,R25
+    0863 01FA      MOVW	R30,R20
+    0864 0DE2      ADD	R30,R2
+    0865 1DF3      ADC	R31,R3
+    0866 90E4      LPM	R14,0(Z)
+(0097) 							move_to_buffer (d0,d1);
+    0867 2D2C      MOV	R18,R12
+    0868 2733      CLR	R19
+    0869 2D0E      MOV	R16,R14
+    086A 2711      CLR	R17
+    086B D090      RCALL	_move_to_buffer
+(0098) 							delay(1);
+    086C E001      LDI	R16,1
+    086D E010      LDI	R17,0
+    086E D0F1      RCALL	_delay
+    086F 5041      SUBI	R20,1
+    0870 4050      SBCI	R21,0
+    0871 3040      CPI	R20,0
+    0872 E0E0      LDI	R30,0
+    0873 075E      CPC	R21,R30
+    0874 F6D4      BGE	0x084F
+(0099) 						}
+(0100) 					break;//找到了就退出循环
+    0875 C005      RJMP	0x087B
+    0876 94A3      INC	R10
+    0877 E38E      LDI	R24,0x3E
+    0878 158A      CP	R24,R10
+    0879 F008      BCS	0x087B
+    087A CF86      RJMP	0x0801
+(0101) 					}
+(0102) 			}
+(0103) 			/*        字库没有的字，则输出空白0x00  */
+(0104) 			if (j>gb16_tabel_long)//
+    087B E38E      LDI	R24,0x3E
+    087C 158A      CP	R24,R10
+    087D F490      BCC	0x0890
+(0105) 			   for (k=0; k<16; k++)
+    087E 2744      CLR	R20
+    087F 2755      CLR	R21
+(0106) 				{
+(0107) 					d0 = 0x00;
+    0880 24EE      CLR	R14
+(0108) 					d1 = 0x00;
+    0881 24CC      CLR	R12
+(0109) 					move_to_buffer (d0,d1);
+    0882 2D2C      MOV	R18,R12
+    0883 2733      CLR	R19
+    0884 2D0E      MOV	R16,R14
+    0885 2711      CLR	R17
+    0886 D075      RCALL	_move_to_buffer
+(0110) 					delay(1);
+    0887 E001      LDI	R16,1
+    0888 E010      LDI	R17,0
+    0889 D0D6      RCALL	_delay
+    088A 5F4F      SUBI	R20,0xFF
+    088B 4F5F      SBCI	R21,0xFF
+    088C 3140      CPI	R20,0x10
+    088D E0E0      LDI	R30,0
+    088E 075E      CPC	R21,R30
+    088F F384      BLT	0x0880
+(0111) 				}
+(0112) 			i+=2;
+    0890 5F6E      SUBI	R22,0xFE
+(0113)  	  }
+    0891 C05B      RJMP	0x08ED
+(0114)  	 	else	 		 			 //如果是字符
+(0115)  	 	{
+(0116)  	 		j = p[i]-32;
+    0892 2FE6      MOV	R30,R22
+    0893 27FF      CLR	R31
+    0894 840A      LDD	R0,Y+10
+    0895 841B      LDD	R1,Y+11
+    0896 0DE0      ADD	R30,R0
+    0897 1DF1      ADC	R31,R1
+    0898 8180      LDD	R24,Z+0
+    0899 5280      SUBI	R24,0x20
+    089A 2EA8      MOV	R10,R24
+(0117) 			if (dir_f == left)
+    089B 91800148  LDS	R24,_dir_f
+    089D 3081      CPI	R24,1
+    089E F539      BNE	0x08C6
+(0118) 			   for (k=0; k<16; k++)
+    089F 2744      CLR	R20
+    08A0 2755      CLR	R21
+(0119) 			   {
+(0120) 					d0 = ASC_MSK[(j*16)+k];
+    08A1 E180      LDI	R24,0x10
+    08A2 9D8A      MUL	R24,R10
+    08A3 01F0      MOVW	R30,R0
+    08A4 0FE4      ADD	R30,R20
+    08A5 1FF5      ADC	R31,R21
+    08A6 E584      LDI	R24,0x54
+    08A7 E090      LDI	R25,0
+    08A8 0FE8      ADD	R30,R24
+    08A9 1FF9      ADC	R31,R25
+    08AA 90E4      LPM	R14,0(Z)
+(0121) 					k++;
+    08AB 5F4F      SUBI	R20,0xFF
+    08AC 4F5F      SBCI	R21,0xFF
+(0122) 					d1 = ASC_MSK[(j*16)+k];
+    08AD E180      LDI	R24,0x10
+    08AE 9D8A      MUL	R24,R10
+    08AF 01F0      MOVW	R30,R0
+    08B0 0FE4      ADD	R30,R20
+    08B1 1FF5      ADC	R31,R21
+    08B2 E584      LDI	R24,0x54
+    08B3 E090      LDI	R25,0
+    08B4 0FE8      ADD	R30,R24
+    08B5 1FF9      ADC	R31,R25
+    08B6 90C4      LPM	R12,0(Z)
+(0123) 					move_to_buffer (d0,d1);
+    08B7 2D2C      MOV	R18,R12
+    08B8 2733      CLR	R19
+    08B9 2D0E      MOV	R16,R14
+    08BA 2711      CLR	R17
+    08BB D040      RCALL	_move_to_buffer
+(0124) 					delay(1);
+    08BC E001      LDI	R16,1
+    08BD E010      LDI	R17,0
+    08BE D0A1      RCALL	_delay
+    08BF 5F4F      SUBI	R20,0xFF
+    08C0 4F5F      SBCI	R21,0xFF
+    08C1 3140      CPI	R20,0x10
+    08C2 E0E0      LDI	R30,0
+    08C3 075E      CPC	R21,R30
+    08C4 F2E4      BLT	0x08A1
+    08C5 C026      RJMP	0x08EC
+(0125) 				}
+(0126) 			else 
+(0127) 				 for (k=15; k>=0; k--)
+    08C6 E04F      LDI	R20,0xF
+    08C7 E050      LDI	R21,0
+(0128) 			   	 {
+(0129) 					d1 = ASC_MSK[(j*16)+k];
+    08C8 E180      LDI	R24,0x10
+    08C9 9D8A      MUL	R24,R10
+    08CA 01F0      MOVW	R30,R0
+    08CB 0FE4      ADD	R30,R20
+    08CC 1FF5      ADC	R31,R21
+    08CD E584      LDI	R24,0x54
+    08CE E090      LDI	R25,0
+    08CF 0FE8      ADD	R30,R24
+    08D0 1FF9      ADC	R31,R25
+    08D1 90C4      LPM	R12,0(Z)
+(0130) 					k--;
+    08D2 5041      SUBI	R20,1
+    08D3 4050      SBCI	R21,0
+(0131) 					d0 = ASC_MSK[(j*16)+k];
+    08D4 E180      LDI	R24,0x10
+    08D5 9D8A      MUL	R24,R10
+    08D6 01F0      MOVW	R30,R0
+    08D7 0FE4      ADD	R30,R20
+    08D8 1FF5      ADC	R31,R21
+    08D9 E584      LDI	R24,0x54
+    08DA E090      LDI	R25,0
+    08DB 0FE8      ADD	R30,R24
+    08DC 1FF9      ADC	R31,R25
+    08DD 90E4      LPM	R14,0(Z)
+(0132) 					move_to_buffer (d0,d1);
+    08DE 2D2C      MOV	R18,R12
+    08DF 2733      CLR	R19
+    08E0 2D0E      MOV	R16,R14
+    08E1 2711      CLR	R17
+    08E2 D019      RCALL	_move_to_buffer
+(0133) 					delay(1);
+    08E3 E001      LDI	R16,1
+    08E4 E010      LDI	R17,0
+    08E5 D07A      RCALL	_delay
+    08E6 5041      SUBI	R20,1
+    08E7 4050      SBCI	R21,0
+    08E8 3040      CPI	R20,0
+    08E9 E0E0      LDI	R30,0
+    08EA 075E      CPC	R21,R30
+    08EB F6E4      BGE	0x08C8
+(0134) 				 }
+(0135) 			i++;
+    08EC 9563      INC	R22
+    08ED 2FE6      MOV	R30,R22
+    08EE 27FF      CLR	R31
+    08EF 840A      LDD	R0,Y+10
+    08F0 841B      LDD	R1,Y+11
+    08F1 0DE0      ADD	R30,R0
+    08F2 1DF1      ADC	R31,R1
+    08F3 8020      LDD	R2,Z+0
+    08F4 2433      CLR	R3
+    08F5 1432      CP	R3,R2
+    08F6 F408      BCC	0x08F8
+    08F7 CEFD      RJMP	0x07F5
+(0136)  	 	}
+(0137) 	}
+(0138) }
+    08F8 940E098D  CALL	pop_gset5
+    08FA 9622      ADIW	R28,2
+    08FB 9508      RET
+_move_to_buffer:
+  i                    --> R20
+  d1                   --> R18
+  d0                   --> R16
+    08FC 940E0990  CALL	push_gset1
+(0139) /******************** 数据移入缓存*********************/
+(0140) // d0 移入数据高八位
+(0141) // d1 移入数据低八位
+(0142) void move_to_buffer (uchar d0,uchar d1)
+(0143) {
+(0144) 	uchar i;
+(0145) 	if ( dir_f == right)//判断移动方向
+    08FE 90200148  LDS	R2,_dir_f
+    0900 2022      TST	R2
+    0901 F4E9      BNE	0x091F
+(0146) 		{
+(0147) 			for (i=0; i<(buffer_long-2); i++)
+    0902 2744      CLR	R20
+    0903 C014      RJMP	0x0918
+(0148) 			{
+(0149) 				display_buffer[buffer_long-1-i] = display_buffer[buffer_long-1-i-2];	
+    0904 2E24      MOV	R2,R20
+    0905 2433      CLR	R3
+    0906 E38F      LDI	R24,0x3F
+    0907 E090      LDI	R25,0
+    0908 1982      SUB	R24,R2
+    0909 0993      SBC	R25,R3
+    090A 011C      MOVW	R2,R24
+    090B E086      LDI	R24,6
+    090C E091      LDI	R25,1
+    090D 01F1      MOVW	R30,R2
+    090E 0FE8      ADD	R30,R24
+    090F 1FF9      ADC	R31,R25
+    0910 8040      LDD	R4,Z+0
+    0911 E088      LDI	R24,0x8
+    0912 E091      LDI	R25,1
+    0913 01F1      MOVW	R30,R2
+    0914 0FE8      ADD	R30,R24
+    0915 1FF9      ADC	R31,R25
+    0916 8240      STD	Z+0,R4
+    0917 9543      INC	R20
+    0918 334E      CPI	R20,0x3E
+    0919 F350      BCS	0x0904
+(0150) 			}
+(0151) 			display_buffer[0] = d0;
+    091A 93000108  STS	_display_buffer,R16
+(0152) 			display_buffer[1] = d1;  
+    091C 93200109  STS	_display_buffer+1,R18
+(0153) 		}
+    091E C017      RJMP	0x0936
+(0154) 	else 
+(0155) 		{
+(0156) 			for (i=0; i<(buffer_long-2); i++)
+    091F 2744      CLR	R20
+    0920 C00F      RJMP	0x0930
+(0157) 			{
+(0158) 				display_buffer[i] = display_buffer[i+2];	
+    0921 E08A      LDI	R24,0xA
+    0922 E091      LDI	R25,1
+    0923 2FE4      MOV	R30,R20
+    0924 27FF      CLR	R31
+    0925 0FE8      ADD	R30,R24
+    0926 1FF9      ADC	R31,R25
+    0927 8020      LDD	R2,Z+0
+    0928 E088      LDI	R24,0x8
+    0929 E091      LDI	R25,1
+    092A 2FE4      MOV	R30,R20
+    092B 27FF      CLR	R31
+    092C 0FE8      ADD	R30,R24
+    092D 1FF9      ADC	R31,R25
+    092E 8220      STD	Z+0,R2
+    092F 9543      INC	R20
+    0930 334E      CPI	R20,0x3E
+    0931 F378      BCS	0x0921
+(0159) 			}
+(0160) 			display_buffer[buffer_long-2] = d0;
+    0932 93000146  STS	0x146,R16
+(0161) 			display_buffer[buffer_long-1] = d1;  
+    0934 93200147  STS	0x147,R18
+(0162) 		}
+(0163) }
+    0936 940E0993  CALL	pop_gset1
+    0938 9508      RET
+_scan_led:
+  scan_c               --> R20
+  buf_c                --> R22
+    0939 940E09B7  CALL	push_lset
+    093B 940E09A7  CALL	push_gset2
+(0164) /*********************显示数据扫描********************/
+(0165) #pragma interrupt_handler scan_led:9
+(0166) void scan_led (void)
+(0167) {
+(0168) 	uchar buf_c,scan_c=0;
+    093D 2744      CLR	R20
+(0169) 	TCNT1H = T1_TIME_H; //reload counter high value
+    093E EE87      LDI	R24,0xE7
+    093F BD8D      OUT	0x2D,R24
+(0170)   	TCNT1L = T1_TIME_L;; //reload counter low value
+    0940 E580      LDI	R24,0x50
+    0941 BD8C      OUT	0x2C,R24
+(0171) 	for (buf_c=0; buf_c<buffer_long;)
+    0942 2766      CLR	R22
+    0943 C015      RJMP	0x0959
+(0172) 	{
+(0173) 		//LED_DDR_LOW = 0xff;
+(0174) 	 //LED_DDR_HIGH = 0xff;
+(0175) 		LED_DATA_HIGH = display_buffer[buf_c];
+    0944 E088      LDI	R24,0x8
+    0945 E091      LDI	R25,1
+    0946 2FE6      MOV	R30,R22
+    0947 27FF      CLR	R31
+    0948 0FE8      ADD	R30,R24
+    0949 1FF9      ADC	R31,R25
+    094A 8020      LDD	R2,Z+0
+    094B BA28      OUT	0x18,R2
+(0176) 		buf_c++;
+    094C 9563      INC	R22
+(0177) 		LED_DATA_LOW = display_buffer[buf_c];
+    094D 2FE6      MOV	R30,R22
+    094E 27FF      CLR	R31
+    094F 0FE8      ADD	R30,R24
+    0950 1FF9      ADC	R31,R25
+    0951 8020      LDD	R2,Z+0
+    0952 BA2B      OUT	0x1B,R2
+(0178) 		buf_c++;
+    0953 9563      INC	R22
+(0179) 		LED_SCAN_DATA = scan_c;
+    0954 BB45      OUT	0x15,R20
+(0180) 	    delay(8);
+    0955 E008      LDI	R16,0x8
+    0956 E010      LDI	R17,0
+    0957 D008      RCALL	_delay
+(0181) 		//LED_DDR_LOW = 0x00;
+(0182) 		//LED_DDR_HIGH = 0x00;
+(0183) 		scan_c++;
+    0958 9543      INC	R20
+    0959 3460      CPI	R22,0x40
+    095A F348      BCS	0x0944
+(0184) 	}
+(0185) }
+    095B 940E098A  CALL	pop_gset2
+    095D 940E09CE  CALL	pop_lset
+    095F 9518      RETI
+_delay:
+  i                    --> R20
+  j                    --> R22
+  d_time               --> R16
+    0960 940E09A7  CALL	push_gset2
+(0186) 
+(0187) /**********************延时子程序*********************/
+(0188) void delay (uchar d_time)
+(0189) {
+(0190) 	uchar i,j;
+(0191) 	for (i=0; i<=d_time; i++)
+    0962 2744      CLR	R20
+    0963 C007      RJMP	0x096B
+(0192) 	{
+(0193) 		j=25;
+    0964 E169      LDI	R22,0x19
+(0194) 		while(j--);
+    0965 2E26      MOV	R2,R22
+    0966 2433      CLR	R3
+    0967 5061      SUBI	R22,1
+    0968 2022      TST	R2
+    0969 F7D9      BNE	0x0965
+    096A 9543      INC	R20
+    096B 1704      CP	R16,R20
+    096C F7B8      BCC	0x0964
+(0195) 	} 
+(0196) }
+    096D 940E098A  CALL	pop_gset2
+    096F 9508      RET
+FILE: E:\32x16汉字\main.c
+(0001) /**********************************************
+(0002) 功能：32x16LED汉字字幕程序
+(0003) 编译：ICC AVR
+(0004) 作者：刘伟
+(0005) **********************************************/
+(0006) #include <32x16led.h>
+(0007) void main (void)
+(0008) {	
+_main:
+    0970 C017      RJMP	0x0988
+(0009) 	while (1)
+(0010) 	{
+(0011) 		led_initial();
+    0971 DE4B      RCALL	_led_initial
+(0012) 		print_char("TEST LED 0123456789 abc");
+    0972 EF00      LDI	R16,0xF0
+    0973 E010      LDI	R17,0
+    0974 DE7A      RCALL	_print_char
+(0013) 		print_char("我爱金鱼");
+    0975 EE07      LDI	R16,0xE7
+    0976 E010      LDI	R17,0
+    0977 DE77      RCALL	_print_char
+(0014) 		delay(50);
+    0978 E302      LDI	R16,0x32
+    0979 DFE6      RCALL	_delay
+(0015) 	//	led_initial();
+(0016) 		print_char("自己编的练习程序,");
+    097A ED05      LDI	R16,0xD5
+    097B E010      LDI	R17,0
+    097C DE72      RCALL	_print_char
+(0017) 		print_char("显示效果与延时参数和电脑速度有很大关系.");
+    097D EA0D      LDI	R16,0xAD
+    097E E010      LDI	R17,0
+    097F DE6F      RCALL	_print_char
+(0018) 		print_char("我的电脑太差运行起来老是一顿一顿的^_^");
+    0980 E807      LDI	R16,0x87
+    0981 E010      LDI	R17,0
+    0982 DE6C      RCALL	_print_char
+(0019) 		print_char("相信换台好点的电脑会有更好的效果! 刘伟");							
+    0983 E600      LDI	R16,0x60
+    0984 E010      LDI	R17,0
+    0985 DE69      RCALL	_print_char
+(0020) 		delay(50);
+    0986 E302      LDI	R16,0x32
+    0987 DFD8      RCALL	_delay
+    0988 CFE8      RJMP	0x0971
+(0021) 
+(0022) 	}
+(0023) }
+FILE: <library>
+    0989 9508      RET
+pop_gset2:
+    098A E0E2      LDI	R30,2
+    098B 940C0994  JMP	pop
+pop_gset5:
+    098D 27EE      CLR	R30
+    098E 940C0994  JMP	pop
+push_gset1:
+    0990 935A      ST	R21,-Y
+    0991 934A      ST	R20,-Y
+    0992 9508      RET
+pop_gset1:
+    0993 E0E1      LDI	R30,1
+pop:
+    0994 9149      LD	R20,Y+
+    0995 9159      LD	R21,Y+
+    0996 FDE0      SBRC	R30,0
+    0997 9508      RET
+    0998 9169      LD	R22,Y+
+    0999 9179      LD	R23,Y+
+    099A FDE1      SBRC	R30,1
+    099B 9508      RET
+    099C 90A9      LD	R10,Y+
+    099D 90B9      LD	R11,Y+
+    099E FDE2      SBRC	R30,2
+    099F 9508      RET
+    09A0 90C9      LD	R12,Y+
+    09A1 90D9      LD	R13,Y+
+    09A2 FDE3      SBRC	R30,3
+    09A3 9508      RET
+    09A4 90E9      LD	R14,Y+
+    09A5 90F9      LD	R15,Y+
+    09A6 9508      RET
+push_gset2:
+    09A7 937A      ST	R23,-Y
+    09A8 936A      ST	R22,-Y
+    09A9 940C0990  JMP	push_gset1
+push_gset3:
+    09AB 92BA      ST	R11,-Y
+    09AC 92AA      ST	R10,-Y
+    09AD 940C09A7  JMP	push_gset2
+push_gset4:
+    09AF 92DA      ST	R13,-Y
+    09B0 92CA      ST	R12,-Y
+    09B1 940C09AB  JMP	push_gset3
+push_gset5:
+    09B3 92FA      ST	R15,-Y
+    09B4 92EA      ST	R14,-Y
+    09B5 940C09AF  JMP	push_gset4
+push_lset:
+    09B7 93FA      ST	R31,-Y
+    09B8 93EA      ST	R30,-Y
+    09B9 93BA      ST	R27,-Y
+    09BA 93AA      ST	R26,-Y
+    09BB 939A      ST	R25,-Y
+    09BC 938A      ST	R24,-Y
+    09BD 933A      ST	R19,-Y
+    09BE 932A      ST	R18,-Y
+    09BF 931A      ST	R17,-Y
+    09C0 930A      ST	R16,-Y
+    09C1 929A      ST	R9,-Y
+    09C2 928A      ST	R8,-Y
+    09C3 927A      ST	R7,-Y
+    09C4 926A      ST	R6,-Y
+    09C5 925A      ST	R5,-Y
+    09C6 924A      ST	R4,-Y
+    09C7 923A      ST	R3,-Y
+    09C8 922A      ST	R2,-Y
+    09C9 921A      ST	R1,-Y
+    09CA 920A      ST	R0,-Y
+    09CB B60F      IN	R0,0x3F
+    09CC 920A      ST	R0,-Y
+    09CD 9508      RET
+pop_lset:
+    09CE 9009      LD	R0,Y+
+    09CF BE0F      OUT	0x3F,R0
+    09D0 9009      LD	R0,Y+
+    09D1 9019      LD	R1,Y+
+    09D2 9029      LD	R2,Y+
+    09D3 9039      LD	R3,Y+
+    09D4 9049      LD	R4,Y+
+    09D5 9059      LD	R5,Y+
+    09D6 9069      LD	R6,Y+
+    09D7 9079      LD	R7,Y+
+    09D8 9089      LD	R8,Y+
+    09D9 9099      LD	R9,Y+
+    09DA 9109      LD	R16,Y+
+    09DB 9119      LD	R17,Y+
+    09DC 9129      LD	R18,Y+
+    09DD 9139      LD	R19,Y+
+    09DE 9189      LD	R24,Y+
+    09DF 9199      LD	R25,Y+
+    09E0 91A9      LD	R26,Y+
+    09E1 91B9      LD	R27,Y+
+    09E2 91E9      LD	R30,Y+
+    09E3 91F9      LD	R31,Y+
+    09E4 9508      RET

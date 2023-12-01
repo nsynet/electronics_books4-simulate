@@ -1,0 +1,76 @@
+__start:
+__text_start:
+    002A E5CF      LDI	R28,0x5F
+    002B E0D4      LDI	R29,4
+    002C BFCD      OUT	0x3D,R28
+    002D BFDE      OUT	0x3E,R29
+    002E 51C4      SUBI	R28,0x14
+    002F 40D0      SBCI	R29,0
+    0030 EA0A      LDI	R16,0xAA
+    0031 8308      STD	Y+0,R16
+    0032 2400      CLR	R0
+    0033 E6E0      LDI	R30,0x60
+    0034 E0F0      LDI	R31,0
+    0035 E010      LDI	R17,0
+    0036 36E0      CPI	R30,0x60
+    0037 07F1      CPC	R31,R17
+    0038 F011      BEQ	0x003B
+    0039 9201      ST	R0,Z+
+    003A CFFB      RJMP	0x0036
+    003B 8300      STD	Z+0,R16
+    003C E5E4      LDI	R30,0x54
+    003D E0F0      LDI	R31,0
+    003E E6A0      LDI	R26,0x60
+    003F E0B0      LDI	R27,0
+    0040 E010      LDI	R17,0
+    0041 35E4      CPI	R30,0x54
+    0042 07F1      CPC	R31,R17
+    0043 F021      BEQ	0x0048
+    0044 95C8      LPM
+    0045 9631      ADIW	R30,1
+    0046 920D      ST	R0,X+
+    0047 CFF9      RJMP	0x0041
+    0048 940E004B  CALL	_main
+_exit:
+    004A CFFF      RJMP	_exit
+FILE: F:\myavr\temp\M16_AN_Compare\M16_AN_Compare.c
+(0001) #include <iom16v.h>
+(0002) #define uchar unsigned char
+(0003) #define uint unsigned int
+(0004) 
+(0005) void main(void)
+(0006) {
+(0007)  uchar i;
+(0008)  DDRB=0xf0;
+_main:
+  i                    --> Y+1
+    004B EF80      LDI	R24,0xF0
+    004C BB87      OUT	0x17,R24
+(0009)  PORTB=0x00;
+    004D 2422      CLR	R2
+    004E BA28      OUT	0x18,R2
+(0010)  ACSR=0x00;
+    004F B828      OUT	0x08,R2
+    0050 C00B      RJMP	0x005C
+(0011)  while(1)
+(0012)  {
+(0013)   if((ACSR&0x20)==0x20)
+    0051 B188      IN	R24,0x08
+    0052 7280      ANDI	R24,0x20
+    0053 3280      CPI	R24,0x20
+    0054 F421      BNE	0x0059
+(0014)   PORTB=PORTB|0xf0;
+    0055 B388      IN	R24,0x18
+    0056 6F80      ORI	R24,0xF0
+    0057 BB88      OUT	0x18,R24
+    0058 C003      RJMP	0x005C
+(0015)   else
+(0016)   PORTB=PORTB&0x0f;
+    0059 B388      IN	R24,0x18
+    005A 708F      ANDI	R24,0xF
+    005B BB88      OUT	0x18,R24
+    005C CFF4      RJMP	0x0051
+(0017)  }
+(0018) }
+FILE: <library>
+    005D 9508      RET

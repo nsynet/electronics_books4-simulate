@@ -1,0 +1,38 @@
+C51 COMPILER V7.20   SUIJISHU                                                              03/17/2007 13:59:39 PAGE 1   
+
+
+C51 COMPILER V7.20, COMPILATION OF MODULE SUIJISHU
+OBJECT MODULE PLACED IN suijishu.OBJ
+COMPILER INVOKED BY: d:\Keil\C51\BIN\C51.EXE suijishu.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg52.h>
+   2          #include<stdlib.h>
+   3          void main(void)
+   4          { 
+   5   1        int tempnum,i;
+   6   1        while(1)
+   7   1      {
+   8   2        tempnum=rand();
+   9   2        if (0<=tempnum<=255)
+  10   2        P1=tempnum;
+  11   2        for(i=0;i<30000;i++);
+  12   2      }
+  13   1       
+  14   1      }
+  15          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     64    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
