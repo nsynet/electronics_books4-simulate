@@ -1,0 +1,5 @@
+-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I.\ucosii\config -I.\ucosii\core -I.\ucosii\port -I.\user -I.\lib\inc 
+-I "C:\Program Files\Keil_v4\ARM\RV31\INC" 
+-I "C:\Program Files\Keil_v4\ARM\CMSIS\Include" 
+-I "C:\Program Files\Keil_v4\ARM\Inc\ST\STM32F10x" 
+-DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DUSE_FULL_ASSERT -o ".\output\exti.o" --omf_browse ".\output\exti.crf" --depend ".\output\exti.d" "user\exti.c"

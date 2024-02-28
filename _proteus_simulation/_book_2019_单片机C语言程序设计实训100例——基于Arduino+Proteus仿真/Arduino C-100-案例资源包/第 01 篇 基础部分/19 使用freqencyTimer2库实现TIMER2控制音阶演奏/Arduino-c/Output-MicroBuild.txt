@@ -1,0 +1,4 @@
+﻿Compiling '使用freqencyTimer2库实现TIMER2控制音阶演奏' for 'Arduino/Genuino Uno'
+Program size: 1,566 bytes (used 5% of a 32,256 byte maximum) (1.59 secs)
+Minimum Memory Usage: 46 bytes (2% of a 2048 byte maximum)
+ 

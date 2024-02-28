@@ -1,0 +1,4 @@
+Compiling 'PC机与Arduino双向串口通信' for 'Arduino/Genuino Uno'
+Program size: 2,822 bytes (used 9% of a 32,256 byte maximum) (9.81 secs)
+Minimum Memory Usage: 219 bytes (11% of a 2048 byte maximum)
+ 

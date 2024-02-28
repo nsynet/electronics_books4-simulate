@@ -1,0 +1,24 @@
+--cpu Cortex-M3
+"seg_led\startup_stm32f103x6.o"
+"seg_led\main.o"
+"seg_led\gpio.o"
+"seg_led\stm32f1xx_it.o"
+"seg_led\stm32f1xx_hal_msp.o"
+"seg_led\stm32f1xx_hal_gpio_ex.o"
+"seg_led\stm32f1xx_hal_tim.o"
+"seg_led\stm32f1xx_hal_tim_ex.o"
+"seg_led\stm32f1xx_hal.o"
+"seg_led\stm32f1xx_hal_rcc.o"
+"seg_led\stm32f1xx_hal_rcc_ex.o"
+"seg_led\stm32f1xx_hal_gpio.o"
+"seg_led\stm32f1xx_hal_dma.o"
+"seg_led\stm32f1xx_hal_cortex.o"
+"seg_led\stm32f1xx_hal_pwr.o"
+"seg_led\stm32f1xx_hal_flash.o"
+"seg_led\stm32f1xx_hal_flash_ex.o"
+"seg_led\stm32f1xx_hal_exti.o"
+"seg_led\system_stm32f1xx.o"
+--library_type=microlib --strict --scatter "Seg_LED\Seg_LED.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "Seg_LED.map" -o Seg_LED\Seg_LED.axf

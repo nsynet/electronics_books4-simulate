@@ -1,0 +1,25 @@
+--cpu Cortex-M3
+"timer1_poll\startup_stm32f103x6.o"
+"timer1_poll\main.o"
+"timer1_poll\gpio.o"
+"timer1_poll\tim.o"
+"timer1_poll\stm32f1xx_it.o"
+"timer1_poll\stm32f1xx_hal_msp.o"
+"timer1_poll\stm32f1xx_hal_gpio_ex.o"
+"timer1_poll\stm32f1xx_hal_tim.o"
+"timer1_poll\stm32f1xx_hal_tim_ex.o"
+"timer1_poll\stm32f1xx_hal.o"
+"timer1_poll\stm32f1xx_hal_rcc.o"
+"timer1_poll\stm32f1xx_hal_rcc_ex.o"
+"timer1_poll\stm32f1xx_hal_gpio.o"
+"timer1_poll\stm32f1xx_hal_dma.o"
+"timer1_poll\stm32f1xx_hal_cortex.o"
+"timer1_poll\stm32f1xx_hal_pwr.o"
+"timer1_poll\stm32f1xx_hal_flash.o"
+"timer1_poll\stm32f1xx_hal_flash_ex.o"
+"timer1_poll\stm32f1xx_hal_exti.o"
+"timer1_poll\system_stm32f1xx.o"
+--strict --scatter "Timer1_poll\Timer1_poll.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "Timer1_poll.map" -o Timer1_poll\Timer1_poll.axf

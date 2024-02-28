@@ -1,0 +1,27 @@
+--cpu Cortex-M3
+"adc_int_segled\startup_stm32f103x6.o"
+"adc_int_segled\main.o"
+"adc_int_segled\gpio.o"
+"adc_int_segled\adc.o"
+"adc_int_segled\stm32f1xx_it.o"
+"adc_int_segled\stm32f1xx_hal_msp.o"
+"adc_int_segled\stm32f1xx_hal_gpio_ex.o"
+"adc_int_segled\stm32f1xx_hal_adc.o"
+"adc_int_segled\stm32f1xx_hal_adc_ex.o"
+"adc_int_segled\stm32f1xx_hal.o"
+"adc_int_segled\stm32f1xx_hal_rcc.o"
+"adc_int_segled\stm32f1xx_hal_rcc_ex.o"
+"adc_int_segled\stm32f1xx_hal_gpio.o"
+"adc_int_segled\stm32f1xx_hal_dma.o"
+"adc_int_segled\stm32f1xx_hal_cortex.o"
+"adc_int_segled\stm32f1xx_hal_pwr.o"
+"adc_int_segled\stm32f1xx_hal_flash.o"
+"adc_int_segled\stm32f1xx_hal_flash_ex.o"
+"adc_int_segled\stm32f1xx_hal_exti.o"
+"adc_int_segled\stm32f1xx_hal_tim.o"
+"adc_int_segled\stm32f1xx_hal_tim_ex.o"
+"adc_int_segled\system_stm32f1xx.o"
+--library_type=microlib --strict --scatter "ADC_int_SEGLED\ADC_int_SEGLED.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "ADC_int_SEGLED.map" -o ADC_int_SEGLED\ADC_int_SEGLED.axf

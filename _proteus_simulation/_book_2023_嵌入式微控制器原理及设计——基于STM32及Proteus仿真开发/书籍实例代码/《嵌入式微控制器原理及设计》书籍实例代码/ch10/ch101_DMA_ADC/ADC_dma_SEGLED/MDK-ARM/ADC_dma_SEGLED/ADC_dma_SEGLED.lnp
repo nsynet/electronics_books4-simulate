@@ -1,0 +1,28 @@
+--cpu Cortex-M3
+"adc_dma_segled\startup_stm32f103x6.o"
+"adc_dma_segled\main.o"
+"adc_dma_segled\gpio.o"
+"adc_dma_segled\adc.o"
+"adc_dma_segled\dma.o"
+"adc_dma_segled\stm32f1xx_it.o"
+"adc_dma_segled\stm32f1xx_hal_msp.o"
+"adc_dma_segled\stm32f1xx_hal_gpio_ex.o"
+"adc_dma_segled\stm32f1xx_hal_adc.o"
+"adc_dma_segled\stm32f1xx_hal_adc_ex.o"
+"adc_dma_segled\stm32f1xx_hal.o"
+"adc_dma_segled\stm32f1xx_hal_rcc.o"
+"adc_dma_segled\stm32f1xx_hal_rcc_ex.o"
+"adc_dma_segled\stm32f1xx_hal_gpio.o"
+"adc_dma_segled\stm32f1xx_hal_dma.o"
+"adc_dma_segled\stm32f1xx_hal_cortex.o"
+"adc_dma_segled\stm32f1xx_hal_pwr.o"
+"adc_dma_segled\stm32f1xx_hal_flash.o"
+"adc_dma_segled\stm32f1xx_hal_flash_ex.o"
+"adc_dma_segled\stm32f1xx_hal_exti.o"
+"adc_dma_segled\stm32f1xx_hal_tim.o"
+"adc_dma_segled\stm32f1xx_hal_tim_ex.o"
+"adc_dma_segled\system_stm32f1xx.o"
+--library_type=microlib --strict --scatter "ADC_dma_SEGLED\ADC_dma_SEGLED.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "ADC_dma_SEGLED.map" -o ADC_dma_SEGLED\ADC_dma_SEGLED.axf

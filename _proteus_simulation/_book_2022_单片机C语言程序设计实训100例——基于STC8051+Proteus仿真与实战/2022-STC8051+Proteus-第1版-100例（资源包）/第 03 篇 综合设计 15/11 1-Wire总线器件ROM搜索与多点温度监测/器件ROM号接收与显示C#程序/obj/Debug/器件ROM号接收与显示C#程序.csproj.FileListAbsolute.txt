@@ -1,0 +1,16 @@
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\03 1-Wire总线器件ROM搜索与多点温度监测  ok ok ok ok ok\器件ROM号接收与显示C#程序\obj\Debug\ResolveAssemblyReference.cache
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\03 1-Wire总线器件ROM搜索与多点温度监测  ok ok ok ok ok\器件ROM号接收与显示C#程序\obj\Debug\器件ROM号接收与显示程序.Properties.Resources.resources
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\03 1-Wire总线器件ROM搜索与多点温度监测  ok ok ok ok ok\器件ROM号接收与显示C#程序\obj\Debug\器件ROM号接收与显示C#程序.csproj.GenerateResource.Cache
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\03 1-Wire总线器件ROM搜索与多点温度监测  ok ok ok ok ok\器件ROM号接收与显示C#程序\obj\Debug\器件ROM号接收与显示C程序.Form_Main.resources
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\03 1-Wire总线器件ROM搜索与多点温度监测  ok ok ok ok ok\器件ROM号接收与显示C#程序\bin\Debug\器件ROM号接收与显示C#程序.exe
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\03 1-Wire总线器件ROM搜索与多点温度监测  ok ok ok ok ok\器件ROM号接收与显示C#程序\bin\Debug\器件ROM号接收与显示C#程序.pdb
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\03 1-Wire总线器件ROM搜索与多点温度监测  ok ok ok ok ok\器件ROM号接收与显示C#程序\obj\Debug\器件ROM号接收与显示C#程序.exe
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\03 1-Wire总线器件ROM搜索与多点温度监测  ok ok ok ok ok\器件ROM号接收与显示C#程序\obj\Debug\器件ROM号接收与显示C#程序.pdb
+E:\8888888888888 2011-8051-C-100 (2)\电子工业 8051-C-100-Proteus 案例压缩包,第二版\第 03 篇 综合设计\06 1-Wire总线器件ROM搜索与多点温度监测\器件ROM号接收与显示C#程序\obj\Debug\器件ROM号接收与显示C#程序.exe
+E:\8888888888888 2011-8051-C-100 (2)\电子工业 8051-C-100-Proteus 案例压缩包,第二版\第 03 篇 综合设计\06 1-Wire总线器件ROM搜索与多点温度监测\器件ROM号接收与显示C#程序\obj\Debug\器件ROM号接收与显示C#程序.pdb
+E:\8888888888888 2011-8051-C-100 (2)\电子工业 8051-C-100-Proteus 案例压缩包,第二版\第 03 篇 综合设计\06 1-Wire总线器件ROM搜索与多点温度监测\器件ROM号接收与显示C#程序\bin\Debug\器件ROM号接收与显示C#程序.exe
+E:\8888888888888 2011-8051-C-100 (2)\电子工业 8051-C-100-Proteus 案例压缩包,第二版\第 03 篇 综合设计\06 1-Wire总线器件ROM搜索与多点温度监测\器件ROM号接收与显示C#程序\bin\Debug\器件ROM号接收与显示C#程序.pdb
+E:\8888888888888 2011-8051-C-100 (2)\电子工业 8051-C-100-Proteus 案例压缩包,第二版\第 03 篇 综合设计\06 1-Wire总线器件ROM搜索与多点温度监测\器件ROM号接收与显示C#程序\obj\Debug\ResolveAssemblyReference.cache
+E:\8888888888888 2011-8051-C-100 (2)\电子工业 8051-C-100-Proteus 案例压缩包,第二版\第 03 篇 综合设计\06 1-Wire总线器件ROM搜索与多点温度监测\器件ROM号接收与显示C#程序\obj\Debug\器件ROM号接收与显示C程序.Form_Main.resources
+E:\8888888888888 2011-8051-C-100 (2)\电子工业 8051-C-100-Proteus 案例压缩包,第二版\第 03 篇 综合设计\06 1-Wire总线器件ROM搜索与多点温度监测\器件ROM号接收与显示C#程序\obj\Debug\器件ROM号接收与显示程序.Properties.Resources.resources
+E:\8888888888888 2011-8051-C-100 (2)\电子工业 8051-C-100-Proteus 案例压缩包,第二版\第 03 篇 综合设计\06 1-Wire总线器件ROM搜索与多点温度监测\器件ROM号接收与显示C#程序\obj\Debug\器件ROM号接收与显示C#程序.csproj.GenerateResource.Cache

@@ -1,0 +1,109 @@
+http://www.z4zr.com/page/621.html
+//首先是头文件，这里只介绍用法。。
+#include <SPI.h>;
+#include <SD.h>;
+/*
+然后是接口（当然如果有SPI的接口最好还是使用SPI的接口）：
+MOSI--11
+MOSO--12
+CLK--13
+CS--自定一个 //用于片选
+*/
+//所以在使用前 需要定义一个片选信号，这里定义片逇?动调用。
+【语法】file.flush()
+【参数】无
+*/
+
+file.peek()
+/*
+【描述】从文件中读出一个字节(字符)，文件内容指针不会指向下一个字节，也就是说，只连续调用peek()，将返回相同的数据，如果想要读下一个节字须要调用read()函数
+【语法】file.peek()
+【参数】无
+【返回】下一个字节内容，如果该字节无效则返回-1
+*/
+
+file.position()
+/*
+【描述】获取当前指针在文件中的位置，即将在该位置进行下一次读或写操作
+【参数】无
+【语法】file.position()
+【返回】文件中的当前位置(unsigned long)
+*/
+
+file.seek()
+/*
+【描述】将文件指针跳转到指定文件位置(该位置必须是0到文件实际大小之间)
+【语法】file.seek(pos)
+【参数】pos--要寻找的位置(unsigned long)
+【返回】成功返回true，否则返回false
+*/
+
+file.print()
+/*
+【描述】向文件中写入数据(文件必须是以写的方式(FILE_WRITE)打开),打印数字时，会在文件中以字符形式显示(即会自动进行转换)，且数字可定义格式
+【语法】file.print(data) 或者 file.print(data，BASE)
+【参数】data--需要打印的数据
+BASE(可选参数)--打印数字的格式，可以是二进制(BIN)、十进制(DEC)、八进制(OCT)、十六进制(HEX)
+*/
+
+file.println()
+/*
+【描述】向文件中输入数据，输入完数据后自动换行，除语法和换行功能有部分区别外，其余与print()相同
+【语法】file.println()或file.println(data)
+file.println(data,BASE)
+【参数】同print()
+*/
+
+file.size()
+/*
+【描述】返回文件的大小
+【语法】file.size()
+【返回】文件的字节数(unsigned long)
+*/
+
+file.read()
+/*
+【描述】读取文件中的1个字节
+【语法】file.read()
+【返回】下一个字节内容，如果该字节无效则返回-1
+byte dat = file.read();
+*/
+
+file.write()
+/*
+【描述】往文件中写入数据
+【语法】file.write(data)
+file.write(buf,len)
+【参数】file--同close()
+data--字节(字符)或字符串首地址
+len--buf中元素的个数
+*/
+
+file.isDirectory()
+/*
+【描述】目录和文件夹是特殊的文件，调用该函数可以用于判断当前文件是否是个文件夹
+【语法】file.isDirectory()
+【返回】布尔值
+*/
+
+file.openNextFile()
+/*
+【描述】报告一个目录下的下一个文件或目录
+【语法】file.openNextFile()
+【参数】无
+【返回】当前路径中的下一个文件(字符型)
+*/
+
+file.rewindDirectory()
+/*
+【描述】该函数会使指针指向当前目录下的第一个字件，一般和openNextFile()联合使用。
+【参数】无
+【返回】无
+*/
+
+file.name()
+/*
+【描述】返回当前文件对象的文件名
+【参数】无
+【返回】额 暂时没有测试
+*/

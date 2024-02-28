@@ -1,0 +1,8 @@
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15 - 6.x\18 基于STC15+Enc28j60+uIP仿真以太网应用--0.8OK\STC15+ENC28J60以太网应用上位机C#程序\obj\Debug\STC15以太网应用上位机程序.csprojAssemblyReference.cache
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15 - 6.x\18 基于STC15+Enc28j60+uIP仿真以太网应用--0.8OK\STC15+ENC28J60以太网应用上位机C#程序\obj\Debug\温室控制程序.Form_Main.resources
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15 - 6.x\18 基于STC15+Enc28j60+uIP仿真以太网应用--0.8OK\STC15+ENC28J60以太网应用上位机C#程序\obj\Debug\温室控制与管理程序.Properties.Resources.resources
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15 - 6.x\18 基于STC15+Enc28j60+uIP仿真以太网应用--0.8OK\STC15+ENC28J60以太网应用上位机C#程序\obj\Debug\STC15以太网应用上位机程序.csproj.GenerateResource.cache
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15 - 6.x\18 基于STC15+Enc28j60+uIP仿真以太网应用--0.8OK\STC15+ENC28J60以太网应用上位机C#程序\obj\Debug\温室控制与管理程序.exe
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15 - 6.x\18 基于STC15+Enc28j60+uIP仿真以太网应用--0.8OK\STC15+ENC28J60以太网应用上位机C#程序\obj\Debug\温室控制与管理程序.pdb
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15 - 6.x\18 基于STC15+Enc28j60+uIP仿真以太网应用--0.8OK\STC15+ENC28J60以太网应用上位机C#程序\bin\Debug\温室控制与管理程序.exe
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15 - 6.x\18 基于STC15+Enc28j60+uIP仿真以太网应用--0.8OK\STC15+ENC28J60以太网应用上位机C#程序\bin\Debug\温室控制与管理程序.pdb

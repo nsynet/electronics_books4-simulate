@@ -1,0 +1,16 @@
+E:\8888888888888-2010-PIC\PIC-C-100-------------2010\03 Application\27 Spring Room Management System Simulation Based on 485\温室控制程序\温室控制程序\bin\Debug\温室控制程序.exe
+E:\8888888888888-2010-PIC\PIC-C-100-------------2010\03 Application\27 Spring Room Management System Simulation Based on 485\温室控制程序\温室控制程序\bin\Debug\温室控制程序.pdb
+E:\8888888888888-2010-PIC\PIC-C-100-------------2010\03 Application\27 Spring Room Management System Simulation Based on 485\温室控制程序\温室控制程序\obj\Debug\ResolveAssemblyReference.cache
+E:\8888888888888-2010-PIC\PIC-C-100-------------2010\03 Application\27 Spring Room Management System Simulation Based on 485\温室控制程序\温室控制程序\obj\Debug\温室控制程序.Properties.Resources.resources
+E:\8888888888888-2010-PIC\PIC-C-100-------------2010\03 Application\27 Spring Room Management System Simulation Based on 485\温室控制程序\温室控制程序\obj\Debug\温室控制程序.csproj.GenerateResource.Cache
+E:\8888888888888-2010-PIC\PIC-C-100-------------2010\03 Application\27 Spring Room Management System Simulation Based on 485\温室控制程序\温室控制程序\obj\Debug\温室控制程序.exe
+E:\8888888888888-2010-PIC\PIC-C-100-------------2010\03 Application\27 Spring Room Management System Simulation Based on 485\温室控制程序\温室控制程序\obj\Debug\温室控制程序.pdb
+E:\8888888888888-2010-PIC\PIC-C-100-------------2010\03 Application\27 Spring Room Management System Simulation Based on 485\温室控制程序\温室控制程序\obj\Debug\温室控制程序.Form_Main.resources
+E:\8888888888888 2010-PIC\PIC-C-100-------------2010\03 Application\18 Greenhouse Management System\温室控制上位机C#程序\obj\Debug\温室控制程序.exe
+E:\8888888888888 2010-PIC\PIC-C-100-------------2010\03 Application\18 Greenhouse Management System\温室控制上位机C#程序\obj\Debug\温室控制程序.pdb
+E:\8888888888888 2010-PIC\PIC-C-100-------------2010\03 Application\18 Greenhouse Management System\温室控制上位机C#程序\bin\Debug\温室控制程序.exe
+E:\8888888888888 2010-PIC\PIC-C-100-------------2010\03 Application\18 Greenhouse Management System\温室控制上位机C#程序\bin\Debug\温室控制程序.pdb
+E:\8888888888888 2010-PIC\PIC-C-100-------------2010\03 Application\18 Greenhouse Management System\温室控制上位机C#程序\obj\Debug\ResolveAssemblyReference.cache
+E:\8888888888888 2010-PIC\PIC-C-100-------------2010\03 Application\18 Greenhouse Management System\温室控制上位机C#程序\obj\Debug\温室控制程序.Form_Main.resources
+E:\8888888888888 2010-PIC\PIC-C-100-------------2010\03 Application\18 Greenhouse Management System\温室控制上位机C#程序\obj\Debug\温室控制程序.Properties.Resources.resources
+E:\8888888888888 2010-PIC\PIC-C-100-------------2010\03 Application\18 Greenhouse Management System\温室控制上位机C#程序\obj\Debug\温室控制程序.csproj.GenerateResource.Cache

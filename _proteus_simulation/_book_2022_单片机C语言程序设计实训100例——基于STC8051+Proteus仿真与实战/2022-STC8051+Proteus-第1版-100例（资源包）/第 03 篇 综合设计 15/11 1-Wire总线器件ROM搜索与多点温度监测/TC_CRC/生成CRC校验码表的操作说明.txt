@@ -1,0 +1,8 @@
+
+   打开TC,运行CRC-8-FILE.CPP程序.
+
+   在C盘根下将生成CRC8.txt,将该文件内容拷贝到
+
+   Keil c程序内的校验码表数组,
+
+   注意定义为 code INT8U 类型.

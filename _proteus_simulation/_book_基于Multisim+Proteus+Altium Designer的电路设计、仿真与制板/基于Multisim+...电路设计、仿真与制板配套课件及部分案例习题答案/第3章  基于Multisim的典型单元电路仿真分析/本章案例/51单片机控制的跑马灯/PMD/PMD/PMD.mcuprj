@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ASCII"?>
+<MCUProject Schema="67" Class="CMCUProject" Path="" PathAbs="" ProjectType="1">
+<ProjectFolders/>
+<ProjectFiles/>
+<BuildSettings>
+<MCUProjectBuildSettings Class="CMCUProjectBuildSettings" ToolGroupType="-1" IntermediatePath="&amp;ASC.\" IntermediatePathAbs="" OutputPath="&amp;ASC.\" OutputPathAbs="" TargetFileType="6" SimPath="&amp;ASC..\" SimPathAbs="&amp;UNIE:\_uc975358def8bbe8ba14e0e4eff771f6280672f\_ucf75358def8bbe8ba14eff771f53ca52367248ff08655967507f165199ff09\_uc17b2c3_uc17ae0 Multisim\_uc25b9e4f8b\51_uc953557247673a63a7523676848dd19a6c706f\PMD\" SimFile="&amp;ASCPMD.hex" CodeLoadType="0"/>
+</BuildSettings>
+</MCUProject>

@@ -1,0 +1,17 @@
+--cpu Cortex-M3
+"keyled_ll\startup_stm32f103x6.o"
+"keyled_ll\main.o"
+"keyled_ll\gpio.o"
+"keyled_ll\stm32f1xx_it.o"
+"keyled_ll\key.o"
+"keyled_ll\led.o"
+"keyled_ll\stm32f1xx_ll_gpio.o"
+"keyled_ll\stm32f1xx_ll_pwr.o"
+"keyled_ll\stm32f1xx_ll_exti.o"
+"keyled_ll\stm32f1xx_ll_rcc.o"
+"keyled_ll\stm32f1xx_ll_utils.o"
+"keyled_ll\system_stm32f1xx.o"
+--library_type=microlib --strict --scatter "keyled_ll\keyled_ll.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "keyled_ll.map" -o keyled_ll\keyled_ll.axf

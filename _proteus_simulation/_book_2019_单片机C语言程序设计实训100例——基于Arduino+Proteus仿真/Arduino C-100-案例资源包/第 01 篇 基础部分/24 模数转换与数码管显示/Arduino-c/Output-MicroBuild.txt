@@ -1,0 +1,4 @@
+﻿Compiling '模数转换与数码管显示' for 'Arduino/Genuino Uno'
+Program size: 1,668 bytes (used 5% of a 32,256 byte maximum) (1.36 secs)
+Minimum Memory Usage: 29 bytes (1% of a 2048 byte maximum)
+ 

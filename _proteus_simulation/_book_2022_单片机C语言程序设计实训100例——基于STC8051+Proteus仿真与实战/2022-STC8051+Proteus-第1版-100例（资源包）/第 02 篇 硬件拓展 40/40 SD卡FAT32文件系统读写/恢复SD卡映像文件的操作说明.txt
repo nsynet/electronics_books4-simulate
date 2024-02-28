@@ -1,0 +1,2 @@
+1.将压缩包中的文件解压到当前文件夹，以替换已发生变化的sd.mmc；
+2.在Proteus中点击菜单：debug/Reset Persistent Model Data，实现SD与映像文件的重新绑定。

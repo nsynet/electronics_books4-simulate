@@ -1,0 +1,192 @@
+C51 COMPILER V9.54   MAIN                                                                  02/23/2022 21:20:41 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE main.c LARGE OPTIMIZE(8,SPEED) DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          //--------------------------- main.c ------------------------------
+   2          //  名称: 温室控制系统仿真设计
+   3          //-----------------------------------------------------------------
+   4          //  说明: K1~K3按键分别控制通风、采光及水泵电机开关,LCD显示当前温度值.
+   5          //        上位机按钮可分别实现K1~K3的控制功能,系统运行时,下位机温度值
+   6          //        将刷新显示在上位机C#窗体中.
+   7          //
+   8          //-----------------------------------------------------------------
+   9          #include "STC15xxx.h"
+  10          #include <intrins.h>
+  11          #include <string.h>
+  12          #include <stdio.h>
+  13          #define u8  unsigned char
+  14          #define u16 unsigned int
+  15          #define MAX_CHAR 11         //允许接收并保存的最大字符个数
+  16          volatile u8 recv_buff[MAX_CHAR+1];  //串口接收缓冲
+  17          volatile u8 Buf_Index = 0;      //缓冲索引
+  18          extern u8 Read_Temperature();   //读传感器温度函数
+  19          extern void LCD_Initialize();   //LCD初始化函数
+  20          extern void LCD_ShowString(u8 ,u8,u8 *);//在指定行/列显示字符串函数
+  21          extern u8 Temp_Value[];       //从DS18B20读取的数据
+  22          extern void delay_ms(u8 x);     //延时函数
+  23          char Disp_Buffer[21];       //LCD显示缓冲
+  24          volatile u8 recv_OK = 0;      //上位机命令串接收成功标识
+  25          //相关按键、控制引脚等定义
+  26          sbit K1 = P3^4;           //通风电机开关控制按键
+  27          sbit K2 = P3^5;           //采光电机开关控制按键
+  28          sbit K3 = P3^6;           //水泵开关控制按键
+  29          sbit LED_1 = P0^0;          //通风电机开关指示灯
+  30          sbit LED_2 = P0^1;          //采光电机开关指示灯
+  31          sbit LED_3 = P0^2;          //水泵指示灯
+  32          sbit RELAY = P0^3;          //水泵控制继电器
+  33          sbit F_IN1 = P0^4;          //通风电机控制端
+  34          sbit F_IN2 = P0^5;
+  35          sbit F_IN3 = P0^6;          //采光电机控制端
+  36          sbit F_IN4 = P0^7;
+  37          bit TX1_Busy;             //发送忙标志
+  38          //-----------------------------------------------------------------
+  39          // 向串口输出一个字符
+  40          //-----------------------------------------------------------------
+  41          void PutChar(u8 c) {
+  42   1        TX1_Busy = 1; SBUF = c; while(TX1_Busy) delay_ms(1);
+  43   1      }
+  44          //-----------------------------------------------------------------
+  45          // 串口输出字符串
+  46          //-----------------------------------------------------------------
+  47          void PutStr(char *s) { while(*s) PutChar(*s++); }
+  48          //-----------------------------------------------------------------
+  49          // 串口配置
+  50          //-----------------------------------------------------------------
+  51          void UartInit() {   //9600bps@12.000MHz
+  52   1        SCON = 0x50;    //8位数据,可变波特率
+  53   1        AUXR &= 0xBF;   //定时器1时钟为Fosc/12,即12T
+  54   1        AUXR &= 0xFE;   //串口1选择定时器1为波特率发生器
+  55   1        TMOD &= 0x0F;   //设定定时器1为16位自动重装方式
+C51 COMPILER V9.54   MAIN                                                                  02/23/2022 21:20:41 PAGE 2   
+
+  56   1        TL1 = 0xE6;     //设定定时初值
+  57   1        TH1 = 0xFF;     //设定定时初值
+  58   1        ET1 = 0;      //禁止定时器1中断
+  59   1        TR1 = 1;      //启动定时器1
+  60   1        TX1_Busy = 0;   //默认为非忙状态
+  61   1      }
+  62          void Refresh_LCD() {
+  63   1        if (LED_1 == 1) LCD_ShowString(3,3,   (char*)"->>");
+  64   1        else      LCD_ShowString(3,3,   (char*)" X ");
+  65   1        if (LED_2 == 1) LCD_ShowString(3,10,  (char*)"->>");
+  66   1        else      LCD_ShowString(3,10,  (char*)" X ");
+  67   1        if (LED_3 == 1) LCD_ShowString(3,17,  (char*)"->>");
+  68   1        else      LCD_ShowString(3,17,  (char*)" X ");
+  69   1      }
+  70          //-----------------------------------------------------------------
+  71          // 主函数
+  72          //-----------------------------------------------------------------
+  73          void main() {
+  74   1        float temp = 0.0;       //浮点型温度变量
+  75   1        P0M1 = 0x00; P0M0 = 0x00;   //配置为准双向口
+  76   1        P1M1 = 0x00; P1M0 = 0x00;
+  77   1        P2M1 = 0x00; P2M0 = 0x00;
+  78   1        P3M1 = 0x00; P3M0 = 0x00;
+  79   1        LED_1 = LED_2 = LED_3 = 0;    //初始时关闭三只LED
+  80   1        UartInit();           //串口配置（9600bps)
+  81   1        IT0 = 1;            //INT0下降沿触发
+  82   1        IE = 0x91;            //允许串口中断与INT0中断
+  83   1        LCD_Initialize();         //液晶初始化
+  84   1        LCD_ShowString(0,0,"   Greenhouse Test  ");//显示标题
+  85   1        LCD_ShowString(1,0,"--------------------");//显示分隔线
+  86   1        LCD_ShowString(2,0,"TEMP: ");
+  87   1        LCD_ShowString(3,0,"PU:    WD:    LT:    ");
+  88   1        Read_Temperature();       //读取温度
+  89   1        delay_ms(800);          //延时
+  90   1        while(1) {            //循环读取温度并显示
+  91   2          if (Read_Temperature()){  //读取温度正常则转换并显示
+  92   3            //计算浮点温度值(强制转换为int不可省略,否则计算负温度时将出错)
+  93   3            temp = (int)(Temp_Value[1]<<8 | Temp_Value[0]) * 0.0625;
+  94   3            //浮点温度值转换为字符串
+  95   3            sprintf(Disp_Buffer, "%5.1f", temp);
+  96   3            //向PC机发送温度数字串(带回车换行符)
+  97   3            PutStr(Disp_Buffer); PutStr("\r\n");
+  98   3            //浮点温度字符串末尾附加摄氏度符号,\xDF\x43为℃的LCD编码.
+  99   3            strcat(Disp_Buffer,"\xDF\x43     ");
+ 100   3            LCD_ShowString(2,7, Disp_Buffer);//液晶显示
+ 101   3          }
+ 102   2          if (recv_OK) {        //串口命令完整接收则进行处理
+ 103   3            recv_OK = 0;
+ 104   3            if (strcmp(recv_buff,     "WIND_OPEN") == 0)
+ 105   3            { F_IN1 = 1; F_IN2 = 0; LED_1 = 1; }
+ 106   3            else if (strcmp(recv_buff,"LIGHT_OPEN") == 0)
+ 107   3            { F_IN3 = 1; F_IN4 = 0; LED_2 = 1; }
+ 108   3            else if (strcmp(recv_buff,"WIND_CLOSE") == 0)
+ 109   3            { F_IN1 = 1; F_IN2 = 1; LED_1 = 0; }
+ 110   3            else if (strcmp(recv_buff,"LIGHT_CLOSE") == 0)
+ 111   3            { F_IN3 = 1; F_IN4 = 1; LED_2 = 0; }
+ 112   3            else if (strcmp(recv_buff,"PUMP_OPEN") == 0)
+ 113   3            { RELAY = 0; LED_3 = 1; }
+ 114   3            else if (strcmp(recv_buff,"PUMP_CLOSE") == 0)
+ 115   3            { RELAY = 1; LED_3 = 0; }
+ 116   3          }
+ 117   2          Refresh_LCD();
+C51 COMPILER V9.54   MAIN                                                                  02/23/2022 21:20:41 PAGE 3   
+
+ 118   2          delay_ms(200);        //延时(过快读传感器将导致错误)
+ 119   2        }
+ 120   1      }
+ 121          //-----------------------------------------------------------------
+ 122          // INT0中断函数
+ 123          //-----------------------------------------------------------------
+ 124          void INT0_ISR() interrupt 0 {
+ 125   1        if (K1 == 0) {          //通风电机开关控制
+ 126   2          delay_ms(10);
+ 127   2          if (K1 == 0) {
+ 128   3            if (LED_1 == 1) { F_IN1 = 1; F_IN2 = 1; LED_1 = 0; }
+ 129   3            else      { F_IN1 = 1; F_IN2 = 0; LED_1 = 1; }
+ 130   3          }
+ 131   2        }
+ 132   1        if (K2 == 0) {          //采光电机开关控制
+ 133   2          delay_ms(10);
+ 134   2          if (K2 == 0) {
+ 135   3            if (LED_2 == 1) { F_IN3 = 1; F_IN4 = 1; LED_2 = 0; }
+ 136   3            else      { F_IN3 = 1; F_IN4 = 0; LED_2 = 1; }
+ 137   3          }
+ 138   2        }
+ 139   1        if (K3 == 0) {          //水泵开关控制
+ 140   2          delay_ms(10);
+ 141   2          if (K3 == 0) {
+ 142   3            if (LED_3 == 1) { RELAY = 1;  LED_3 = 0; } 
+ 143   3            else      { RELAY = 0;  LED_3 = 1; }
+ 144   3          }
+ 145   2        }
+ 146   1      }
+ 147          //-----------------------------------------------------------------
+ 148          // 串口接收中断函数
+ 149          //-----------------------------------------------------------------
+ 150          void Serial_INT_ISR() interrupt 4 {
+ 151   1        static u8 i = 0; u8 c;
+ 152   1        if (RI) {           //接收中断标志位判断
+ 153   2          RI = 0; c = SBUF;     //清串口接收标志,读取一字节
+ 154   2          if (c == '$') { i = 0; return; }//首字符判断($)
+ 155   2          if (c == 0x0D) return;    //忽略0x0D
+ 156   2          if (c == 0x0A){ i = 0; recv_OK = 1;}  //结束字符处理
+ 157   2          else {            //正常接收
+ 158   3            recv_buff[i] = c; recv_buff[++i] = '\0';
+ 159   3            if (i == MAX_CHAR) i = 0; //接收字符长度异常时i归0
+ 160   3          }
+ 161   2        }
+ 162   1        if (TI) {           //发送中断标志位判断
+ 163   2          TI = 0; TX1_Busy = 0;   //清除TX1发送忙状态
+ 164   2        }
+ 165   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    818    ----
+   CONSTANT SIZE    =    161    ----
+   XDATA SIZE       =     36       7
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,44 @@
+#include<reg51.h>   
+//步进电机正反转程序
+#define out P2          // P2口接步进电机
+sbit button1=P3^7;	   // 正转按钮
+sbit button2=P3^6;	   // 反转按钮					   
+zhengzhuan( );          // 声明正转子程序
+Fanzhuan ( );           // 声明反转子程序
+delay(int);
+//=========主程序==============================================
+main()
+{   while(1)
+{
+	if(button1==0)  zhengzhuan( );
+	if(button2==0)   fanzhuan( );
+}
+}
+//=====================正转子程序==================
+zhengzhuan(  )	   
+{       out=0x01;
+delay(50);
+out=0x02;
+delay(50);
+out=0x04;
+delay(50);
+out=0x08;
+delay(50);
+}
+//=====================正转子程序==================
+Fanzhuan ( )		   
+{        out=0x08;
+delay(50);
+out=0x01;
+delay(50);
+out=0x02;
+delay(50);
+out=0x04;
+delay(50);
+}
+//===============延迟函数===============================   
+delay(int x)
+{ int i,j;
+	for(i=0;i<x;i++)
+	for(j=0;j<120;j++);
+}

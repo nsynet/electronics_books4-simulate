@@ -1,0 +1,57 @@
+E:\8888888888888 2010-PIC\PIC-C-100-------------2010\03 Application\18 Greenhouse Management System\温室控制上位机C#程序\bin\Debug\温室控制与管理程序.exe
+E:\8888888888888 2010-PIC\PIC-C-100-------------2010\03 Application\18 Greenhouse Management System\温室控制上位机C#程序\bin\Debug\温室控制与管理程序.pdb
+E:\8888888888888 2010-PIC\PIC-C-100-------------2010\03 Application\18 Greenhouse Management System\温室控制上位机C#程序\obj\Debug\ResolveAssemblyReference.cache
+E:\8888888888888 2010-PIC\PIC-C-100-------------2010\03 Application\18 Greenhouse Management System\温室控制上位机C#程序\obj\Debug\温室控制程序.Form_Main.resources
+E:\8888888888888 2010-PIC\PIC-C-100-------------2010\03 Application\18 Greenhouse Management System\温室控制上位机C#程序\obj\Debug\温室控制与管理程序.Properties.Resources.resources
+E:\8888888888888 2010-PIC\PIC-C-100-------------2010\03 Application\18 Greenhouse Management System\温室控制上位机C#程序\obj\Debug\温室管理与控制程序.csproj.GenerateResource.Cache
+E:\8888888888888 2010-PIC\PIC-C-100-------------2010\03 Application\18 Greenhouse Management System\温室控制上位机C#程序\obj\Debug\温室控制与管理程序.exe
+E:\8888888888888 2010-PIC\PIC-C-100-------------2010\03 Application\18 Greenhouse Management System\温室控制上位机C#程序\obj\Debug\温室控制与管理程序.pdb
+E:\8888888888888 2010-PIC\PIC-C-100-------------2011.4.30\03 Application\18 Greenhouse Management System\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室控制与管理程序.exe
+E:\8888888888888 2010-PIC\PIC-C-100-------------2011.4.30\03 Application\18 Greenhouse Management System\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室控制与管理程序.pdb
+E:\8888888888888 2010-PIC\PIC-C-100-------------2011.4.30\03 Application\18 Greenhouse Management System\温室控制与管理上位机C#程序(VS2008)\bin\Debug\温室控制与管理程序.exe
+E:\8888888888888 2010-PIC\PIC-C-100-------------2011.4.30\03 Application\18 Greenhouse Management System\温室控制与管理上位机C#程序(VS2008)\bin\Debug\温室控制与管理程序.pdb
+E:\8888888888888 2010-PIC\PIC-C-100-------------2011.4.30\03 Application\18 Greenhouse Management System\温室控制与管理上位机C#程序(VS2008)\obj\Debug\ResolveAssemblyReference.cache
+E:\8888888888888 2010-PIC\PIC-C-100-------------2011.4.30\03 Application\18 Greenhouse Management System\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室控制程序.Form_Main.resources
+E:\8888888888888 2010-PIC\PIC-C-100-------------2011.4.30\03 Application\18 Greenhouse Management System\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室控制与管理程序.Properties.Resources.resources
+E:\8888888888888 2010-PIC\PIC-C-100-------------2011.4.30\03 Application\18 Greenhouse Management System\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室管理与控制程序.csproj.GenerateResource.Cache
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\17 温室监控系统仿真设计 ~~~~~~~~\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室控制与管理程序.exe
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\17 温室监控系统仿真设计 ~~~~~~~~\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室控制与管理程序.pdb
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\17 温室监控系统仿真设计 ~~~~~~~~\温室控制与管理上位机C#程序(VS2008)\bin\Debug\温室控制与管理程序.exe
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\17 温室监控系统仿真设计 ~~~~~~~~\温室控制与管理上位机C#程序(VS2008)\bin\Debug\温室控制与管理程序.pdb
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\17 温室监控系统仿真设计 ~~~~~~~~\温室控制与管理上位机C#程序(VS2008)\obj\Debug\ResolveAssemblyReference.cache
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\17 温室监控系统仿真设计 ~~~~~~~~\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室控制程序.Form_Main.resources
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\17 温室监控系统仿真设计 ~~~~~~~~\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室控制与管理程序.Properties.Resources.resources
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\17 温室监控系统仿真设计 ~~~~~~~~\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室管理与控制程序.csproj.GenerateResource.Cache
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\24 温室监控系统仿真设计\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室控制与管理程序.exe
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\24 温室监控系统仿真设计\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室控制与管理程序.pdb
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\24 温室监控系统仿真设计\温室控制与管理上位机C#程序(VS2008)\bin\Debug\温室控制与管理程序.exe
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\24 温室监控系统仿真设计\温室控制与管理上位机C#程序(VS2008)\bin\Debug\温室控制与管理程序.pdb
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\24 温室监控系统仿真设计\温室控制与管理上位机C#程序(VS2008)\obj\Debug\ResolveAssemblyReference.cache
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\24 温室监控系统仿真设计\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室控制程序.Form_Main.resources
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\24 温室监控系统仿真设计\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室控制与管理程序.Properties.Resources.resources
+E:\8888888888888 2011-8051-C-100 (2)\第 03 篇 综合设计\24 温室监控系统仿真设计\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室管理与控制程序.csproj.GenerateResource.Cache
+K:\ffmpeg\bin\8051-C-100-Proteus-第2版\第 03 篇 综合设计\24 温室监控系统仿真设计\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室控制与管理程序.exe
+K:\ffmpeg\bin\8051-C-100-Proteus-第2版\第 03 篇 综合设计\24 温室监控系统仿真设计\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室控制与管理程序.pdb
+K:\ffmpeg\bin\8051-C-100-Proteus-第2版\第 03 篇 综合设计\24 温室监控系统仿真设计\温室控制与管理上位机C#程序(VS2008)\bin\Debug\温室控制与管理程序.exe
+K:\ffmpeg\bin\8051-C-100-Proteus-第2版\第 03 篇 综合设计\24 温室监控系统仿真设计\温室控制与管理上位机C#程序(VS2008)\bin\Debug\温室控制与管理程序.pdb
+K:\ffmpeg\bin\8051-C-100-Proteus-第2版\第 03 篇 综合设计\24 温室监控系统仿真设计\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室管理与控制程序.csprojResolveAssemblyReference.cache
+K:\ffmpeg\bin\8051-C-100-Proteus-第2版\第 03 篇 综合设计\24 温室监控系统仿真设计\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室控制程序.Form_Main.resources
+K:\ffmpeg\bin\8051-C-100-Proteus-第2版\第 03 篇 综合设计\24 温室监控系统仿真设计\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室控制与管理程序.Properties.Resources.resources
+K:\ffmpeg\bin\8051-C-100-Proteus-第2版\第 03 篇 综合设计\24 温室监控系统仿真设计\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室管理与控制程序.csproj.GenerateResource.Cache
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15 - 6.x\15 温室监控系统仿真设计 -- 0.7OK\温室控制与管理上位机C#程序(VS2008)\bin\Debug\温室控制与管理程序.exe
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15 - 6.x\15 温室监控系统仿真设计 -- 0.7OK\温室控制与管理上位机C#程序(VS2008)\bin\Debug\温室控制与管理程序.pdb
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15 - 6.x\15 温室监控系统仿真设计 -- 0.7OK\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室管理与控制程序.csprojAssemblyReference.cache
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15 - 6.x\15 温室监控系统仿真设计 -- 0.7OK\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室控制程序.Form_Main.resources
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15 - 6.x\15 温室监控系统仿真设计 -- 0.7OK\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室控制与管理程序.Properties.Resources.resources
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15 - 6.x\15 温室监控系统仿真设计 -- 0.7OK\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室管理与控制程序.csproj.GenerateResource.cache
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15 - 6.x\15 温室监控系统仿真设计 -- 0.7OK\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室控制与管理程序.exe
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15 - 6.x\15 温室监控系统仿真设计 -- 0.7OK\温室控制与管理上位机C#程序(VS2008)\obj\Debug\温室控制与管理程序.pdb
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15\12 温室监控系统仿真设计 --OK\温室控制与管理上位机C#程序(VS2019)\bin\Debug\温室控制与管理程序.exe
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15\12 温室监控系统仿真设计 --OK\温室控制与管理上位机C#程序(VS2019)\bin\Debug\温室控制与管理程序.pdb
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15\12 温室监控系统仿真设计 --OK\温室控制与管理上位机C#程序(VS2019)\obj\Debug\温室管理与控制程序.csprojAssemblyReference.cache
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15\12 温室监控系统仿真设计 --OK\温室控制与管理上位机C#程序(VS2019)\obj\Debug\温室控制程序.Form_Main.resources
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15\12 温室监控系统仿真设计 --OK\温室控制与管理上位机C#程序(VS2019)\obj\Debug\温室控制与管理程序.Properties.Resources.resources
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15\12 温室监控系统仿真设计 --OK\温室控制与管理上位机C#程序(VS2019)\obj\Debug\温室管理与控制程序.csproj.GenerateResource.cache
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15\12 温室监控系统仿真设计 --OK\温室控制与管理上位机C#程序(VS2019)\obj\Debug\温室管理与控制程序.csproj.CoreCompileInputs.cache
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15\12 温室监控系统仿真设计 --OK\温室控制与管理上位机C#程序(VS2019)\obj\Debug\温室控制与管理程序.exe
+V:\8888888888888 2020-STC15+Proteus  第1版\2020-STC15+Proteus-第1版-100例\第 03 篇 综合设计 15\12 温室监控系统仿真设计 --OK\温室控制与管理上位机C#程序(VS2019)\obj\Debug\温室控制与管理程序.pdb

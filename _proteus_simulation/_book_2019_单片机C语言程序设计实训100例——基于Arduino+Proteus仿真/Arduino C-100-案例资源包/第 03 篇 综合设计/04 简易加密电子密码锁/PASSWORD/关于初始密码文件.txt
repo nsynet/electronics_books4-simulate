@@ -1,0 +1,8 @@
+
+   pass.bin为初始密码文件,可用UltraEdit直接编辑保存. 
+   
+   然后在PIC的Advanced Properties中找到Initial contents of EEPROM并设置.
+
+   本例未绑定到该属性,而是在初始密码为空时直接开锁,
+
+   然后设置123456并保存为初始密码.

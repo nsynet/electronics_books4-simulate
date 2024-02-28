@@ -1,0 +1,56 @@
+#include<reg51.h>           //定义寄存器的头文件
+#define shuma P2            //定义数码端接P0
+#define xuanze P3           //定义控制端接P3口
+delay(int);                  //声明延迟函数
+//========主程序==============================================
+main()
+{    shuma=0xff;
+	while(1)
+	{ xuanze=0xfe;        //选择第1个数码管
+	    shuma=0xa4;     //显示数字2
+	   delay(2);          //延时2ms                           
+               shuma=0xff;       //熄灭数字2                        
+
+             xuanze=0xfd;        //选择第2个数码管
+	   shuma=0xc0;      //显示数字0
+	   delay(2);          //延时2ms
+               shuma=0xff;       //熄灭数字0
+
+            xuanze=0xfb;         //选择第3个数码管
+	  shuma=0xf9;       //显示数字1
+	  delay(2);          //延时2ms
+              shuma=0xff;       //熄灭数字1
+
+          xuanze=0xf7;          //选择第4个数码管                      
+	shuma=0x78;       //显示数字7.
+	 delay(2);          //延时2ms                                
+            shuma=0xff;        //熄灭数字7.                                       
+                                                                                                                               
+          xuanze=0xef;         //选择第5个数码管
+ shuma=0xf9;      //显示数字1
+	  delay(2);        //延时2ms
+             shuma=0xff;      //熄灭数字1
+          xuanze=0xdf;         //选择第6个数码管
+
+	shuma=0x24;      //显示数字2.
+	  delay(2);       //延时2ms
+            shuma=0xff;      //熄灭数字2.
+
+          xuanze=0xbf;        //选择第7个数码管
+	shuma=0xa4;      //显示数字2
+	  delay(2);       //延时4ms
+            shuma=0xff;       //熄灭数字2
+
+          xuanze=0x7f;       //选择第8个数码管
+	shuma=0x80;    //显示数字8
+	  delay(2);      //延时4ms
+	 shuma=0xff;    //熄灭数字8   
+		
+	}	
+}
+//==================================延迟函数========================================================== 
+delay(int x)
+{ int i,j;
+	for(i=0;i<x;i++)
+	for(j=0;j<120;j++);
+}

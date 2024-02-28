@@ -1,0 +1,47 @@
+C51 COMPILER V9.56.0.0   PMD                                                               09/04/2022 21:59:59 PAGE 1   
+
+
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE PMD
+OBJECT MODULE PLACED IN .\Objects\PMD.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE PMD.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\PMD.l
+                    -st) TABS(2) OBJECT(.\Objects\PMD.obj)
+
+line level    source
+
+   1          #include "reg52.h"
+   2          #define uchar unsigned char
+   3          #define uint  unsigned int
+   4          
+   5          void delay(uint count)
+   6          {
+   7   1        while(--count);
+   8   1      }
+   9          
+  10          void main(void)
+  11          {
+  12   1        P1=0XFE;
+  13   1        while(1)
+  14   1        {
+  15   2          delay(300);
+  16   2           P1<<=1;
+  17   2          P1|=0X01;
+  18   2          if(P1==0x7f)
+  19   2          { delay(300);
+  20   3            P1=0xfe;
+  21   3            }     /* Insert your code here. */
+  22   2        }
+  23   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     46    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
