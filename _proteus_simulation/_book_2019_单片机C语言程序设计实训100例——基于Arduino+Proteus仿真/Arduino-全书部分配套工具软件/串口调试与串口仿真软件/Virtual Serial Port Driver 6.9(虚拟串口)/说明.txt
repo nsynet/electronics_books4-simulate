@@ -1,0 +1,1 @@
+安装后用vspdctl.dll替换安装目录下的dll文件.
