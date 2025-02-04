@@ -1,0 +1,14 @@
+halguilite\wmmemdev.o: ..\GUI\WM\WMMemDev.c
+halguilite\wmmemdev.o: ..\GUI\WM\WM_Intern.h
+halguilite\wmmemdev.o: ..\GUI\WM\WM.h
+halguilite\wmmemdev.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\wmmemdev.o: ..\GUI\Config\GUIConf.h
+halguilite\wmmemdev.o: ..\GUI\Core\GUIType.h
+halguilite\wmmemdev.o: ..\GUI\Core\LCD.h
+halguilite\wmmemdev.o: ..\GUI\WM\WM_GUI.h
+halguilite\wmmemdev.o: ..\GUI\Core\GUI_Protected.h
+halguilite\wmmemdev.o: ..\GUI\Core\GUI.h
+halguilite\wmmemdev.o: ..\GUI\Core\GUIVersion.h
+halguilite\wmmemdev.o: ..\GUI\Core\LCD_Protected.h
+halguilite\wmmemdev.o: ..\GUI\Core\GUIDebug.h
+halguilite\wmmemdev.o: ..\GUI\Core\GUI_X.h

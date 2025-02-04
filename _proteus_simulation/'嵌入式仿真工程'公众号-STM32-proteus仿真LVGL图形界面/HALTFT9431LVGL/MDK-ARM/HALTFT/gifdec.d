@@ -1,0 +1,16 @@
+haltft\gifdec.o: ..\GUI\lvgl\src\extra\libs\gif\gifdec.c
+haltft\gifdec.o: ..\GUI\lvgl\src\extra\libs\gif\gifdec.h
+haltft\gifdec.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+haltft\gifdec.o: ..\GUI\lvgl\src\extra\libs\gif\../../../misc/lv_fs.h
+haltft\gifdec.o: ..\GUI\lvgl\src\extra\libs\gif\../../../misc/../lv_conf_internal.h
+haltft\gifdec.o: ..\GUI\lvgl\src\extra\libs\gif\../../../misc/../lv_conf_kconfig.h
+haltft\gifdec.o: ..\GUI\lvgl\src\extra\libs\gif\../../../misc/../../../lv_conf.h
+haltft\gifdec.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+haltft\gifdec.o: ..\GUI\lvgl\src\extra\libs\gif\../../../misc/lv_log.h
+haltft\gifdec.o: ..\GUI\lvgl\src\extra\libs\gif\../../../misc/lv_types.h
+haltft\gifdec.o: ..\GUI\lvgl\src\extra\libs\gif\../../../misc/lv_mem.h
+haltft\gifdec.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+haltft\gifdec.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+haltft\gifdec.o: ..\GUI\lvgl\src\extra\libs\gif\../../../misc/lv_color.h
+haltft\gifdec.o: ..\GUI\lvgl\src\extra\libs\gif\../../../misc/lv_assert.h
+haltft\gifdec.o: ..\GUI\lvgl\src\extra\libs\gif\../../../misc/lv_math.h

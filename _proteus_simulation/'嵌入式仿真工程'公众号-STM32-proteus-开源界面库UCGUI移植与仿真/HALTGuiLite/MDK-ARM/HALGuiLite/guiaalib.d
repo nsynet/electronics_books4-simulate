@@ -1,0 +1,16 @@
+halguilite\guiaalib.o: ..\GUI\AntiAlias\GUIAALib.c
+halguilite\guiaalib.o: ..\GUI\Core\GUI_Private.h
+halguilite\guiaalib.o: ..\GUI\Core\GUI_Protected.h
+halguilite\guiaalib.o: ..\GUI\Core\GUI.h
+halguilite\guiaalib.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\guiaalib.o: ..\GUI\Config\GUIConf.h
+halguilite\guiaalib.o: ..\GUI\Core\GUIType.h
+halguilite\guiaalib.o: ..\GUI\Core\LCD.h
+halguilite\guiaalib.o: ..\GUI\Core\GUIVersion.h
+halguilite\guiaalib.o: ..\GUI\Core\LCD_Protected.h
+halguilite\guiaalib.o: ..\GUI\Core\GUIDebug.h
+halguilite\guiaalib.o: ..\GUI\Core\GUI_X.h
+halguilite\guiaalib.o: ..\GUI\WM\WM_GUI.h
+halguilite\guiaalib.o: ..\GUI\Core\LCD_Private.h
+halguilite\guiaalib.o: ..\GUI\Core\LCD_ConfDefaults.h
+halguilite\guiaalib.o: ..\GUI\Config\LCDConf.h

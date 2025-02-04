@@ -1,0 +1,11 @@
+halguilite\header_createindirect.o: ..\GUI\Widget\HEADER_CreateIndirect.c
+halguilite\header_createindirect.o: ..\GUI\Widget\HEADER.h
+halguilite\header_createindirect.o: ..\GUI\Core\GUI.h
+halguilite\header_createindirect.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\header_createindirect.o: ..\GUI\Config\GUIConf.h
+halguilite\header_createindirect.o: ..\GUI\Core\GUIType.h
+halguilite\header_createindirect.o: ..\GUI\Core\LCD.h
+halguilite\header_createindirect.o: ..\GUI\Core\GUIVersion.h
+halguilite\header_createindirect.o: ..\GUI\WM\WM.h
+halguilite\header_createindirect.o: ..\GUI\WM\WM_GUI.h
+halguilite\header_createindirect.o: ..\GUI\Widget\DIALOG_Intern.h

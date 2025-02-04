@@ -1,0 +1,17 @@
+halguilite\lcdcolor.o: ..\GUI\Core\LCDColor.c
+halguilite\lcdcolor.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+halguilite\lcdcolor.o: ..\GUI\Core\GUI_Private.h
+halguilite\lcdcolor.o: ..\GUI\Core\GUI_Protected.h
+halguilite\lcdcolor.o: ..\GUI\Core\GUI.h
+halguilite\lcdcolor.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\lcdcolor.o: ..\GUI\Config\GUIConf.h
+halguilite\lcdcolor.o: ..\GUI\Core\GUIType.h
+halguilite\lcdcolor.o: ..\GUI\Core\LCD.h
+halguilite\lcdcolor.o: ..\GUI\Core\GUIVersion.h
+halguilite\lcdcolor.o: ..\GUI\Core\LCD_Protected.h
+halguilite\lcdcolor.o: ..\GUI\Core\GUIDebug.h
+halguilite\lcdcolor.o: ..\GUI\Core\GUI_X.h
+halguilite\lcdcolor.o: ..\GUI\WM\WM_GUI.h
+halguilite\lcdcolor.o: ..\GUI\Core\LCD_Private.h
+halguilite\lcdcolor.o: ..\GUI\Core\LCD_ConfDefaults.h
+halguilite\lcdcolor.o: ..\GUI\Config\LCDConf.h

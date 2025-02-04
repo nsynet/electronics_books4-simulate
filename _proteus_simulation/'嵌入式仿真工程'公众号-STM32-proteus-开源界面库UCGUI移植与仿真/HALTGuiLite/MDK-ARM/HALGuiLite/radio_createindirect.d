@@ -1,0 +1,11 @@
+halguilite\radio_createindirect.o: ..\GUI\Widget\RADIO_CreateIndirect.c
+halguilite\radio_createindirect.o: ..\GUI\Core\GUI.h
+halguilite\radio_createindirect.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\radio_createindirect.o: ..\GUI\Config\GUIConf.h
+halguilite\radio_createindirect.o: ..\GUI\Core\GUIType.h
+halguilite\radio_createindirect.o: ..\GUI\Core\LCD.h
+halguilite\radio_createindirect.o: ..\GUI\Core\GUIVersion.h
+halguilite\radio_createindirect.o: ..\GUI\Widget\RADIO.h
+halguilite\radio_createindirect.o: ..\GUI\WM\WM.h
+halguilite\radio_createindirect.o: ..\GUI\WM\WM_GUI.h
+halguilite\radio_createindirect.o: ..\GUI\Widget\DIALOG_Intern.h

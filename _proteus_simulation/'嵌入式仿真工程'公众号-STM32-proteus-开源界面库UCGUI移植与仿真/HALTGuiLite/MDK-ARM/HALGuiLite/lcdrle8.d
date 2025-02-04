@@ -1,0 +1,17 @@
+halguilite\lcdrle8.o: ..\GUI\Core\LCDRLE8.c
+halguilite\lcdrle8.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+halguilite\lcdrle8.o: ..\GUI\Core\GUI_Private.h
+halguilite\lcdrle8.o: ..\GUI\Core\GUI_Protected.h
+halguilite\lcdrle8.o: ..\GUI\Core\GUI.h
+halguilite\lcdrle8.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\lcdrle8.o: ..\GUI\Config\GUIConf.h
+halguilite\lcdrle8.o: ..\GUI\Core\GUIType.h
+halguilite\lcdrle8.o: ..\GUI\Core\LCD.h
+halguilite\lcdrle8.o: ..\GUI\Core\GUIVersion.h
+halguilite\lcdrle8.o: ..\GUI\Core\LCD_Protected.h
+halguilite\lcdrle8.o: ..\GUI\Core\GUIDebug.h
+halguilite\lcdrle8.o: ..\GUI\Core\GUI_X.h
+halguilite\lcdrle8.o: ..\GUI\WM\WM_GUI.h
+halguilite\lcdrle8.o: ..\GUI\Core\LCD_Private.h
+halguilite\lcdrle8.o: ..\GUI\Core\LCD_ConfDefaults.h
+halguilite\lcdrle8.o: ..\GUI\Config\LCDConf.h

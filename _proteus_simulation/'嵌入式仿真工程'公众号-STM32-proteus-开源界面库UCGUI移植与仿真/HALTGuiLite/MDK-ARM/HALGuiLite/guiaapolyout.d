@@ -1,0 +1,9 @@
+halguilite\guiaapolyout.o: ..\GUI\AntiAlias\GUIAAPolyOut.c
+halguilite\guiaapolyout.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+halguilite\guiaapolyout.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+halguilite\guiaapolyout.o: ..\GUI\Core\GUI.h
+halguilite\guiaapolyout.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\guiaapolyout.o: ..\GUI\Config\GUIConf.h
+halguilite\guiaapolyout.o: ..\GUI\Core\GUIType.h
+halguilite\guiaapolyout.o: ..\GUI\Core\LCD.h
+halguilite\guiaapolyout.o: ..\GUI\Core\GUIVersion.h

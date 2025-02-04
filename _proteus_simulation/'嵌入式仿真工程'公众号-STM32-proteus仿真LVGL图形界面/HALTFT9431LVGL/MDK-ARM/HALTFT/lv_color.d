@@ -1,0 +1,13 @@
+haltft\lv_color.o: ..\GUI\lvgl\src\misc\lv_color.c
+haltft\lv_color.o: ..\GUI\lvgl\src\misc\lv_color.h
+haltft\lv_color.o: ..\GUI\lvgl\src\misc\../lv_conf_internal.h
+haltft\lv_color.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+haltft\lv_color.o: ..\GUI\lvgl\src\misc\../lv_conf_kconfig.h
+haltft\lv_color.o: ..\GUI\lvgl\src\misc\../../../lv_conf.h
+haltft\lv_color.o: ..\GUI\lvgl\src\misc\lv_assert.h
+haltft\lv_color.o: ..\GUI\lvgl\src\misc\lv_log.h
+haltft\lv_color.o: ..\GUI\lvgl\src\misc\lv_types.h
+haltft\lv_color.o: ..\GUI\lvgl\src\misc\lv_mem.h
+haltft\lv_color.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+haltft\lv_color.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+haltft\lv_color.o: ..\GUI\lvgl\src\misc\lv_math.h

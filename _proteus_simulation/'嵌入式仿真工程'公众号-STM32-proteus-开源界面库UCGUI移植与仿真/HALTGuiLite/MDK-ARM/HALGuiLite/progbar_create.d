@@ -1,0 +1,9 @@
+halguilite\progbar_create.o: ..\GUI\Widget\PROGBAR_Create.c
+halguilite\progbar_create.o: ..\GUI\Widget\PROGBAR.h
+halguilite\progbar_create.o: ..\GUI\WM\WM.h
+halguilite\progbar_create.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\progbar_create.o: ..\GUI\Config\GUIConf.h
+halguilite\progbar_create.o: ..\GUI\Core\GUIType.h
+halguilite\progbar_create.o: ..\GUI\Core\LCD.h
+halguilite\progbar_create.o: ..\GUI\WM\WM_GUI.h
+halguilite\progbar_create.o: ..\GUI\Widget\DIALOG_Intern.h

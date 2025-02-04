@@ -1,0 +1,11 @@
+halguilite\lcdp0.o: ..\GUI\ConvertMono\LCDP0.c
+halguilite\lcdp0.o: ..\GUI\Core\LCD_Private.h
+halguilite\lcdp0.o: ..\GUI\Core\LCD_ConfDefaults.h
+halguilite\lcdp0.o: ..\GUI\Config\LCDConf.h
+halguilite\lcdp0.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\lcdp0.o: ..\GUI\Config\GUIConf.h
+halguilite\lcdp0.o: ..\GUI\Core\LCD_Protected.h
+halguilite\lcdp0.o: ..\GUI\Core\LCD.h
+halguilite\lcdp0.o: ..\GUI\Core\GUI.h
+halguilite\lcdp0.o: ..\GUI\Core\GUIType.h
+halguilite\lcdp0.o: ..\GUI\Core\GUIVersion.h

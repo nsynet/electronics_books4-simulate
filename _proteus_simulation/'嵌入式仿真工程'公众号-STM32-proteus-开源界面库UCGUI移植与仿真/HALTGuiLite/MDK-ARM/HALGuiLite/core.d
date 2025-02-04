@@ -1,0 +1,11 @@
+halguilite\core.o: ..\Guilite\core\core.cpp
+halguilite\core.o: ..\Guilite\core\../core/display.h
+halguilite\core.o: ..\Guilite\core\../core/../core/api.h
+halguilite\core.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+halguilite\core.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+halguilite\core.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+halguilite\core.o: ..\Guilite\core\../core//image.h
+halguilite\core.o: ..\Guilite\core\../core//../core/resource.h
+halguilite\core.o: ..\Guilite\core\../core/theme.h
+halguilite\core.o: ..\Guilite\core\../core/wnd.h
+halguilite\core.o: ..\Guilite\core\../core/word.h

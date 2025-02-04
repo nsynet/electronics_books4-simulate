@@ -1,0 +1,10 @@
+haltft\lv_printf.o: ..\GUI\lvgl\src\misc\lv_printf.c
+haltft\lv_printf.o: ..\GUI\lvgl\src\misc\lv_printf.h
+haltft\lv_printf.o: ..\GUI\lvgl\src\misc\../lv_conf_internal.h
+haltft\lv_printf.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+haltft\lv_printf.o: ..\GUI\lvgl\src\misc\../lv_conf_kconfig.h
+haltft\lv_printf.o: ..\GUI\lvgl\src\misc\../../../lv_conf.h
+haltft\lv_printf.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+haltft\lv_printf.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+haltft\lv_printf.o: ..\GUI\lvgl\src\misc\lv_types.h
+haltft\lv_printf.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h

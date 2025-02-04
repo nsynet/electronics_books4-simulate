@@ -1,0 +1,14 @@
+halguilite\wm__notifyvischanged.o: ..\GUI\WM\WM__NotifyVisChanged.c
+halguilite\wm__notifyvischanged.o: ..\GUI\WM\WM_Intern.h
+halguilite\wm__notifyvischanged.o: ..\GUI\WM\WM.h
+halguilite\wm__notifyvischanged.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\wm__notifyvischanged.o: ..\GUI\Config\GUIConf.h
+halguilite\wm__notifyvischanged.o: ..\GUI\Core\GUIType.h
+halguilite\wm__notifyvischanged.o: ..\GUI\Core\LCD.h
+halguilite\wm__notifyvischanged.o: ..\GUI\WM\WM_GUI.h
+halguilite\wm__notifyvischanged.o: ..\GUI\Core\GUI_Protected.h
+halguilite\wm__notifyvischanged.o: ..\GUI\Core\GUI.h
+halguilite\wm__notifyvischanged.o: ..\GUI\Core\GUIVersion.h
+halguilite\wm__notifyvischanged.o: ..\GUI\Core\LCD_Protected.h
+halguilite\wm__notifyvischanged.o: ..\GUI\Core\GUIDebug.h
+halguilite\wm__notifyvischanged.o: ..\GUI\Core\GUI_X.h

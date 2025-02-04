@@ -1,0 +1,13 @@
+halguilite\gui__calctextrect.o: ..\GUI\Core\GUI__CalcTextRect.c
+halguilite\gui__calctextrect.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+halguilite\gui__calctextrect.o: ..\GUI\Core\GUI_Protected.h
+halguilite\gui__calctextrect.o: ..\GUI\Core\GUI.h
+halguilite\gui__calctextrect.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\gui__calctextrect.o: ..\GUI\Config\GUIConf.h
+halguilite\gui__calctextrect.o: ..\GUI\Core\GUIType.h
+halguilite\gui__calctextrect.o: ..\GUI\Core\LCD.h
+halguilite\gui__calctextrect.o: ..\GUI\Core\GUIVersion.h
+halguilite\gui__calctextrect.o: ..\GUI\Core\LCD_Protected.h
+halguilite\gui__calctextrect.o: ..\GUI\Core\GUIDebug.h
+halguilite\gui__calctextrect.o: ..\GUI\Core\GUI_X.h
+halguilite\gui__calctextrect.o: ..\GUI\WM\WM_GUI.h

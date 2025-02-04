@@ -1,0 +1,9 @@
+halguilite\framewin_create.o: ..\GUI\Widget\FRAMEWIN_Create.c
+halguilite\framewin_create.o: ..\GUI\Widget\FRAMEWIN.h
+halguilite\framewin_create.o: ..\GUI\WM\WM.h
+halguilite\framewin_create.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\framewin_create.o: ..\GUI\Config\GUIConf.h
+halguilite\framewin_create.o: ..\GUI\Core\GUIType.h
+halguilite\framewin_create.o: ..\GUI\Core\LCD.h
+halguilite\framewin_create.o: ..\GUI\WM\WM_GUI.h
+halguilite\framewin_create.o: ..\GUI\Widget\DIALOG_Intern.h

@@ -1,0 +1,14 @@
+halguilite\guirealloc.o: ..\GUI\Core\GUIRealloc.c
+halguilite\guirealloc.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+halguilite\guirealloc.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+halguilite\guirealloc.o: ..\GUI\Core\GUI_Protected.h
+halguilite\guirealloc.o: ..\GUI\Core\GUI.h
+halguilite\guirealloc.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\guirealloc.o: ..\GUI\Config\GUIConf.h
+halguilite\guirealloc.o: ..\GUI\Core\GUIType.h
+halguilite\guirealloc.o: ..\GUI\Core\LCD.h
+halguilite\guirealloc.o: ..\GUI\Core\GUIVersion.h
+halguilite\guirealloc.o: ..\GUI\Core\LCD_Protected.h
+halguilite\guirealloc.o: ..\GUI\Core\GUIDebug.h
+halguilite\guirealloc.o: ..\GUI\Core\GUI_X.h
+halguilite\guirealloc.o: ..\GUI\WM\WM_GUI.h

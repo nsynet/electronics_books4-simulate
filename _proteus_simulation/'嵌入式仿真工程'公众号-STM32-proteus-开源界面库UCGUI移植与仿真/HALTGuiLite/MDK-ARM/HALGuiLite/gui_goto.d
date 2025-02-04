@@ -1,0 +1,15 @@
+halguilite\gui_goto.o: ..\GUI\Core\GUI_Goto.c
+halguilite\gui_goto.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+halguilite\gui_goto.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+halguilite\gui_goto.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+halguilite\gui_goto.o: ..\GUI\Core\GUI_Protected.h
+halguilite\gui_goto.o: ..\GUI\Core\GUI.h
+halguilite\gui_goto.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\gui_goto.o: ..\GUI\Config\GUIConf.h
+halguilite\gui_goto.o: ..\GUI\Core\GUIType.h
+halguilite\gui_goto.o: ..\GUI\Core\LCD.h
+halguilite\gui_goto.o: ..\GUI\Core\GUIVersion.h
+halguilite\gui_goto.o: ..\GUI\Core\LCD_Protected.h
+halguilite\gui_goto.o: ..\GUI\Core\GUIDebug.h
+halguilite\gui_goto.o: ..\GUI\Core\GUI_X.h
+halguilite\gui_goto.o: ..\GUI\WM\WM_GUI.h

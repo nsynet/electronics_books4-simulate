@@ -1,0 +1,13 @@
+halguilite\guiencjs.o: ..\GUI\Core\GUIEncJS.c
+halguilite\guiencjs.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+halguilite\guiencjs.o: ..\GUI\Core\GUI_Protected.h
+halguilite\guiencjs.o: ..\GUI\Core\GUI.h
+halguilite\guiencjs.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\guiencjs.o: ..\GUI\Config\GUIConf.h
+halguilite\guiencjs.o: ..\GUI\Core\GUIType.h
+halguilite\guiencjs.o: ..\GUI\Core\LCD.h
+halguilite\guiencjs.o: ..\GUI\Core\GUIVersion.h
+halguilite\guiencjs.o: ..\GUI\Core\LCD_Protected.h
+halguilite\guiencjs.o: ..\GUI\Core\GUIDebug.h
+halguilite\guiencjs.o: ..\GUI\Core\GUI_X.h
+halguilite\guiencjs.o: ..\GUI\WM\WM_GUI.h

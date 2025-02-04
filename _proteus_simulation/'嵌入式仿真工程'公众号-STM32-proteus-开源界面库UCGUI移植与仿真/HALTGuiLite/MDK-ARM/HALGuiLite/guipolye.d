@@ -1,0 +1,10 @@
+halguilite\guipolye.o: ..\GUI\Core\GUIPolyE.c
+halguilite\guipolye.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+halguilite\guipolye.o: ..\GUI\Core\GUI.h
+halguilite\guipolye.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\guipolye.o: ..\GUI\Config\GUIConf.h
+halguilite\guipolye.o: ..\GUI\Core\GUIType.h
+halguilite\guipolye.o: ..\GUI\Core\LCD.h
+halguilite\guipolye.o: ..\GUI\Core\GUIVersion.h
+halguilite\guipolye.o: ..\GUI\Core\GUIDebug.h
+halguilite\guipolye.o: ..\GUI\Core\GUI_X.h

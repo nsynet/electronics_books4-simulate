@@ -1,0 +1,15 @@
+halguilite\wmtouch.o: ..\GUI\WM\WMTouch.c
+halguilite\wmtouch.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+halguilite\wmtouch.o: ..\GUI\WM\WM_Intern.h
+halguilite\wmtouch.o: ..\GUI\WM\WM.h
+halguilite\wmtouch.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\wmtouch.o: ..\GUI\Config\GUIConf.h
+halguilite\wmtouch.o: ..\GUI\Core\GUIType.h
+halguilite\wmtouch.o: ..\GUI\Core\LCD.h
+halguilite\wmtouch.o: ..\GUI\WM\WM_GUI.h
+halguilite\wmtouch.o: ..\GUI\Core\GUI_Protected.h
+halguilite\wmtouch.o: ..\GUI\Core\GUI.h
+halguilite\wmtouch.o: ..\GUI\Core\GUIVersion.h
+halguilite\wmtouch.o: ..\GUI\Core\LCD_Protected.h
+halguilite\wmtouch.o: ..\GUI\Core\GUIDebug.h
+halguilite\wmtouch.o: ..\GUI\Core\GUI_X.h

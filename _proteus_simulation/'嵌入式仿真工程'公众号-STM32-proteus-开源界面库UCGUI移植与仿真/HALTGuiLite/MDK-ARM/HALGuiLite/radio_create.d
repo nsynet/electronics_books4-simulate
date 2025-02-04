@@ -1,0 +1,9 @@
+halguilite\radio_create.o: ..\GUI\Widget\RADIO_Create.c
+halguilite\radio_create.o: ..\GUI\Widget\RADIO.h
+halguilite\radio_create.o: ..\GUI\WM\WM.h
+halguilite\radio_create.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\radio_create.o: ..\GUI\Config\GUIConf.h
+halguilite\radio_create.o: ..\GUI\Core\GUIType.h
+halguilite\radio_create.o: ..\GUI\Core\LCD.h
+halguilite\radio_create.o: ..\GUI\WM\WM_GUI.h
+halguilite\radio_create.o: ..\GUI\Widget\DIALOG_Intern.h

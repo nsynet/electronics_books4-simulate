@@ -1,0 +1,12 @@
+halguilite\gui__wrap.o: ..\GUI\Core\GUI__Wrap.c
+halguilite\gui__wrap.o: ..\GUI\Core\GUI_Protected.h
+halguilite\gui__wrap.o: ..\GUI\Core\GUI.h
+halguilite\gui__wrap.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\gui__wrap.o: ..\GUI\Config\GUIConf.h
+halguilite\gui__wrap.o: ..\GUI\Core\GUIType.h
+halguilite\gui__wrap.o: ..\GUI\Core\LCD.h
+halguilite\gui__wrap.o: ..\GUI\Core\GUIVersion.h
+halguilite\gui__wrap.o: ..\GUI\Core\LCD_Protected.h
+halguilite\gui__wrap.o: ..\GUI\Core\GUIDebug.h
+halguilite\gui__wrap.o: ..\GUI\Core\GUI_X.h
+halguilite\gui__wrap.o: ..\GUI\WM\WM_GUI.h

@@ -1,0 +1,12 @@
+halguilite\guicolor2index.o: ..\GUI\Core\GUIColor2Index.c
+halguilite\guicolor2index.o: ..\GUI\Core\GUI_Protected.h
+halguilite\guicolor2index.o: ..\GUI\Core\GUI.h
+halguilite\guicolor2index.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\guicolor2index.o: ..\GUI\Config\GUIConf.h
+halguilite\guicolor2index.o: ..\GUI\Core\GUIType.h
+halguilite\guicolor2index.o: ..\GUI\Core\LCD.h
+halguilite\guicolor2index.o: ..\GUI\Core\GUIVersion.h
+halguilite\guicolor2index.o: ..\GUI\Core\LCD_Protected.h
+halguilite\guicolor2index.o: ..\GUI\Core\GUIDebug.h
+halguilite\guicolor2index.o: ..\GUI\Core\GUI_X.h
+halguilite\guicolor2index.o: ..\GUI\WM\WM_GUI.h

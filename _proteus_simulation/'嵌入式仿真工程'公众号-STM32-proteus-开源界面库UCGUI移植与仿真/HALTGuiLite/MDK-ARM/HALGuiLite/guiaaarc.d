@@ -1,0 +1,16 @@
+halguilite\guiaaarc.o: ..\GUI\AntiAlias\GUIAAArc.c
+halguilite\guiaaarc.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+halguilite\guiaaarc.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+halguilite\guiaaarc.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+halguilite\guiaaarc.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+halguilite\guiaaarc.o: ..\GUI\Core\GUI_Protected.h
+halguilite\guiaaarc.o: ..\GUI\Core\GUI.h
+halguilite\guiaaarc.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\guiaaarc.o: ..\GUI\Config\GUIConf.h
+halguilite\guiaaarc.o: ..\GUI\Core\GUIType.h
+halguilite\guiaaarc.o: ..\GUI\Core\LCD.h
+halguilite\guiaaarc.o: ..\GUI\Core\GUIVersion.h
+halguilite\guiaaarc.o: ..\GUI\Core\LCD_Protected.h
+halguilite\guiaaarc.o: ..\GUI\Core\GUIDebug.h
+halguilite\guiaaarc.o: ..\GUI\Core\GUI_X.h
+halguilite\guiaaarc.o: ..\GUI\WM\WM_GUI.h

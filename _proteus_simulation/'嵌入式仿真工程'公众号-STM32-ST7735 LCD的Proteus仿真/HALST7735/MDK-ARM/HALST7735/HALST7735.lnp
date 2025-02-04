@@ -1,0 +1,28 @@
+--cpu=Cortex-M4.fp.sp
+"halst7735\startup_stm32f401xe.o"
+"halst7735\main.o"
+"halst7735\stm32f4xx_it.o"
+"halst7735\stm32f4xx_hal_msp.o"
+"halst7735\stm32f4xx_hal_spi.o"
+"halst7735\stm32f4xx_hal_rcc.o"
+"halst7735\stm32f4xx_hal_rcc_ex.o"
+"halst7735\stm32f4xx_hal_flash.o"
+"halst7735\stm32f4xx_hal_flash_ex.o"
+"halst7735\stm32f4xx_hal_flash_ramfunc.o"
+"halst7735\stm32f4xx_hal_gpio.o"
+"halst7735\stm32f4xx_hal_dma_ex.o"
+"halst7735\stm32f4xx_hal_dma.o"
+"halst7735\stm32f4xx_hal_pwr.o"
+"halst7735\stm32f4xx_hal_pwr_ex.o"
+"halst7735\stm32f4xx_hal_cortex.o"
+"halst7735\stm32f4xx_hal.o"
+"halst7735\stm32f4xx_hal_exti.o"
+"halst7735\stm32f4xx_hal_tim.o"
+"halst7735\stm32f4xx_hal_tim_ex.o"
+"halst7735\system_stm32f4xx.o"
+"halst7735\fonts.o"
+"halst7735\st7735.o"
+--strict --scatter "HALST7735\HALST7735.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "HALST7735.map" -o HALST7735\HALST7735.axf

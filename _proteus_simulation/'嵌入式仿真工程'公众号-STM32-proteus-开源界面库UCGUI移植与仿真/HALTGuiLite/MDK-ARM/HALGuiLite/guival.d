@@ -1,0 +1,13 @@
+halguilite\guival.o: ..\GUI\Core\GUIVal.c
+halguilite\guival.o: ..\GUI\Core\GUI_Protected.h
+halguilite\guival.o: ..\GUI\Core\GUI.h
+halguilite\guival.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\guival.o: ..\GUI\Config\GUIConf.h
+halguilite\guival.o: ..\GUI\Core\GUIType.h
+halguilite\guival.o: ..\GUI\Core\LCD.h
+halguilite\guival.o: ..\GUI\Core\GUIVersion.h
+halguilite\guival.o: ..\GUI\Core\LCD_Protected.h
+halguilite\guival.o: ..\GUI\Core\GUIDebug.h
+halguilite\guival.o: ..\GUI\Core\GUI_X.h
+halguilite\guival.o: ..\GUI\WM\WM_GUI.h
+halguilite\guival.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

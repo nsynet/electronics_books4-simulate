@@ -1,0 +1,26 @@
+--cpu=Cortex-M4.fp.sp
+"halcarrefour\startup_stm32f401xe.o"
+"halcarrefour\main.o"
+"halcarrefour\gpio.o"
+"halcarrefour\stm32f4xx_it.o"
+"halcarrefour\stm32f4xx_hal_msp.o"
+"halcarrefour\stm32f4xx_hal_tim.o"
+"halcarrefour\stm32f4xx_hal_tim_ex.o"
+"halcarrefour\stm32f4xx_hal_rcc.o"
+"halcarrefour\stm32f4xx_hal_rcc_ex.o"
+"halcarrefour\stm32f4xx_hal_flash.o"
+"halcarrefour\stm32f4xx_hal_flash_ex.o"
+"halcarrefour\stm32f4xx_hal_flash_ramfunc.o"
+"halcarrefour\stm32f4xx_hal_gpio.o"
+"halcarrefour\stm32f4xx_hal_dma_ex.o"
+"halcarrefour\stm32f4xx_hal_dma.o"
+"halcarrefour\stm32f4xx_hal_pwr.o"
+"halcarrefour\stm32f4xx_hal_pwr_ex.o"
+"halcarrefour\stm32f4xx_hal_cortex.o"
+"halcarrefour\stm32f4xx_hal.o"
+"halcarrefour\stm32f4xx_hal_exti.o"
+"halcarrefour\system_stm32f4xx.o"
+--strict --scatter "HALCarrefour\HALCarrefour.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "HALCarrefour.map" -o HALCarrefour\HALCarrefour.axf

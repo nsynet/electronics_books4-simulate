@@ -1,0 +1,9 @@
+halguilite\f16_hk.o: ..\GUI\Font\F16_HK.c
+halguilite\f16_hk.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+halguilite\f16_hk.o: ..\GUI\Core\GUI_FontIntern.h
+halguilite\f16_hk.o: ..\GUI\Core\GUI.h
+halguilite\f16_hk.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\f16_hk.o: ..\GUI\Config\GUIConf.h
+halguilite\f16_hk.o: ..\GUI\Core\GUIType.h
+halguilite\f16_hk.o: ..\GUI\Core\LCD.h
+halguilite\f16_hk.o: ..\GUI\Core\GUIVersion.h

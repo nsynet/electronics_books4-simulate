@@ -1,0 +1,12 @@
+halguilite\lcd_2.o: ..\GUI\MultiLayer\LCD_2.c
+halguilite\lcd_2.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+halguilite\lcd_2.o: ..\GUI\Core\LCD_Private.h
+halguilite\lcd_2.o: ..\GUI\Core\LCD_ConfDefaults.h
+halguilite\lcd_2.o: ..\GUI\Config\LCDConf.h
+halguilite\lcd_2.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\lcd_2.o: ..\GUI\Config\GUIConf.h
+halguilite\lcd_2.o: ..\GUI\Core\LCD_Protected.h
+halguilite\lcd_2.o: ..\GUI\Core\LCD.h
+halguilite\lcd_2.o: ..\GUI\Core\GUI.h
+halguilite\lcd_2.o: ..\GUI\Core\GUIType.h
+halguilite\lcd_2.o: ..\GUI\Core\GUIVersion.h

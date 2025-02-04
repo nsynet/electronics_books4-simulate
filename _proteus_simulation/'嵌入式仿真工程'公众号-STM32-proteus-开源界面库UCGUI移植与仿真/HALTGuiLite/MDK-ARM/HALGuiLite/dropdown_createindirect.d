@@ -1,0 +1,11 @@
+halguilite\dropdown_createindirect.o: ..\GUI\Widget\DROPDOWN_CreateIndirect.c
+halguilite\dropdown_createindirect.o: ..\GUI\Core\GUI.h
+halguilite\dropdown_createindirect.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\dropdown_createindirect.o: ..\GUI\Config\GUIConf.h
+halguilite\dropdown_createindirect.o: ..\GUI\Core\GUIType.h
+halguilite\dropdown_createindirect.o: ..\GUI\Core\LCD.h
+halguilite\dropdown_createindirect.o: ..\GUI\Core\GUIVersion.h
+halguilite\dropdown_createindirect.o: ..\GUI\Widget\DROPDOWN.h
+halguilite\dropdown_createindirect.o: ..\GUI\WM\WM.h
+halguilite\dropdown_createindirect.o: ..\GUI\WM\WM_GUI.h
+halguilite\dropdown_createindirect.o: ..\GUI\Widget\DIALOG_Intern.h

@@ -1,0 +1,15 @@
+halguilite\guiaacircle.o: ..\GUI\AntiAlias\GUIAACircle.c
+halguilite\guiaacircle.o: ..\GUI\Core\GUI_Protected.h
+halguilite\guiaacircle.o: ..\GUI\Core\GUI.h
+halguilite\guiaacircle.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\guiaacircle.o: ..\GUI\Config\GUIConf.h
+halguilite\guiaacircle.o: ..\GUI\Core\GUIType.h
+halguilite\guiaacircle.o: ..\GUI\Core\LCD.h
+halguilite\guiaacircle.o: ..\GUI\Core\GUIVersion.h
+halguilite\guiaacircle.o: ..\GUI\Core\LCD_Protected.h
+halguilite\guiaacircle.o: ..\GUI\Core\GUIDebug.h
+halguilite\guiaacircle.o: ..\GUI\Core\GUI_X.h
+halguilite\guiaacircle.o: ..\GUI\WM\WM_GUI.h
+halguilite\guiaacircle.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+halguilite\guiaacircle.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+halguilite\guiaacircle.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

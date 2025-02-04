@@ -1,0 +1,13 @@
+halguilite\guitask.o: ..\GUI\Core\GUITask.c
+halguilite\guitask.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+halguilite\guitask.o: ..\GUI\Core\GUI_Protected.h
+halguilite\guitask.o: ..\GUI\Core\GUI.h
+halguilite\guitask.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\guitask.o: ..\GUI\Config\GUIConf.h
+halguilite\guitask.o: ..\GUI\Core\GUIType.h
+halguilite\guitask.o: ..\GUI\Core\LCD.h
+halguilite\guitask.o: ..\GUI\Core\GUIVersion.h
+halguilite\guitask.o: ..\GUI\Core\LCD_Protected.h
+halguilite\guitask.o: ..\GUI\Core\GUIDebug.h
+halguilite\guitask.o: ..\GUI\Core\GUI_X.h
+halguilite\guitask.o: ..\GUI\WM\WM_GUI.h

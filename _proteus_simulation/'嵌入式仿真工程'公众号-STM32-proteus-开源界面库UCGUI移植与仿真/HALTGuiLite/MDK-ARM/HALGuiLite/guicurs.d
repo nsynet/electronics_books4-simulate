@@ -1,0 +1,17 @@
+halguilite\guicurs.o: ..\GUI\Core\GUICurs.c
+halguilite\guicurs.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+halguilite\guicurs.o: ..\GUI\Core\GUI_Private.h
+halguilite\guicurs.o: ..\GUI\Core\GUI_Protected.h
+halguilite\guicurs.o: ..\GUI\Core\GUI.h
+halguilite\guicurs.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\guicurs.o: ..\GUI\Config\GUIConf.h
+halguilite\guicurs.o: ..\GUI\Core\GUIType.h
+halguilite\guicurs.o: ..\GUI\Core\LCD.h
+halguilite\guicurs.o: ..\GUI\Core\GUIVersion.h
+halguilite\guicurs.o: ..\GUI\Core\LCD_Protected.h
+halguilite\guicurs.o: ..\GUI\Core\GUIDebug.h
+halguilite\guicurs.o: ..\GUI\Core\GUI_X.h
+halguilite\guicurs.o: ..\GUI\WM\WM_GUI.h
+halguilite\guicurs.o: ..\GUI\Core\LCD_Private.h
+halguilite\guicurs.o: ..\GUI\Core\LCD_ConfDefaults.h
+halguilite\guicurs.o: ..\GUI\Config\LCDConf.h

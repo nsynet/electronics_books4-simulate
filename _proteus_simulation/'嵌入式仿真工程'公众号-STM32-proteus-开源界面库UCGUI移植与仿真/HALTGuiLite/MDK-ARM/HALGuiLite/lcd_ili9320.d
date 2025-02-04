@@ -1,0 +1,15 @@
+halguilite\lcd_ili9320.o: ..\UGUI\GUI\LCDDriver\LCD_ili9320.c
+halguilite\lcd_ili9320.o: ..\UGUI\GUI\LCDDriver\../Core/LCD_Private.h
+halguilite\lcd_ili9320.o: ..\UGUI\GUI\LCDDriver\../Core/LCD_ConfDefaults.h
+halguilite\lcd_ili9320.o: ..\UGUI\GUI\LCDDriver\../Core/../../Config/LCDConf.h
+halguilite\lcd_ili9320.o: ..\UGUI\GUI\LCDDriver\../Core/GUI_ConfDefaults.h
+halguilite\lcd_ili9320.o: ..\UGUI\GUI\LCDDriver\../Core/../../Config/GUIConf.h
+halguilite\lcd_ili9320.o: ..\UGUI\GUI\LCDDriver\../Core/LCD_Protected.h
+halguilite\lcd_ili9320.o: ..\UGUI\GUI\LCDDriver\../Core/LCD.h
+halguilite\lcd_ili9320.o: ..\UGUI\GUI\LCDDriver\../Core/GUI.h
+halguilite\lcd_ili9320.o: ..\UGUI\GUI\LCDDriver\../Core/GUIType.h
+halguilite\lcd_ili9320.o: ..\UGUI\GUI\LCDDriver\../Core/GUIVersion.h
+halguilite\lcd_ili9320.o: ..\UGUI\GUI\LCDDriver\../Core/GUI_Private.h
+halguilite\lcd_ili9320.o: ..\UGUI\GUI\LCDDriver\../Core/GUI_Protected.h
+halguilite\lcd_ili9320.o: ..\UGUI\GUI\LCDDriver\../Core/GUIDebug.h
+halguilite\lcd_ili9320.o: ..\UGUI\GUI\LCDDriver\../Core/GUI_X.h

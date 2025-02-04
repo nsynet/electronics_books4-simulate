@@ -1,0 +1,9 @@
+halguilite\gui_mergerect.o: ..\GUI\Core\GUI_MergeRect.c
+halguilite\gui_mergerect.o: ..\GUI\Core\GUI.h
+halguilite\gui_mergerect.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\gui_mergerect.o: ..\GUI\Config\GUIConf.h
+halguilite\gui_mergerect.o: ..\GUI\Core\GUIType.h
+halguilite\gui_mergerect.o: ..\GUI\Core\LCD.h
+halguilite\gui_mergerect.o: ..\GUI\Core\GUIVersion.h
+halguilite\gui_mergerect.o: ..\GUI\Core\GUIDebug.h
+halguilite\gui_mergerect.o: ..\GUI\Core\GUI_X.h

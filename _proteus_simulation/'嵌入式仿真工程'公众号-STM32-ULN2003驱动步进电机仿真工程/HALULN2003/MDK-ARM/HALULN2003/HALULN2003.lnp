@@ -1,0 +1,26 @@
+--cpu=Cortex-M4.fp.sp
+"haluln2003\startup_stm32f401xe.o"
+"haluln2003\main.o"
+"haluln2003\stm32f4xx_it.o"
+"haluln2003\stm32f4xx_hal_msp.o"
+"haluln2003\stm32f4xx_hal_tim.o"
+"haluln2003\stm32f4xx_hal_tim_ex.o"
+"haluln2003\stm32f4xx_hal_rcc.o"
+"haluln2003\stm32f4xx_hal_rcc_ex.o"
+"haluln2003\stm32f4xx_hal_flash.o"
+"haluln2003\stm32f4xx_hal_flash_ex.o"
+"haluln2003\stm32f4xx_hal_flash_ramfunc.o"
+"haluln2003\stm32f4xx_hal_gpio.o"
+"haluln2003\stm32f4xx_hal_dma_ex.o"
+"haluln2003\stm32f4xx_hal_dma.o"
+"haluln2003\stm32f4xx_hal_pwr.o"
+"haluln2003\stm32f4xx_hal_pwr_ex.o"
+"haluln2003\stm32f4xx_hal_cortex.o"
+"haluln2003\stm32f4xx_hal.o"
+"haluln2003\stm32f4xx_hal_exti.o"
+"haluln2003\system_stm32f4xx.o"
+"haluln2003\lcd.o"
+--strict --scatter "HALULN2003\HALULN2003.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "HALULN2003.map" -o HALULN2003\HALULN2003.axf

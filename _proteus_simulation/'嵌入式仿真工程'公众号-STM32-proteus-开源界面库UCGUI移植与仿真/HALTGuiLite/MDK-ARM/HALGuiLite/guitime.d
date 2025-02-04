@@ -1,0 +1,13 @@
+halguilite\guitime.o: ..\GUI\Core\GUITime.c
+halguilite\guitime.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+halguilite\guitime.o: ..\GUI\Core\GUI_Protected.h
+halguilite\guitime.o: ..\GUI\Core\GUI.h
+halguilite\guitime.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\guitime.o: ..\GUI\Config\GUIConf.h
+halguilite\guitime.o: ..\GUI\Core\GUIType.h
+halguilite\guitime.o: ..\GUI\Core\LCD.h
+halguilite\guitime.o: ..\GUI\Core\GUIVersion.h
+halguilite\guitime.o: ..\GUI\Core\LCD_Protected.h
+halguilite\guitime.o: ..\GUI\Core\GUIDebug.h
+halguilite\guitime.o: ..\GUI\Core\GUI_X.h
+halguilite\guitime.o: ..\GUI\WM\WM_GUI.h

@@ -1,0 +1,26 @@
+--cpu=Cortex-M4.fp.sp
+"halduty\startup_stm32f401xe.o"
+"halduty\main.o"
+"halduty\stm32f4xx_it.o"
+"halduty\stm32f4xx_hal_msp.o"
+"halduty\stm32f4xx_hal_tim.o"
+"halduty\stm32f4xx_hal_tim_ex.o"
+"halduty\stm32f4xx_hal_rcc.o"
+"halduty\stm32f4xx_hal_rcc_ex.o"
+"halduty\stm32f4xx_hal_flash.o"
+"halduty\stm32f4xx_hal_flash_ex.o"
+"halduty\stm32f4xx_hal_flash_ramfunc.o"
+"halduty\stm32f4xx_hal_gpio.o"
+"halduty\stm32f4xx_hal_dma_ex.o"
+"halduty\stm32f4xx_hal_dma.o"
+"halduty\stm32f4xx_hal_pwr.o"
+"halduty\stm32f4xx_hal_pwr_ex.o"
+"halduty\stm32f4xx_hal_cortex.o"
+"halduty\stm32f4xx_hal.o"
+"halduty\stm32f4xx_hal_exti.o"
+"halduty\system_stm32f4xx.o"
+"halduty\lcd.o"
+--strict --scatter "HALDuty\HALDuty.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "HALDuty.map" -o HALDuty\HALDuty.axf

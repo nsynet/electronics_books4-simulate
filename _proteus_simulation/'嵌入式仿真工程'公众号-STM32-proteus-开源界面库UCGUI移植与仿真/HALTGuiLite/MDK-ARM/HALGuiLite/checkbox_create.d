@@ -1,0 +1,9 @@
+halguilite\checkbox_create.o: ..\GUI\Widget\CHECKBOX_Create.c
+halguilite\checkbox_create.o: ..\GUI\Widget\CHECKBOX.h
+halguilite\checkbox_create.o: ..\GUI\WM\WM.h
+halguilite\checkbox_create.o: ..\GUI\Core\GUI_ConfDefaults.h
+halguilite\checkbox_create.o: ..\GUI\Config\GUIConf.h
+halguilite\checkbox_create.o: ..\GUI\Core\GUIType.h
+halguilite\checkbox_create.o: ..\GUI\Core\LCD.h
+halguilite\checkbox_create.o: ..\GUI\WM\WM_GUI.h
+halguilite\checkbox_create.o: ..\GUI\Widget\DIALOG_Intern.h

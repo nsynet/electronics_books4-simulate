@@ -1,0 +1,14 @@
+haltft\lv_gpu_sdl_stack_blur.o: ..\GUI\lvgl\src\gpu\sdl\lv_gpu_sdl_stack_blur.c
+haltft\lv_gpu_sdl_stack_blur.o: ..\GUI\lvgl\src\gpu\sdl\lv_gpu_sdl_stack_blur.h
+haltft\lv_gpu_sdl_stack_blur.o: ..\GUI\lvgl\src\gpu\sdl\../../lv_conf_internal.h
+haltft\lv_gpu_sdl_stack_blur.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+haltft\lv_gpu_sdl_stack_blur.o: ..\GUI\lvgl\src\gpu\sdl\../../lv_conf_kconfig.h
+haltft\lv_gpu_sdl_stack_blur.o: ..\GUI\lvgl\src\gpu\sdl\../../../../lv_conf.h
+haltft\lv_gpu_sdl_stack_blur.o: ..\GUI\lvgl\src\gpu\sdl\../../misc/lv_color.h
+haltft\lv_gpu_sdl_stack_blur.o: ..\GUI\lvgl\src\gpu\sdl\../../misc/lv_assert.h
+haltft\lv_gpu_sdl_stack_blur.o: ..\GUI\lvgl\src\gpu\sdl\../../misc/lv_log.h
+haltft\lv_gpu_sdl_stack_blur.o: ..\GUI\lvgl\src\gpu\sdl\../../misc/lv_types.h
+haltft\lv_gpu_sdl_stack_blur.o: ..\GUI\lvgl\src\gpu\sdl\../../misc/lv_mem.h
+haltft\lv_gpu_sdl_stack_blur.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+haltft\lv_gpu_sdl_stack_blur.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+haltft\lv_gpu_sdl_stack_blur.o: ..\GUI\lvgl\src\gpu\sdl\../../misc/lv_math.h
